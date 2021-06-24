@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Focus Admin: JS Grid Table</title>
+
+    <!-- ================= Favicon ================== -->
+    <!-- Standard -->
+    <link rel="shortcut icon" href="http://placehold.it/64.png/000/fff">
+    <!-- Retina iPad Touch Icon-->
+    <link rel="apple-touch-icon" sizes="144x144" href="http://placehold.it/144.png/000/fff">
+    <!-- Retina iPhone Touch Icon-->
+    <link rel="apple-touch-icon" sizes="114x114" href="http://placehold.it/114.png/000/fff">
+    <!-- Standard iPad Touch Icon-->
+    <link rel="apple-touch-icon" sizes="72x72" href="http://placehold.it/72.png/000/fff">
+    <!-- Standard iPhone Touch Icon-->
+    <link rel="apple-touch-icon" sizes="57x57" href="http://placehold.it/57.png/000/fff">
+
+    <!-- Styles -->
+    <link href="/assets/css/lib/font-awesome.min.css" rel="stylesheet">
+    <link href="/assets/css/lib/themify-icons.css" rel="stylesheet">
+    <link href="/assets/css/lib/menubar/sidebar.css" rel="stylesheet">
+    <link href="/assets/css/lib/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/css/lib/helper.css" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet">
+</head>
+
+<body onload="getCurrentUser()">
+
+<!-- SideBar -->
+<div class="sidebar sidebar-hide-to-small sidebar-shrink sidebar-gestures">
+    <div class="nano">
+        <div class="nano-content">
+            <div class="logo"><a href="#"><!-- <img src="assets/images/logo.png" alt="" /> --><span>Admin Catalog</span></a></div>
+            <ul>
+
+                <li><a href="/admin/managers/list"><i class="ti-angle-right"></i> Managers </a></li>
+                <li><a href="/admin/subGovernances/list"><i class="ti-angle-right"></i> Sub Governances</a></li>
+                <li><a href="/admin/contests/list"><i class="ti-angle-right"></i> Contests</a></li>
+                <li><a href="/admin/submissions/list"><i class="ti-angle-right"></i>Submissions</a></li>
+                <li><a href="/admin/authors/list"><i class="ti-angle-right"></i> Authors</a></li>
+                <li><a href="/logout"><i class="ti-close"></i> Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- SideBar End -->
+
+
+<!-- Header -->
+
+<div class="header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="float-left">
+                    <div class="hamburger sidebar-toggle">
+                        <span class="line"></span>
+                        <span class="line"></span>
+                        <span class="line"></span>
+                    </div>
+                </div>
+                <div class="float-right">
+                    <div class="dropdown dib">
+                        <div class="header-icon" data-toggle="dropdown">
+                            <span class="user-avatar" id="currentUser"></span>
+                            <i class="ti-angle-down f-s-10"></i>
+                            <div class="drop-down dropdown-profile dropdown-menu dropdown-menu-right">
+                                <div class="dropdown-content-body">
+                                    <ul>
+                                        <li>
+                                            <a href="/logout">
+                                                <i class="ti-power-off"></i>
+                                                <span>Logout</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Header End-->
+
+
+<div class="content-wrap">
+    <div class="main">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-8 p-r-0 title-margin-right">
+                    <div class="page-header">
+                        <div class="page-title">
+                            <h1></h1>
+                        </div>
+                    </div>
+                </div>
+                <!-- /# column -->
+                <div class="col-lg-4 p-l-0 title-margin-left">
+                    <div class="page-header">
+                        <div class="page-title">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#">Contest</a></li>
+                                <li class="breadcrumb-item active">Add</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                <!-- /# column -->
+            </div>
+            <!-- /# row -->
+            <section id="main-content">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-title">
+                                <h4>Add New Contest</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="horizontal-form-elements">
+                                    <form class="form-horizontal" action="/admin/contests/add" method="POST">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">Name</label>
+                                                    <div class="col-sm-10">
+                                                        <input  type="text" placeholder="name"
+                                                                 autofocus name="name" class="form-control input-rounded" id="name">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">Description</label>
+                                                    <div class="col-sm-10">
+                                                        <textarea class="form-control" rows="10" placeholder="Description" id="description" name="description"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">Submission From</label>
+                                                    <div class="col-sm-10">
+                                                        <input  type="text" placeholder="Date"
+                                                                autofocus name="submissionFrom" class="form-control input-rounded" id="submissionFrom">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">Submission To</label>
+                                                    <div class="col-sm-10">
+                                                        <input  type="text" placeholder="Date"
+                                                                autofocus name="submissionTo" class="form-control input-rounded" id="submissionTo">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">Voting From</label>
+                                                    <div class="col-sm-10">
+                                                        <input  type="text" placeholder="Date"
+                                                                autofocus name="votingFrom" class="form-control input-rounded" id="votingFrom">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">Voting To</label>
+                                                    <div class="col-sm-10">
+                                                        <input  type="text" placeholder="Date"
+                                                                autofocus name="votingTo" class="form-control input-rounded" id="votingTo">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">Status</label>
+                                                    <div class="col-sm-10">
+                                                        <select class="form-control" id="status" name="status">
+                                                            <option selected>VOTING</option>
+                                                            <option>ENDED</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">SubGovernance</label>
+                                                    <div class="col-sm-10">
+                                                        <select class="form-control" id="subGovernance" name="subGovernance.id">
+                                                            <option th:each="subGov : ${subGovernances}" th:value="${subGov.id}" th:text="${subGov.name}"></option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button type="submit" name="auth" class="btn btn-primary">Add Contest</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<!-- jquery vendor -->
+<script src="/assets/js/lib/jquery.min.js"></script>
+<script src="/assets/js/lib/jquery.nanoscroller.min.js"></script>
+<!-- nano scroller -->
+<script src="/assets/js/lib/menubar/sidebar.js"></script>
+<script src="/assets/js/lib/preloader/pace.min.js"></script>
+<!-- sidebar -->
+
+<!-- bootstrap -->
+
+
+<script src="/assets/js/lib/bootstrap.min.js"></script><script src="/assets/js/scripts.js"></script>
+<!-- scripit init-->
+<script src="/js/functions.js"></script>
+<script src="/js/validateData.js"></script>
+
+</body>
+
+</html>

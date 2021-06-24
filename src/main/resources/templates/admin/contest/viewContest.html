@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+
+
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap-theme.min.css" />
+    <link rel="stylesheet"
+          href="/bootstrap-table/dist/bootstrap-table.min.css" />
+
+    <script
+            src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript"
+            src="/bootstrap-table/dist/bootstrap-table.min.js"></script>
+
+    <script type="text/javascript" src="/js/functions.js"></script>
+</head>
+<body onload="getCurrentUser()">
+
+<div th:replace="fragments/header.html :: header"></div>
+
+
+<div id="container" style="width: 70%; margin: auto">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3><label>Contest - <span th:text="${contest.name}"></span></label></h3>
+        </div>
+        <div class="panel-heading">
+            <h4>Contests</h4>
+        </div>
+        <div class="panel-body">
+            Name
+            Description
+            Submission period (Период проведения)
+            Voting period (Период голосования)
+            Status
+
+            <table class="table table-bordered table-striped table-hover">
+                <thead>
+                <tr>
+                    <th align="center">ID</th>
+                    <th align="center">Contest Name</th>
+                    <th align="center">Submission period</th>
+                    <th align="center">Voiting period</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr th:each="submission : ${contest.submissions}">
+                    <!--<td align="center" th:text="${contest.id}"></td>
+                    <td align="center"><a th:href=@{/admin/contests/view?(id=${contest.id})} th:text="${contest.name}"></a></td>
+                    <td align="center" th:text="${contest.submissionFrom} - ${contest.submissionTo}"></td>
+                    <td align="center" th:text="${contest.votingFrom} - ${contest.votingTo}"></td>-->
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<!--
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Cities</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+<h2>List of managers</h2>
+
+<table>
+    <tr>
+        <th>NickName</th>
+        <th>Access</th>
+    </tr>
+
+    <tr th:each="manager : ${managers}">
+        <td th:text="${manager.nickName}">NickName</td>
+        <td th:text="${manager.access}">Access</td>
+    </tr>
+</table>
+
+<form th:action="@{/admin/managers/delete}" method="post">
+    <div><input type="submit" value="Delete"/></div>
+</form>
+
+</body>
+</html>-->

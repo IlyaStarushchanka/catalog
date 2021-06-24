@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+
+
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap-theme.min.css" />
+    <link rel="stylesheet"
+          href="/bootstrap-table/dist/bootstrap-table.min.css" />
+
+    <script
+            src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript"
+            src="/bootstrap-table/dist/bootstrap-table.min.js"></script>
+</head>
+<body>
+
+
+<section id="navbar">
+    <div class="container">
+        <nav class="navbar navbar-inverse" role="navigation">
+            <div class="navbar-header">
+                <a class="navbar-brand">Catalog Admin</a>
+            </div>
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <div th:replace="fragments/header.html :: header"></div>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/logout">Logout</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</section>
+
+
+<div id="container" style="width: 70%; margin: auto">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h1>Managers list</h1>
+        </div>
+        <div class="panel-body">
+                    <table class="table table-bordered table-striped table-hover">
+                        <thead>
+                        <tr>
+                            <th align="center">NickName</th>
+                            <th align="center">Access</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <tr th:each="manager : ${managers}">
+                            <td align="center" th:text="${manager.nickName}"></td>
+                            <td align="center" th:text="${manager.access}"></td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<!--
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Cities</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+<h2>List of managers</h2>
+
+<table>
+    <tr>
+        <th>NickName</th>
+        <th>Access</th>
+    </tr>
+
+    <tr th:each="manager : ${managers}">
+        <td th:text="${manager.nickName}">NickName</td>
+        <td th:text="${manager.access}">Access</td>
+    </tr>
+</table>
+
+<form th:action="@{/admin/managers/delete}" method="post">
+    <div><input type="submit" value="Delete"/></div>
+</form>
+
+</body>
+</html>-->
