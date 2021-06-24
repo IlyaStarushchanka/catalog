@@ -57,7 +57,7 @@ public class AdminSubmissionFacade {
 
     @Transactional
     public List<ContestDTO> edit(ContestDTO contestDTO) throws NotFoundException {
-        Contest contest = contestServiceImpl.getById(contestDTO.getId());
+        /*Contest contest = contestServiceImpl.getById(contestDTO.getId());
         Contest newContestData = MAPPER.toState(contestDTO);
         if (contest == null){
             throw new NotFoundException("");
@@ -66,7 +66,7 @@ public class AdminSubmissionFacade {
         if (contestDTO.getSubGovernance() != null) {
             newSubGovernance = subGovernanceServiceImpl.getById(contestDTO.getSubGovernance().getId());
         }
-        contestServiceImpl.edit(newSubGovernance, contest, newContestData);
+        contestServiceImpl.edit(newSubGovernance, contest, newContestData);*/
         return MAPPER.toContestListDTO(contestServiceImpl.getList());
     }
 

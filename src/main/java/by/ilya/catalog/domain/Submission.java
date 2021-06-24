@@ -1,11 +1,16 @@
 package by.ilya.catalog.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Submission {
@@ -20,6 +25,9 @@ public class Submission {
     private String publishTime;
     @ManyToOne(optional = false)
     private Author author;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<FileDB> files = new ArrayList<>();
+    private String authorFreeTonAddress;
 
     private double rate;
     private int place;
@@ -87,5 +95,21 @@ public class Submission {
 
     public void setRate(double rate) {
         this.rate = rate;
+    }
+
+    public List<FileDB> getFiles() {
+        return files;
+    }
+
+    public void setFiles(List<FileDB> files) {
+        this.files = files;
+    }
+
+    public String getAuthorFreeTonAddress() {
+        return authorFreeTonAddress;
+    }
+
+    public void setAuthorFreeTonAddress(String authorFreeTonAddress) {
+        this.authorFreeTonAddress = authorFreeTonAddress;
     }
 }

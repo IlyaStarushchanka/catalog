@@ -51,7 +51,7 @@ public class ContestServiceImpl implements CrudService<Contest> {
         if (newSubGovernance != null && !newSubGovernance.getContests().contains(contest)) {
             newSubGovernance.getContests().add(contest);
         }
-        contestRepository.save(contest);
+        contestRepository.saveAndFlush(contest);
     }
 
     @Autowired

@@ -14,3 +14,9 @@ function getCurrentUser() {
         }
     });
 }
+
+function addFreeTonAddress(){
+    var additionalInput = "<input  type=\"text\" name=\"freeTonAddresses\" class=\"form-control input-rounded\" id=\"freeTonAddresses\">";
+    var div = document.getElementsByClassName("freeTonAddress");
+    $(div).append(additionalInput);
+}

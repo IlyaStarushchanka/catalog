@@ -6,11 +6,13 @@ import by.ilya.catalog.dto.ContestDTO;
 import by.ilya.catalog.dto.ManagerDTO;
 import by.ilya.catalog.dto.SubGovernanceDTO;
 import by.ilya.catalog.dto.SubmissionDTO;
+import by.ilya.catalog.facade.AdminAuthorFacade;
 import by.ilya.catalog.facade.AdminContestFacade;
 import by.ilya.catalog.facade.AdminManagerPageFacade;
 import by.ilya.catalog.facade.AdminPageFacade;
 import by.ilya.catalog.facade.AdminSubGovernanceFacade;
 import by.ilya.catalog.facade.AdminSubmissionFacade;
+import by.ilya.catalog.service.AuthorServiceImpl;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,6 +37,7 @@ public class AdminEndpoint {
     private AdminSubGovernanceFacade adminSubGovernanceFacade;
     private AdminContestFacade adminContestFacade;
     private AdminSubmissionFacade adminSubmissionFacade;
+    private AdminAuthorFacade adminAuthorFacade;
 
     @GetMapping("/login")
     public String login(Model model) {
@@ -215,17 +218,44 @@ public class AdminEndpoint {
         return "admin/submission/submission-list";
     }
 
-    @GetMapping("/submissions/upload")
-    public String viewSubmission(@RequestParam(value = "id") long id, Model model){
-        model.addAttribute("submission", adminSubmissionFacade.getById(id));
-        return "admin/submission/submission-view";
+    @GetMapping("/authors/list")
+    public String authorList(Model model){
+        model.addAttribute("authors", adminAuthorFacade.getList());
+        return "admin/author/author-list";
+    }
+    @GetMapping("/authors/openAdd")
+    public String authorOpenAddPage(Model model){
+        return "admin/author/author-create";
+    }
+    @GetMapping("/authors/openEdit")
+    public String authorOpenEditPage(@RequestParam(value = "id") long id, Model model){
+        model.addAttribute("author", adminAuthorFacade.getById(id));
+        return "admin/author/author-edit";
     }
 
-    @GetMapping("/submissions/view")
+    @PostMapping("/authors/add")
+    public String addAuthor(@ModelAttribute AuthorDTO author, Model model){
+        model.addAttribute("authors", adminAuthorFacade.create(author));
+        return "admin/author/author-list";
+    }
+
+    @PostMapping("/authors/edit")
+    public String editAuthor(@ModelAttribute AuthorDTO author, Model model){
+        model.addAttribute("authors", adminAuthorFacade.edit(author));
+        return "admin/author/author-list";
+    }
+
+    @GetMapping("/authors/view")
+    public String authorOpenViewPage(@RequestParam(value = "id") long id, Model model){
+        model.addAttribute("author", adminAuthorFacade.getById(id));
+        return "admin/author/author-view";
+    }
+
+    /*@GetMapping("/submissions/view")
     public String viewSubmission(@RequestParam(value = "id") long id, Model model){
         model.addAttribute("submission", adminSubmissionFacade.getById(id));
         return "admin/submission/submission-view";
-    }
+    }*/
 
     @PostMapping("/authors")
     @ResponseBody
@@ -263,5 +293,10 @@ public class AdminEndpoint {
     @Autowired
     public void setAdminSubmissionFacade(AdminSubmissionFacade adminSubmissionFacade) {
         this.adminSubmissionFacade = adminSubmissionFacade;
+    }
+
+    @Autowired
+    public void setAdminAuthorFacade(AdminAuthorFacade adminAuthorFacade) {
+        this.adminAuthorFacade = adminAuthorFacade;
     }
 }

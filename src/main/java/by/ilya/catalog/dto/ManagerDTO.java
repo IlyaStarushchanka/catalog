@@ -2,9 +2,9 @@ package by.ilya.catalog.dto;
 
 public class ManagerDTO {
 
-    public long id;
-    public String nickName;
-    public String access;
+    private long id;
+    private String nickName;
+    private String access;
 
     public long getId() {
         return id;

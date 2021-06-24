@@ -32,7 +32,7 @@ public class ManagerServiceImpl implements ManagerService {
     @Override
     public Manager create(Manager manager) {
         manager.setPassword(BCrypt.hashpw(manager.getPassword(), BCrypt.gensalt("$2a", 10)));
-        return managerRepository.save(manager);
+        return managerRepository.saveAndFlush(manager);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package by.ilya.catalog.service;
 
 import by.ilya.catalog.domain.Author;
+import by.ilya.catalog.domain.FreeTonAddress;
 import by.ilya.catalog.repository.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,12 +22,12 @@ public class AuthorServiceImpl implements CrudService<Author> {
 
     @Override
     public List<Author> getList() {
-        return null;
+        return authorRepository.findAll();
     }
 
     @Override
     public Author getById(long id) {
-        return null;
+        return authorRepository.getById(id);
     }
 
     @Override

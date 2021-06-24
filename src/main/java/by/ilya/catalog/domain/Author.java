@@ -1,10 +1,12 @@
 package by.ilya.catalog.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -16,10 +18,22 @@ public class Author {
 
     private String telegramNickname;
     private String freetonForumNickname;
-    private String freetonAddresses;
-
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<FreeTonAddress> freetonAddresses = new ArrayList<>();
     @OneToMany
     private List<Submission> submissions;
+
+    public boolean hasFreeTonAddressByName(String address){
+        if (address == null || address.isEmpty()){
+            return true;
+        }
+        for (FreeTonAddress freeTonAddress : freetonAddresses) {
+            if(freeTonAddress.getAddress().equals(address)){
+                return true;
+            }
+        }
+        return false;
+    }
 
     public Long getId() {
         return id;
@@ -45,10 +59,6 @@ public class Author {
         this.freetonForumNickname = freetonForumNickname;
     }
 
-    public void setFreetonAddresses(String freetonAddresses) {
-        this.freetonAddresses = freetonAddresses;
-    }
-
     public List<Submission> getSubmissions() {
         return submissions;
     }
@@ -57,7 +67,11 @@ public class Author {
         this.submissions = submissions;
     }
 
-    public String getFreetonAddresses() {
+    public List<FreeTonAddress> getFreetonAddresses() {
         return freetonAddresses;
+    }
+
+    public void setFreetonAddresses(List<FreeTonAddress> freetonAddresses) {
+        this.freetonAddresses = freetonAddresses;
     }
 }
