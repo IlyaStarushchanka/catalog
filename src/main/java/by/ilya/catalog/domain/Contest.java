@@ -12,8 +12,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class Contest {
@@ -24,7 +27,7 @@ public class Contest {
 
     @Column(nullable = false)
     private String name;
-    @Column(nullable = false)
+    @Column(nullable = false, length = 10000)
     private String description;
     private String submissionFrom;
     private String submissionTo;
@@ -34,12 +37,12 @@ public class Contest {
     @Enumerated(value = EnumType.STRING)
     private StatusEnum status;
 
-    //private double prizeFund;
+    private double prizeFund;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Submission> submissions;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Submission> submissions = new HashSet<>();
 
-    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @ManyToOne(optional = false)
     private SubGovernance subGovernance;
 
     public Long getId() {
@@ -106,11 +109,11 @@ public class Contest {
         this.status = status;
     }
 
-    public List<Submission> getSubmissions() {
+    public Set<Submission> getSubmissions() {
         return submissions;
     }
 
-    public void setSubmissions(List<Submission> submissions) {
+    public void setSubmissions(Set<Submission> submissions) {
         this.submissions = submissions;
     }
 
@@ -122,13 +125,13 @@ public class Contest {
         this.subGovernance = subGovernance;
     }
 
-    /*public double getPrizeFund() {
+    public double getPrizeFund() {
         return prizeFund;
     }
 
     public void setPrizeFund(double prizeFund) {
         this.prizeFund = prizeFund;
-    }*/
+    }
 
     @Override
     public boolean equals(Object o) {

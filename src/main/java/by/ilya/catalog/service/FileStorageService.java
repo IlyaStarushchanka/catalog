@@ -21,16 +21,17 @@ public class FileStorageService {
     private SubmissionServiceImpl submissionServiceImpl;
 
     @Transactional
-    public FileDB store(MultipartFile file, Long submissionId) throws IOException {
+    public void store(MultipartFile file, Long submissionId) throws IOException {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-        FileDB fileDB = new FileDB(fileName, file.getContentType(), file.getBytes());
-        Submission submission = submissionServiceImpl.getById(submissionId);
-        if (submission != null) {
-            fileDB.setSubmission(submission);
-            submission.getFiles().add(fileDB);
-            return fileDBRepository.save(fileDB);
+        if (fileName != null || !fileName.isEmpty()) {
+            FileDB fileDB = new FileDB(fileName, file.getContentType(), file.getBytes());
+            Submission submission = submissionServiceImpl.getById(submissionId);
+            if (submission != null) {
+                fileDB.setSubmission(submission);
+                submission.getFiles().add(fileDB);
+                fileDBRepository.save(fileDB);
+            }
         }
-        return fileDB;
     }
 
     public FileDB getFile(String id) {

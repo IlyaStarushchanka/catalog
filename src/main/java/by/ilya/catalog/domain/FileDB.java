@@ -28,7 +28,7 @@ public class FileDB {
     @Lob
     private byte[] data;
 
-    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Submission submission;
 
     public FileDB() {

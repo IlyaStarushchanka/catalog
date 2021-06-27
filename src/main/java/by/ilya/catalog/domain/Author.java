@@ -1,13 +1,19 @@
 package by.ilya.catalog.domain;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Author {
@@ -16,12 +22,12 @@ public class Author {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String telegramNickname;
     private String freetonForumNickname;
     @OneToMany(cascade = CascadeType.ALL)
-    private List<FreeTonAddress> freetonAddresses = new ArrayList<>();
-    @OneToMany
-    private List<Submission> submissions;
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<FreeTonAddress> freetonAddresses;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Submission> submissions = new HashSet<>();
 
     public boolean hasFreeTonAddressByName(String address){
         if (address == null || address.isEmpty()){
@@ -43,14 +49,6 @@ public class Author {
         this.id = id;
     }
 
-    public String getTelegramNickname() {
-        return telegramNickname;
-    }
-
-    public void setTelegramNickname(String telegramNickname) {
-        this.telegramNickname = telegramNickname;
-    }
-
     public String getFreetonForumNickname() {
         return freetonForumNickname;
     }
@@ -59,11 +57,11 @@ public class Author {
         this.freetonForumNickname = freetonForumNickname;
     }
 
-    public List<Submission> getSubmissions() {
+    public Set<Submission> getSubmissions() {
         return submissions;
     }
 
-    public void setSubmissions(List<Submission> submissions) {
+    public void setSubmissions(Set<Submission> submissions) {
         this.submissions = submissions;
     }
 

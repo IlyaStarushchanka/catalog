@@ -15,9 +15,6 @@ public class FreeTonAddress {
 
     private String address;
 
-    @ManyToOne
-    private Author author;
-
     public FreeTonAddress() {
     }
 
@@ -27,7 +24,6 @@ public class FreeTonAddress {
 
     public FreeTonAddress(String address, Author author) {
         this.address = address;
-        this.author = author;
     }
 
     public FreeTonAddress(Long id, String address) {
@@ -51,11 +47,4 @@ public class FreeTonAddress {
         this.address = address;
     }
 
-    public Author getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(Author author) {
-        this.author = author;
-    }
 }

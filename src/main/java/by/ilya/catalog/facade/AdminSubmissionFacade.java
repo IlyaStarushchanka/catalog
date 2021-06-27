@@ -1,11 +1,13 @@
 package by.ilya.catalog.facade;
 
+import by.ilya.catalog.domain.Author;
 import by.ilya.catalog.domain.Contest;
 import by.ilya.catalog.domain.SubGovernance;
 import by.ilya.catalog.domain.Submission;
 import by.ilya.catalog.dto.ContestDTO;
 import by.ilya.catalog.dto.SubmissionDTO;
 import by.ilya.catalog.mapper.CatalogMapper;
+import by.ilya.catalog.service.AuthorServiceImpl;
 import by.ilya.catalog.service.ContestServiceImpl;
 import by.ilya.catalog.service.SubGovernanceServiceImpl;
 import by.ilya.catalog.service.SubmissionServiceImpl;
@@ -13,7 +15,9 @@ import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
+import java.util.HashSet;
 import java.util.List;
 
 @Service
@@ -21,53 +25,84 @@ public class AdminSubmissionFacade {
 
     private SubmissionServiceImpl submissionServiceImpl;
     private ContestServiceImpl contestServiceImpl;
+    private AuthorServiceImpl authorServiceImpl;
     private static final CatalogMapper MAPPER = CatalogMapper.INSTANCE;
 
     @Transactional
-    public SubmissionDTO create(SubmissionDTO submissionDTO) {
+    public void create(SubmissionDTO submissionDTO) {
         Submission submission = MAPPER.toState(submissionDTO);
         Contest contest = null;
         if (submission.getContest() != null && submission.getContest().getId() != null) {
             contest = contestServiceImpl.getById(submission.getContest().getId());
             submission.setContest(contest);
         }
+        Author author = null;
+        if (submission.getAuthor() != null && submission.getAuthor().getId() != null) {
+            author = authorServiceImpl.getById(submission.getAuthor().getId());
+            submission.setAuthor(author);
+        }
+        submission.setAuthorFreeTonAddress(submissionDTO.getAuthor().getChosedFreeTonAddress());
         submission = submissionServiceImpl.create(submission);
         if (contest != null) {
             contest.getSubmissions().add(submission);
         }
-        return MAPPER.toDTO(submission);
+        if (author != null) {
+            author.getSubmissions().add(submission);
+        }
     }
 
+    @Transactional
     public SubmissionDTO getById(long id) {
         return MAPPER.toDTO(submissionServiceImpl.getById(id));
     }
 
     public List<SubmissionDTO> getList() {
-        return MAPPER.toSubmissionListDTO(submissionServiceImpl.getList());
+        return MAPPER.toSubmissionListDTO(new HashSet<>(submissionServiceImpl.getList()));
     }
 
 
-    public List<SubmissionDTO> delete(long id) {
+    @Transactional
+    public void delete(long id) {
         Submission submission = submissionServiceImpl.getById(id);
         if (submission != null) {
+            Author author = submission.getAuthor();
+            author.getSubmissions().remove(submission);
+            Contest contest = submission.getContest();
+            contest.getSubmissions().remove(submission);
             submissionServiceImpl.delete(id);
         }
-        return getList();
     }
 
     @Transactional
-    public List<ContestDTO> edit(ContestDTO contestDTO) throws NotFoundException {
-        /*Contest contest = contestServiceImpl.getById(contestDTO.getId());
-        Contest newContestData = MAPPER.toState(contestDTO);
-        if (contest == null){
+    public void deleteAll(List<Long> ids) {
+        for (Long id : ids) {
+            Submission submission = submissionServiceImpl.getById(id);
+            if (submission != null) {
+                Author author = submission.getAuthor();
+                author.getSubmissions().remove(submission);
+                Contest contest = submission.getContest();
+                contest.getSubmissions().remove(submission);
+                submissionServiceImpl.delete(id);
+            }
+        }
+    }
+
+    @Transactional
+    public void edit(SubmissionDTO submissionDTO) throws NotFoundException {
+        Submission submission = submissionServiceImpl.getById(submissionDTO.getId());
+        Submission newSubmissionData = MAPPER.toState(submissionDTO);
+        if (submission == null){
             throw new NotFoundException("");
         }
-        SubGovernance newSubGovernance = null;
-        if (contestDTO.getSubGovernance() != null) {
-            newSubGovernance = subGovernanceServiceImpl.getById(contestDTO.getSubGovernance().getId());
+        Contest newContest = null;
+        if (submissionDTO.getContest() != null) {
+            newContest = contestServiceImpl.getById(submission.getContest().getId());
         }
-        contestServiceImpl.edit(newSubGovernance, contest, newContestData);*/
-        return MAPPER.toContestListDTO(contestServiceImpl.getList());
+        Author newAuthor = null;
+        if (submissionDTO.getAuthor() != null) {
+            newAuthor = authorServiceImpl.getById(submission.getAuthor().getId());
+        }
+        submissionServiceImpl.edit(newContest,newAuthor, submission, newSubmissionData);
     }
 
     @Autowired
@@ -75,5 +110,13 @@ public class AdminSubmissionFacade {
         this.submissionServiceImpl = submissionServiceImpl;
     }
 
+    @Autowired
+    public void setContestServiceImpl(ContestServiceImpl contestServiceImpl) {
+        this.contestServiceImpl = contestServiceImpl;
+    }
 
+    @Autowired
+    public void setAuthorServiceImpl(AuthorServiceImpl authorServiceImpl) {
+        this.authorServiceImpl = authorServiceImpl;
+    }
 }

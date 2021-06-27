@@ -3,17 +3,20 @@ package by.ilya.catalog.endpoint;
 import by.ilya.catalog.domain.FileDB;
 import by.ilya.catalog.dto.ResponseFile;
 import by.ilya.catalog.dto.ResponseMessage;
+import by.ilya.catalog.facade.AdminSubmissionFacade;
 import by.ilya.catalog.service.FileStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -26,22 +29,27 @@ public class FileEndpoint {
 
     @Autowired
     private FileStorageService fileStorageService;
+    @Autowired
+    private AdminSubmissionFacade adminSubmissionFacade;
 
     @PostMapping("/admin/upload")
-    public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("submissionId") Long submissionId) {
+    public String uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("submissionId") Long submissionId, Model model) {
         String message = "";
         try {
             fileStorageService.store(file, submissionId);
 
             message = "Uploaded the file successfully: " + file.getOriginalFilename();
-            return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
+            //return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
         } catch (Exception e) {
             message = "Could not upload the file: " + file.getOriginalFilename() + "!";
-            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
+            //return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
         }
+        model.addAttribute("submission", adminSubmissionFacade.getById(submissionId));
+        return "admin/submission/submission-view";
     }
 
-    @GetMapping("/admin/delete")
+    @GetMapping("/admin/files/delete")
+    @ResponseBody
     public void delete(@RequestParam(value = "id") String id) {
         fileStorageService.delete(id);
     }
@@ -59,7 +67,8 @@ public class FileEndpoint {
                     dbFile.getName(),
                     fileDownloadUri,
                     dbFile.getType(),
-                    dbFile.getData().length);
+                    dbFile.getData().length,
+                    dbFile.getId());
         }).collect(Collectors.toList());
 
         return ResponseEntity.status(HttpStatus.OK).body(files);

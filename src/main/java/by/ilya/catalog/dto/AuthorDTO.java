@@ -5,18 +5,10 @@ import java.util.List;
 public class AuthorDTO {
 
     private long id;
-    private String telegramNickname;
     private String freetonForumNickname;
     private List<SubmissionDTO> submissions;
     private String[] freeTonAddresses;
-
-    public String getTelegramNickname() {
-        return telegramNickname;
-    }
-
-    public void setTelegramNickname(String telegramNickname) {
-        this.telegramNickname = telegramNickname;
-    }
+    private String chosedFreeTonAddress;
 
     public String getFreetonForumNickname() {
         return freetonForumNickname;
@@ -48,5 +40,13 @@ public class AuthorDTO {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getChosedFreeTonAddress() {
+        return chosedFreeTonAddress;
+    }
+
+    public void setChosedFreeTonAddress(String chosedFreeTonAddress) {
+        this.chosedFreeTonAddress = chosedFreeTonAddress;
     }
 }

@@ -21,7 +21,7 @@ public class SubGovernance {
 
     @Column(nullable = false)
     private String name;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Contest> contests = new ArrayList<>();
 
     public Long getId() {

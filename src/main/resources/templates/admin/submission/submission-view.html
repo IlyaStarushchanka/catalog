@@ -108,8 +108,8 @@
                     <div class="page-header">
                         <div class="page-title">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#">Authors</a></li>
-                                <li class="breadcrumb-item active">Edit</li>
+                                <li class="breadcrumb-item"><a href="#">Submission</a></li>
+                                <li class="breadcrumb-item active" th:text="${submission.number}"></li>
                             </ol>
                         </div>
                     </div>
@@ -122,37 +122,78 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-title">
-                                <h4>Edit Author</h4>
                             </div>
                             <div class="card-body">
                                 <div class="horizontal-form-elements">
-                                    <form class="form-horizontal" action="/admin/authors/edit" method="POST">
+                                    <form class="form-horizontal">
                                         <div class="row">
-                                            <div class="col-lg-12">
+                                            <div class="col-lg-6">
                                                 <div class="form-group">
-                                                    <label class="col-sm-3 control-label">Freeton Forum NickName</label>
-                                                    <div class="col-sm-10">
-                                                        <input type="hidden" id="id" name="id" th:value="${author.id}" />
-                                                        <input  type="text" autofocus name="freetonForumNickname" th:value="${author.freetonForumNickname}" class="form-control input-rounded" id="freetonForumNickname">
-                                                    </div>
+                                                    <h7> Number :
+                                                        <p class="form-control-static" th:text="${submission.number}"></p></h7>
                                                 </div>
+
                                                 <div class="form-group">
-                                                    <label class="col-sm-3 control-label">FreeTon Addresses<a href="#" role="button" onclick="addFreeTonAddress()">
-                                                        <span class="ti-plus"/>
-                                                    </a></label>
-                                                    <p class="form-control-static" th:each="address : ${author.freeTonAddresses}" th:text="${address}"></p>
-                                                    <div class="col-sm-10 freeTonAddress">
-                                                        <input  type="text" autofocus name="freeTonAddresses" class="form-control input-rounded" id="freeTonAddresses">
-                                                    </div>
+                                                    <h7> Contest :
+                                                        <p class="form-control-staticti-link"><a th:href=@{/admin/contests/view?(id=${submission.contest.id})} th:text="${submission.contest.name}"></a></p></h7>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <h7>Author :
+                                                        <p class="form-control-static" th:text="${submission.author.freetonForumNickname}"></p>
+                                                        <p class="form-control-static" th:text="${submission.authorFreeTonAddress}"></p>
+                                                    </h7>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <h7>Total Rate :
+                                                        <p class="form-control-static" th:text="${submission.rate}"></p></h7>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <h7>Reward :
+                                                        <p class="form-control-static" th:text="${submission.prize}"></p></h7>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <h7>Place :
+                                                        <p class="form-control-static" th:text="${submission.place}"></p></h7>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <h7>Description :
+                                                        <p class="form-control-static" th:text="${submission.description}"></p></h7>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <h7>Files :
+                                                        <div th:each="file : ${submission.files}">
+                                                            <input type="hidden" th:id="'fileId_'+${file.id}" name="fileId" th:value="${file.id}" />
+                                                            <p class="form-control-static ti-link"><a th:href="${file.url}" th:text="${file.name}"></a>
+                                                                <a href="#" role="button" th:id="${file.id}" onclick="removeFile(this)">
+                                                                    <span class="ti-trash"/>
+                                                                </a></p>
+                                                        </div>
+                                                    </h7>
+
                                                 </div>
                                             </div>
                                         </div>
-                                        <button type="submit" name="auth" class="btn btn-primary">Edit Author</button>
                                     </form>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <form method="POST" enctype="multipart/form-data" action="/admin/upload">
+                        <input type="hidden" id="submissionId" name="submissionId" th:value="${submission.id}" />
+                        <table>
+                            <tr><td>File to upload:</td>
+                                <td><input type="file" class="form-control" name="file" /></td>
+                            </tr>
+                            <tr><td></td><td><input type="submit" class="btn btn-primary" value="Upload" /></td></tr>
+                        </table>
+                    </form>
                 </div>
             </section>
         </div>
@@ -178,7 +219,6 @@
 <script src="/assets/js/lib/bootstrap.min.js"></script><script src="/assets/js/scripts.js"></script>
 <!-- scripit init-->
 <script src="/js/functions.js"></script>
-<script src="/js/validateData.js"></script>
 
 </body>
 

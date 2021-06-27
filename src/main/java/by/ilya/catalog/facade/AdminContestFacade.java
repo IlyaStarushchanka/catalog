@@ -3,6 +3,7 @@ package by.ilya.catalog.facade;
 import by.ilya.catalog.domain.Contest;
 import by.ilya.catalog.domain.StatusEnum;
 import by.ilya.catalog.domain.SubGovernance;
+import by.ilya.catalog.domain.Submission;
 import by.ilya.catalog.dto.ContestDTO;
 import by.ilya.catalog.dto.SubGovernanceDTO;
 import by.ilya.catalog.mapper.CatalogMapper;
@@ -13,13 +14,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Service
 public class AdminContestFacade {
 
     private ContestServiceImpl contestServiceImpl;
     private SubGovernanceServiceImpl subGovernanceServiceImpl;
+    private AdminSubmissionFacade adminSubmissionFacade;
     private static final CatalogMapper MAPPER = CatalogMapper.INSTANCE;
 
     @Transactional
@@ -46,9 +51,13 @@ public class AdminContestFacade {
     }
 
 
+    @Transactional
     public List<ContestDTO> delete(long id) {
         Contest contest = contestServiceImpl.getById(id);
         if (contest != null) {
+            contest.getSubGovernance().getContests().remove(contest);
+            List<Long> ids = contest.getSubmissions().stream().map(Submission::getId).collect(Collectors.toList());
+            adminSubmissionFacade.deleteAll(ids);
             contestServiceImpl.delete(id);
         }
         return getList();
@@ -79,5 +88,10 @@ public class AdminContestFacade {
     @Autowired
     public void setSubGovernanceServiceImpl(SubGovernanceServiceImpl subGovernanceServiceImpl) {
         this.subGovernanceServiceImpl = subGovernanceServiceImpl;
+    }
+
+    @Autowired
+    public void setAdminSubmissionFacade(AdminSubmissionFacade adminSubmissionFacade) {
+        this.adminSubmissionFacade = adminSubmissionFacade;
     }
 }

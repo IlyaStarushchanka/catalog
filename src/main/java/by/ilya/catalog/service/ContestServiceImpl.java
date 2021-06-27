@@ -48,9 +48,14 @@ public class ContestServiceImpl implements CrudService<Contest> {
         contest.setVotingFrom(newContestData.getVotingFrom());
         contest.setVotingTo(newContestData.getVotingTo());
         contest.setSubGovernance(newSubGovernance);
+        contest.setPrizeFund(newContestData.getPrizeFund());
         if (newSubGovernance != null && !newSubGovernance.getContests().contains(contest)) {
             newSubGovernance.getContests().add(contest);
         }
+        contestRepository.saveAndFlush(contest);
+    }
+
+    public void update(Contest contest){
         contestRepository.saveAndFlush(contest);
     }
 

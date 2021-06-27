@@ -193,29 +193,63 @@ public class AdminEndpoint {
         return "admin/contest/contest-list";
     }
 
-    @GetMapping("/contests/view")
-    public String viewContest(@RequestParam(value = "id") long id,Model model){
-        model.addAttribute("contest", adminContestFacade.getById(id));
-        return "admin/contest/contest-view";
+    @GetMapping("/submissions/view")
+    public String viewSubmission(@RequestParam(value = "id") long id, Model model){
+        model.addAttribute("submission", adminSubmissionFacade.getById(id));
+        return "admin/submission/submission-view";
+    }
+
+    @GetMapping("/submissions/openAdd")
+    public String openSubmissionAddPage(Model model){
+        model.addAttribute("contests", adminContestFacade.getList());
+        model.addAttribute("authors", adminAuthorFacade.getList());
+        return "admin/submission/submission-create";
+    }
+
+    @GetMapping("/submissions/openEdit")
+    public String openSubmissionEditPage(@RequestParam(value = "id") long id, Model model, Principal principal){
+        SubmissionDTO submissionDTO = adminSubmissionFacade.getById(id);
+        if (submissionDTO == null){
+            model.addAttribute("errorMessage", "You cannot edit submission.");
+            return "error";
+        }
+        model.addAttribute("submission", submissionDTO);
+        model.addAttribute("contests", adminContestFacade.getList());
+        model.addAttribute("authors", adminAuthorFacade.getList());
+        return "admin/submission/submission-edit";
+    }
+
+    @GetMapping("/submissions/list")
+    public String submissionList(Model model){
+        model.addAttribute("submissions", adminSubmissionFacade.getList());
+        return "admin/submission/submission-list";
     }
 
     @PostMapping("/submissions/add")
-    public String createSubmission(@ModelAttribute SubmissionDTO submissionDTO, Model model){
+    public String addSubmission(@ModelAttribute SubmissionDTO submissionDTO, Model model){
         adminSubmissionFacade.create(submissionDTO);
+        model.addAttribute("submissions", adminSubmissionFacade.getList());
+        return "admin/submission/submission-list";
+    }
+
+    @PostMapping("/submissions/edit")
+    public String editSubmission(@ModelAttribute SubmissionDTO submissionDTO, Model model) throws NotFoundException {
+        adminSubmissionFacade.edit(submissionDTO);
         model.addAttribute("submissions", adminSubmissionFacade.getList());
         return "admin/submission/submission-list";
     }
 
     @GetMapping("/submissions/delete")
     public String deleteSubmission(@RequestParam(value = "id") long id, Model model){
-        model.addAttribute("submissions", adminSubmissionFacade.delete(id));
+        adminSubmissionFacade.delete(id);
+        model.addAttribute("submissions", adminSubmissionFacade.getList());
         return "admin/submission/submission-list";
     }
 
-    @PostMapping("/submissions/edit")
-    public String editSubmission(@ModelAttribute ContestDTO contest, Model model) throws NotFoundException {
-        model.addAttribute("contests", adminSubmissionFacade.edit(contest));
-        return "admin/submission/submission-list";
+    @GetMapping("/contests/view")
+    public String viewContest(@RequestParam(value = "id") long id,Model model){
+        model.addAttribute("contest", adminContestFacade.getById(id));
+        return "admin/contest/contest-view";
     }
 
     @GetMapping("/authors/list")
@@ -235,7 +269,8 @@ public class AdminEndpoint {
 
     @PostMapping("/authors/add")
     public String addAuthor(@ModelAttribute AuthorDTO author, Model model){
-        model.addAttribute("authors", adminAuthorFacade.create(author));
+        adminAuthorFacade.create(author);
+        model.addAttribute("authors", adminAuthorFacade.getList());
         return "admin/author/author-list";
     }
 
@@ -250,19 +285,6 @@ public class AdminEndpoint {
         model.addAttribute("author", adminAuthorFacade.getById(id));
         return "admin/author/author-view";
     }
-
-    /*@GetMapping("/submissions/view")
-    public String viewSubmission(@RequestParam(value = "id") long id, Model model){
-        model.addAttribute("submission", adminSubmissionFacade.getById(id));
-        return "admin/submission/submission-view";
-    }*/
-
-    @PostMapping("/authors")
-    @ResponseBody
-    public AuthorDTO createAuthor(@RequestBody AuthorDTO author){
-        return adminPageFacade.createAuthor(author);
-    }
-
     /*@DeleteMapping("/managers/{id}")
     @ResponseBody
     public List<ManagerDTO> deleteManager(@PathVariable long id){

@@ -5,15 +5,18 @@ import java.util.List;
 
 public class SubmissionDTO {
 
+    private long id;
     private ContestDTO contest;
-    private int number;
-    private long publishTime;
+    private String number;
     private AuthorDTO author;
 
     private List<ResponseFile> files = new ArrayList<>();
-    private double rate;
-    private int place;
-    private double prize;
+    private String authorFreeTonAddress;
+    private String description;
+    private String rate;
+    private String place;
+    private String prize;
+
 
     public ContestDTO getContest() {
         return contest;
@@ -23,20 +26,28 @@ public class SubmissionDTO {
         this.contest = contest;
     }
 
-    public int getNumber() {
-        return number;
+    public long getId() {
+        return id;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public void setId(long id) {
+        this.id = id;
     }
 
-    public long getPublishTime() {
-        return publishTime;
+    public String getAuthorFreeTonAddress() {
+        return authorFreeTonAddress;
     }
 
-    public void setPublishTime(long publishTime) {
-        this.publishTime = publishTime;
+    public void setAuthorFreeTonAddress(String authorFreeTonAddress) {
+        this.authorFreeTonAddress = authorFreeTonAddress;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public AuthorDTO getAuthor() {
@@ -55,27 +66,35 @@ public class SubmissionDTO {
         this.files = files;
     }
 
-    public double getRate() {
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public String getRate() {
         return rate;
     }
 
-    public void setRate(double rate) {
+    public void setRate(String rate) {
         this.rate = rate;
     }
 
-    public int getPlace() {
+    public String getPlace() {
         return place;
     }
 
-    public void setPlace(int place) {
+    public void setPlace(String place) {
         this.place = place;
     }
 
-    public double getPrize() {
+    public String getPrize() {
         return prize;
     }
 
-    public void setPrize(double prize) {
+    public void setPrize(String prize) {
         this.prize = prize;
     }
 }

@@ -24,7 +24,7 @@ public class SubGovernanceServiceImpl implements CrudService<SubGovernance> {
 
     @Override
     public List<SubGovernance> getList() {
-        return (List<SubGovernance>)subGovernanceRepository.findAll();
+        return subGovernanceRepository.findAll();
     }
 
     @Override

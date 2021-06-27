@@ -30,6 +30,10 @@ public class AuthorServiceImpl implements CrudService<Author> {
         return authorRepository.getById(id);
     }
 
+    public Author edit(Author author) {
+        return authorRepository.saveAndFlush(author);
+    }
+
     @Override
     public void delete(long id) {
 

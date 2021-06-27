@@ -12,10 +12,11 @@ public class ContestDTO {
     private String votingFrom;
     private String votingTo;
     private String status;
-
-    //private List<SubmissionDTO> submissions;
+    private double prizeFund;
 
     private SubGovernanceDTO subGovernance;
+    private List<SubmissionDTO> submissions;
+
 
     public long getId() {
         return id;
@@ -81,19 +82,27 @@ public class ContestDTO {
         this.status = status;
     }
 
-    /*public List<SubmissionDTO> getSubmissions() {
-        return submissions;
+    public double getPrizeFund() {
+        return prizeFund;
     }
 
-    public void setSubmissions(List<SubmissionDTO> submissions) {
-        this.submissions = submissions;
+    public void setPrizeFund(double prizeFund) {
+        this.prizeFund = prizeFund;
     }
-*/
+
     public SubGovernanceDTO getSubGovernance() {
         return subGovernance;
     }
 
     public void setSubGovernance(SubGovernanceDTO subGovernance) {
         this.subGovernance = subGovernance;
+    }
+
+    public List<SubmissionDTO> getSubmissions() {
+        return submissions;
+    }
+
+    public void setSubmissions(List<SubmissionDTO> submissions) {
+        this.submissions = submissions;
     }
 }

@@ -108,7 +108,7 @@
                         <div class="page-header">
                             <div class="page-title">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#">Authors</a></li>
+                                    <li class="breadcrumb-item"><a href="#">Submission</a></li>
                                     <li class="breadcrumb-item active">List</li>
                                 </ol>
                             </div>
@@ -122,8 +122,8 @@
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-title">
-                                    <h4>Authors
-                                        <a th:href=@{/admin/authors/openAdd} role="button">
+                                    <h4>Submissions
+                                        <a th:href=@{/admin/submissions/openAdd} role="button">
                                             <span class="ti-plus"/>
                                         </a>
                                     </h4>
@@ -135,21 +135,32 @@
                                             <thead>
                                                 <tr>
                                                     <th>Id</th>
-                                                    <th>FreeTon Forum NickName</th>
-                                                    <th>FreeTon Addresses</th>
+                                                    <th>Number</th>
+                                                    <th>Contest</th>
+                                                    <th>Author</th>
+                                                    <th>Rate</th>
+                                                    <th>Place</th>
+                                                    <th>Reward</th>
                                                     <th>Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            <tr th:each="author : ${authors}">
-                                                <th scope="row" th:text="${author.id}"></th>
-                                                <td th:text="${author.freetonForumNickname}"></td>
-                                                <td><label th:each="address : ${author.freeTonAddresses}" th:text="${address} + ','"/></td>
+                                            <tr th:each="submission : ${submissions}">
+                                                <th scope="row" th:text="${submission.id}"></th>
+                                                <td th:text="${submission.number}"></td>
+                                                <td th:text="${submission.contest.name}"></td>
+                                                <td th:text="${submission.author.freetonForumNickname}"></td>
+                                                <td th:text="${submission.rate}"></td>
+                                                <td th:text="${submission.place}"></td>
+                                                <td th:text="${submission.prize}"></td>
                                                 <td align="center">
-                                                    <a th:href=@{/admin/authors/openEdit?(id=${author.id})} role="button">
+                                                    <a th:href=@{/admin/submissions/delete?(id=${submission.id})} role="button">
+                                                        <span class="ti-trash"/>
+                                                    </a>
+                                                    <a th:href=@{/admin/submissions/openEdit?(id=${submission.id})} role="button">
                                                         <span class="ti-pencil"/>
                                                     </a>
-                                                    <a th:href=@{/admin/authors/view?(id=${author.id})} role="button">
+                                                    <a th:href=@{/admin/submissions/view?(id=${submission.id})} role="button">
                                                         <span class="ti-eye" />
                                                     </a>
                                                 </td>

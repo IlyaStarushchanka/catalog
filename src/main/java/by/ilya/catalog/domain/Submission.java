@@ -1,6 +1,7 @@
 package by.ilya.catalog.domain;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -10,7 +11,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class Submission {
@@ -19,19 +23,20 @@ public class Submission {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Contest contest;
-    private int number;
-    private String publishTime;
-    @ManyToOne(optional = false)
+    private String number;
+    @ManyToOne
     private Author author;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<FileDB> files = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<FileDB> files = new HashSet<>();
     private String authorFreeTonAddress;
+    @Column(length = 10000)
+    private String description;
 
-    private double rate;
-    private int place;
-    private double prize;
+    private String rate;
+    private String place;
+    private String prize;
 
     public Long getId() {
         return id;
@@ -49,20 +54,36 @@ public class Submission {
         this.contest = contest;
     }
 
-    public int getNumber() {
+    public String getNumber() {
         return number;
     }
 
-    public void setNumber(int number) {
+    public void setNumber(String number) {
         this.number = number;
     }
 
-    public String getPublishTime() {
-        return publishTime;
+    public String getRate() {
+        return rate;
     }
 
-    public void setPublishTime(String publishTime) {
-        this.publishTime = publishTime;
+    public void setRate(String rate) {
+        this.rate = rate;
+    }
+
+    public String getPlace() {
+        return place;
+    }
+
+    public void setPlace(String place) {
+        this.place = place;
+    }
+
+    public String getPrize() {
+        return prize;
+    }
+
+    public void setPrize(String prize) {
+        this.prize = prize;
     }
 
     public Author getAuthor() {
@@ -73,35 +94,11 @@ public class Submission {
         this.author = author;
     }
 
-    public int getPlace() {
-        return place;
-    }
-
-    public void setPlace(int place) {
-        this.place = place;
-    }
-
-    public double getPrize() {
-        return prize;
-    }
-
-    public void setPrize(double prize) {
-        this.prize = prize;
-    }
-
-    public double getRate() {
-        return rate;
-    }
-
-    public void setRate(double rate) {
-        this.rate = rate;
-    }
-
-    public List<FileDB> getFiles() {
+    public Set<FileDB> getFiles() {
         return files;
     }
 
-    public void setFiles(List<FileDB> files) {
+    public void setFiles(Set<FileDB> files) {
         this.files = files;
     }
 
@@ -111,5 +108,26 @@ public class Submission {
 
     public void setAuthorFreeTonAddress(String authorFreeTonAddress) {
         this.authorFreeTonAddress = authorFreeTonAddress;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Submission that = (Submission) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

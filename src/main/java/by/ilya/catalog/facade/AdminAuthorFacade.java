@@ -26,13 +26,10 @@ public class AdminAuthorFacade {
     }
 
     @Transactional
-    public List<AuthorDTO> create(AuthorDTO authorDTO) {
+    public AuthorDTO create(AuthorDTO authorDTO) {
         Author author = MAPPER.toState(authorDTO);
         authorServiceImpl.create(author);
-        for (FreeTonAddress address : author.getFreetonAddresses()){
-            address.setAuthor(author);
-        }
-        return getList();
+        return MAPPER.toDTO(author);
     }
 
     public AuthorDTO getById(long id) {
@@ -44,7 +41,6 @@ public class AdminAuthorFacade {
         List<FreeTonAddress> newAddresses = new ArrayList<>();
         Author author = authorServiceImpl.getById(authorDTO.getId());
         author.setFreetonForumNickname(authorDTO.getFreetonForumNickname());
-        author.setTelegramNickname(authorDTO.getTelegramNickname());
         for(String address : authorDTO.getFreeTonAddresses()) {
             if (!author.hasFreeTonAddressByName(address)) {
                 FreeTonAddress newAddress = new FreeTonAddress(address, author);
@@ -54,6 +50,7 @@ public class AdminAuthorFacade {
         if (!newAddresses.isEmpty()){
             author.getFreetonAddresses().addAll(newAddresses);
         }
+        authorServiceImpl.edit(author);
         return MAPPER.toAuthorListDTO(authorServiceImpl.getList());
     }
 
