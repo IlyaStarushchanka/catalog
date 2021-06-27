@@ -32,7 +32,7 @@ RUN useradd -ms /bin/bash qovery
 USER qovery
 
 # Get the build artifact (can be a folder)
-COPY --from=build /app/build/libs/catalog-0.0.1-SNAPSHOT.jar /catalog.jar
+COPY --from=build /catalog/build/libs/catalog-0.0.1-SNAPSHOT.jar /catalog.jar
 
 # Set specific environment variables
 ENV JAVA_OPTS=""
