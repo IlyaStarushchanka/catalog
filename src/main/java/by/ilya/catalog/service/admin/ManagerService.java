@@ -1,9 +1,7 @@
-package by.ilya.catalog.service;
+package by.ilya.catalog.service.admin;
 
 import by.ilya.catalog.domain.Manager;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 
 @Service

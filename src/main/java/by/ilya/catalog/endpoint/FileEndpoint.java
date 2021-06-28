@@ -1,10 +1,9 @@
 package by.ilya.catalog.endpoint;
 
 import by.ilya.catalog.domain.FileDB;
-import by.ilya.catalog.dto.ResponseFile;
-import by.ilya.catalog.dto.ResponseMessage;
-import by.ilya.catalog.facade.AdminSubmissionFacade;
-import by.ilya.catalog.service.FileStorageService;
+import by.ilya.catalog.dto.admin.ResponseFile;
+import by.ilya.catalog.facade.admin.AdminSubmissionFacade;
+import by.ilya.catalog.service.admin.FileStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

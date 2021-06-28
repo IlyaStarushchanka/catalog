@@ -1,13 +1,10 @@
-package by.ilya.catalog.facade;
+package by.ilya.catalog.facade.admin;
 
 import by.ilya.catalog.domain.Author;
 import by.ilya.catalog.domain.FreeTonAddress;
-import by.ilya.catalog.domain.SubGovernance;
-import by.ilya.catalog.dto.AuthorDTO;
-import by.ilya.catalog.dto.SubmissionDTO;
-import by.ilya.catalog.mapper.CatalogMapper;
-import by.ilya.catalog.service.AuthorServiceImpl;
-import by.ilya.catalog.service.ContestServiceImpl;
+import by.ilya.catalog.dto.admin.AuthorDTO;
+import by.ilya.catalog.mapper.AdminMapper;
+import by.ilya.catalog.service.admin.AuthorServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,7 +16,7 @@ import java.util.List;
 public class AdminAuthorFacade {
 
     private AuthorServiceImpl authorServiceImpl;
-    private static final CatalogMapper MAPPER = CatalogMapper.INSTANCE;
+    private static final AdminMapper MAPPER = AdminMapper.INSTANCE;
 
     public List<AuthorDTO> getList() {
         return MAPPER.toAuthorListDTO(authorServiceImpl.getList());

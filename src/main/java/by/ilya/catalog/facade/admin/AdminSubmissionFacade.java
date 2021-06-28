@@ -1,21 +1,17 @@
-package by.ilya.catalog.facade;
+package by.ilya.catalog.facade.admin;
 
 import by.ilya.catalog.domain.Author;
 import by.ilya.catalog.domain.Contest;
-import by.ilya.catalog.domain.SubGovernance;
 import by.ilya.catalog.domain.Submission;
-import by.ilya.catalog.dto.ContestDTO;
-import by.ilya.catalog.dto.SubmissionDTO;
-import by.ilya.catalog.mapper.CatalogMapper;
-import by.ilya.catalog.service.AuthorServiceImpl;
-import by.ilya.catalog.service.ContestServiceImpl;
-import by.ilya.catalog.service.SubGovernanceServiceImpl;
-import by.ilya.catalog.service.SubmissionServiceImpl;
+import by.ilya.catalog.dto.admin.SubmissionDTO;
+import by.ilya.catalog.mapper.AdminMapper;
+import by.ilya.catalog.service.admin.AuthorServiceImpl;
+import by.ilya.catalog.service.admin.ContestServiceImpl;
+import by.ilya.catalog.service.admin.SubmissionServiceImpl;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.CollectionUtils;
 
 import java.util.HashSet;
 import java.util.List;
@@ -26,7 +22,7 @@ public class AdminSubmissionFacade {
     private SubmissionServiceImpl submissionServiceImpl;
     private ContestServiceImpl contestServiceImpl;
     private AuthorServiceImpl authorServiceImpl;
-    private static final CatalogMapper MAPPER = CatalogMapper.INSTANCE;
+    private static final AdminMapper MAPPER = AdminMapper.INSTANCE;
 
     @Transactional
     public void create(SubmissionDTO submissionDTO) {

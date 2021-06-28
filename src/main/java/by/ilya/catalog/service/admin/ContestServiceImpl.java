@@ -1,9 +1,7 @@
-package by.ilya.catalog.service;
+package by.ilya.catalog.service.admin;
 
 import by.ilya.catalog.domain.Contest;
-import by.ilya.catalog.domain.StatusEnum;
 import by.ilya.catalog.domain.SubGovernance;
-import by.ilya.catalog.dto.ContestDTO;
 import by.ilya.catalog.repository.ContestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,6 +46,7 @@ public class ContestServiceImpl implements CrudService<Contest> {
         contest.setVotingFrom(newContestData.getVotingFrom());
         contest.setVotingTo(newContestData.getVotingTo());
         contest.setSubGovernance(newSubGovernance);
+        contest.setDescription(newContestData.getDescription());
         contest.setPrizeFund(newContestData.getPrizeFund());
         if (newSubGovernance != null && !newSubGovernance.getContests().contains(contest)) {
             newSubGovernance.getContests().add(contest);

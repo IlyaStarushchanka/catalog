@@ -1,4 +1,4 @@
-package by.ilya.catalog.service;
+package by.ilya.catalog.service.admin;
 
 import java.util.List;
 

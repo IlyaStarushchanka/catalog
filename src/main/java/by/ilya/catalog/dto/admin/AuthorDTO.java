@@ -1,4 +1,4 @@
-package by.ilya.catalog.dto;
+package by.ilya.catalog.dto.admin;
 
 import java.util.List;
 

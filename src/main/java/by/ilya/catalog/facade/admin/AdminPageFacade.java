@@ -1,12 +1,8 @@
-package by.ilya.catalog.facade;
+package by.ilya.catalog.facade.admin;
 
-import by.ilya.catalog.domain.Manager;
-import by.ilya.catalog.dto.AuthorDTO;
-import by.ilya.catalog.dto.ContestDTO;
-import by.ilya.catalog.dto.ManagerDTO;
-import by.ilya.catalog.dto.SubGovernanceDTO;
-import by.ilya.catalog.dto.SubmissionDTO;
-import javassist.NotFoundException;
+import by.ilya.catalog.dto.admin.AuthorDTO;
+import by.ilya.catalog.dto.admin.ContestDTO;
+import by.ilya.catalog.dto.admin.SubmissionDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

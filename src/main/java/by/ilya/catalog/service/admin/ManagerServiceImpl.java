@@ -1,8 +1,7 @@
-package by.ilya.catalog.service;
+package by.ilya.catalog.service.admin;
 
 import by.ilya.catalog.domain.Manager;
 import by.ilya.catalog.repository.ManagerRepository;
-import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,6 @@
-package by.ilya.catalog.service;
+package by.ilya.catalog.service.admin;
 
 import by.ilya.catalog.domain.Author;
-import by.ilya.catalog.domain.FreeTonAddress;
 import by.ilya.catalog.repository.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

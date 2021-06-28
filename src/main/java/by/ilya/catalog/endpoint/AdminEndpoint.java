@@ -1,18 +1,16 @@
 package by.ilya.catalog.endpoint;
 
 import by.ilya.catalog.domain.Manager;
-import by.ilya.catalog.dto.AuthorDTO;
-import by.ilya.catalog.dto.ContestDTO;
-import by.ilya.catalog.dto.ManagerDTO;
-import by.ilya.catalog.dto.SubGovernanceDTO;
-import by.ilya.catalog.dto.SubmissionDTO;
-import by.ilya.catalog.facade.AdminAuthorFacade;
-import by.ilya.catalog.facade.AdminContestFacade;
-import by.ilya.catalog.facade.AdminManagerPageFacade;
-import by.ilya.catalog.facade.AdminPageFacade;
-import by.ilya.catalog.facade.AdminSubGovernanceFacade;
-import by.ilya.catalog.facade.AdminSubmissionFacade;
-import by.ilya.catalog.service.AuthorServiceImpl;
+import by.ilya.catalog.dto.admin.AuthorDTO;
+import by.ilya.catalog.dto.admin.ContestDTO;
+import by.ilya.catalog.dto.admin.ManagerDTO;
+import by.ilya.catalog.dto.admin.SubGovernanceDTO;
+import by.ilya.catalog.dto.admin.SubmissionDTO;
+import by.ilya.catalog.facade.admin.AdminAuthorFacade;
+import by.ilya.catalog.facade.admin.AdminContestFacade;
+import by.ilya.catalog.facade.admin.AdminManagerPageFacade;
+import by.ilya.catalog.facade.admin.AdminSubGovernanceFacade;
+import by.ilya.catalog.facade.admin.AdminSubmissionFacade;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +18,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -32,7 +29,6 @@ import java.security.Principal;
 @RequestMapping("admin")
 public class AdminEndpoint {
 
-    private AdminPageFacade adminPageFacade;
     private AdminManagerPageFacade adminManagerPageFacade;
     private AdminSubGovernanceFacade adminSubGovernanceFacade;
     private AdminContestFacade adminContestFacade;
@@ -290,17 +286,6 @@ public class AdminEndpoint {
     public String authorOpenViewPage(@RequestParam(value = "id") long id, Model model){
         model.addAttribute("author", adminAuthorFacade.getById(id));
         return "admin/author/author-view";
-    }
-    /*@DeleteMapping("/managers/{id}")
-    @ResponseBody
-    public List<ManagerDTO> deleteManager(@PathVariable long id){
-        return adminPageFacade.deleteManager(id);
-    }
-*/
-
-    @Autowired
-    public void setAdminPageFacade(AdminPageFacade adminPageFacade) {
-        this.adminPageFacade = adminPageFacade;
     }
 
     @Autowired

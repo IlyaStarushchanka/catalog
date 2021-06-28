@@ -1,22 +1,18 @@
-package by.ilya.catalog.facade;
+package by.ilya.catalog.facade.admin;
 
 import by.ilya.catalog.domain.Contest;
-import by.ilya.catalog.domain.StatusEnum;
 import by.ilya.catalog.domain.SubGovernance;
 import by.ilya.catalog.domain.Submission;
-import by.ilya.catalog.dto.ContestDTO;
-import by.ilya.catalog.dto.SubGovernanceDTO;
-import by.ilya.catalog.mapper.CatalogMapper;
-import by.ilya.catalog.service.ContestServiceImpl;
-import by.ilya.catalog.service.SubGovernanceServiceImpl;
+import by.ilya.catalog.dto.admin.ContestDTO;
+import by.ilya.catalog.mapper.AdminMapper;
+import by.ilya.catalog.service.admin.ContestServiceImpl;
+import by.ilya.catalog.service.admin.SubGovernanceServiceImpl;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Iterator;
 import java.util.List;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,7 +21,7 @@ public class AdminContestFacade {
     private ContestServiceImpl contestServiceImpl;
     private SubGovernanceServiceImpl subGovernanceServiceImpl;
     private AdminSubmissionFacade adminSubmissionFacade;
-    private static final CatalogMapper MAPPER = CatalogMapper.INSTANCE;
+    private static final AdminMapper MAPPER = AdminMapper.INSTANCE;
 
     @Transactional
     public ContestDTO create(ContestDTO contestDTO) {

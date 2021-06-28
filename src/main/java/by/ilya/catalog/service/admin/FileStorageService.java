@@ -1,4 +1,4 @@
-package by.ilya.catalog.service;
+package by.ilya.catalog.service.admin;
 
 import by.ilya.catalog.domain.FileDB;
 import by.ilya.catalog.domain.Submission;

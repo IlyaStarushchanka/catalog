@@ -1,6 +1,6 @@
-package by.ilya.catalog.service;
+package by.ilya.catalog.service.admin;
 
-import by.ilya.catalog.dto.ResponseMessage;
+import by.ilya.catalog.dto.admin.ResponseMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

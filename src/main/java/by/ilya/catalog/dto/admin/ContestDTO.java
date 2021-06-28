@@ -1,4 +1,4 @@
-package by.ilya.catalog.dto;
+package by.ilya.catalog.dto.admin;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ public class ContestDTO {
     private String votingFrom;
     private String votingTo;
     private String status;
-    private double prizeFund;
+    private String prizeFund;
 
     private SubGovernanceDTO subGovernance;
     private List<SubmissionDTO> submissions;
@@ -82,11 +82,11 @@ public class ContestDTO {
         this.status = status;
     }
 
-    public double getPrizeFund() {
+    public String getPrizeFund() {
         return prizeFund;
     }
 
-    public void setPrizeFund(double prizeFund) {
+    public void setPrizeFund(String prizeFund) {
         this.prizeFund = prizeFund;
     }
 

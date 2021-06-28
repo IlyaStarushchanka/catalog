@@ -1,9 +1,9 @@
-package by.ilya.catalog.facade;
+package by.ilya.catalog.facade.admin;
 
 import by.ilya.catalog.domain.SubGovernance;
-import by.ilya.catalog.dto.SubGovernanceDTO;
-import by.ilya.catalog.mapper.CatalogMapper;
-import by.ilya.catalog.service.SubGovernanceServiceImpl;
+import by.ilya.catalog.dto.admin.SubGovernanceDTO;
+import by.ilya.catalog.mapper.AdminMapper;
+import by.ilya.catalog.service.admin.SubGovernanceServiceImpl;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ import java.util.List;
 public class AdminSubGovernanceFacade {
 
     private SubGovernanceServiceImpl subGovernanceServiceImpl;
-    private static final CatalogMapper MAPPER = CatalogMapper.INSTANCE;
+    private static final AdminMapper MAPPER = AdminMapper.INSTANCE;
 
     public SubGovernanceDTO create(SubGovernanceDTO subGovernanceDTO) {
         SubGovernance subGovernance = MAPPER.toState(subGovernanceDTO);

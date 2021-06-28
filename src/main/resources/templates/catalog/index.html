@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="Ru-ru">
+<html lang="Ru-ru" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8"/>
     <title>TONcatalog</title>
@@ -69,7 +69,7 @@
       </div>
       <div class="catalog__main">
         <div class="catalog__header">
-          <div class="catalog__header-counter">8 results</div>
+          <div class="catalog__header-counter" th:text="${#lists.size(contests)} + ' results'"></div>
           <div class="catalog__header-sort">
             <form action="#" method="get" class="sort">
               <div class="styled-select js-styled-select">
@@ -83,85 +83,13 @@
           </div>
         </div>
         <ul class="catalog__list">
-          <li class="catalog-item">
+          <li class="catalog-item" th:each="contest : ${contests}">
             <a href="#" class="catalog-item__wrap">
-              <div class="catalog-item__name">#169 Contest: Dune</div>
-              <div class="catalog-item__sub">W&D Sub-governance</div>
-              <div class="catalog-item__strong">5 winners</div>
-              <div class="catalog-item__sub">150,000 TONs prize fund</div>
-              <div class="catalog-item__interval">Jun 1 - Jun 20, 2021</div>
-            </a>
-          </li>
-          <li class="catalog-item">
-            <a href="#" class="catalog-item__wrap">
-              <div class="catalog-item__name">#169 Contest: Dune->FreeTON Swap Implementation Stage 1 Proposal</div>
-              <div class="catalog-item__sub">W&D Sub-governance</div>
-              <div class="catalog-item__strong">5 winners</div>
-              <div class="catalog-item__sub">150,000 TONs prize fund</div>
-              <div class="catalog-item__interval">Jun 1 - Jun 20, 2021</div>
-            </a>
-          </li>
-          <li class="catalog-item">
-            <a href="#" class="catalog-item__wrap">
-              <div class="catalog-item__name">#169 Contest: Dune->FreeTON Swap Implementation Stage 1 Proposal</div>
-              <div class="catalog-item__sub">W&D Sub-governance</div>
-              <div class="catalog-item__strong">5 winners</div>
-              <div class="catalog-item__sub">150,000 TONs prize fund</div>
-              <div class="catalog-item__interval">Jun 1 - Jun 20, 2021</div>
-            </a>
-          </li>
-          <li class="catalog-item">
-            <a href="#" class="catalog-item__wrap">
-              <div class="catalog-item__name">#169 Contest: Dune->FreeTON Swap Implementation Stage 1 Proposal</div>
-              <div class="catalog-item__sub">W&D Sub-governance</div>
-              <div class="catalog-item__strong">5 winners</div>
-              <div class="catalog-item__sub">150,000 TONs prize fund</div>
-              <div class="catalog-item__interval">Jun 1 - Jun 20, 2021</div>
-            </a>
-          </li>
-          <li class="catalog-item">
-            <a href="#" class="catalog-item__wrap">
-              <div class="catalog-item__name">#169 Contest: Dune->FreeTON Swap Implementation Stage 1 Proposal</div>
-              <div class="catalog-item__sub">W&D Sub-governance</div>
-              <div class="catalog-item__strong">5 winners</div>
-              <div class="catalog-item__sub">150,000 TONs prize fund</div>
-              <div class="catalog-item__interval">Jun 1 - Jun 20, 2021</div>
-            </a>
-          </li>
-          <li class="catalog-item">
-            <a href="#" class="catalog-item__wrap">
-              <div class="catalog-item__name">#169 Contest: Dune->FreeTON Swap Implementation Stage 1 Proposal</div>
-              <div class="catalog-item__sub">W&D Sub-governance</div>
-              <div class="catalog-item__strong">5 winners</div>
-              <div class="catalog-item__sub">150,000 TONs prize fund</div>
-              <div class="catalog-item__interval">Jun 1 - Jun 20, 2021</div>
-            </a>
-          </li>
-          <li class="catalog-item">
-            <a href="#" class="catalog-item__wrap">
-              <div class="catalog-item__name">#169 Contest: Dune->FreeTON Swap Implementation Stage 1 Proposal</div>
-              <div class="catalog-item__sub">W&D Sub-governance</div>
-              <div class="catalog-item__strong">5 winners</div>
-              <div class="catalog-item__sub">150,000 TONs prize fund</div>
-              <div class="catalog-item__interval">Jun 1 - Jun 20, 2021</div>
-            </a>
-          </li>
-          <li class="catalog-item">
-            <a href="#" class="catalog-item__wrap">
-              <div class="catalog-item__name">#169 Contest: Dune->FreeTON Swap Implementation Stage 1 Proposal</div>
-              <div class="catalog-item__sub">W&D Sub-governance</div>
-              <div class="catalog-item__strong">5 winners</div>
-              <div class="catalog-item__sub">150,000 TONs prize fund</div>
-              <div class="catalog-item__interval">Jun 1 - Jun 20, 2021</div>
-            </a>
-          </li>
-          <li class="catalog-item">
-            <a href="#" class="catalog-item__wrap">
-              <div class="catalog-item__name">#169 Contest: Dune->FreeTON Swap Implementation Stage 1 Proposal</div>
-              <div class="catalog-item__sub">W&D Sub-governance</div>
-              <div class="catalog-item__strong">5 winners</div>
-              <div class="catalog-item__sub">150,000 TONs prize fund</div>
-              <div class="catalog-item__interval">Jun 1 - Jun 20, 2021</div>
+              <div class="catalog-item__name" th:text="${contest.name}"></div>
+              <div class="catalog-item__sub" th:text="${contest.subGovernance.name}"></div>
+              <div class="catalog-item__strong" th:text="${contest.winnersCount} + ' winners'"></div>
+              <div class="catalog-item__sub" th:text="${contest.prizeFund} + ' TONs prize fund'"></div>
+              <div class="catalog-item__interval"th:text="${contest.submissionFrom} + ' - ' + ${contest.submissionTo}"></div>
             </a>
           </li>
         </ul>

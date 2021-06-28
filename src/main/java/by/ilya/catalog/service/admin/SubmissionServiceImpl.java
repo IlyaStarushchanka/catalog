@@ -1,8 +1,7 @@
-package by.ilya.catalog.service;
+package by.ilya.catalog.service.admin;
 
 import by.ilya.catalog.domain.Author;
 import by.ilya.catalog.domain.Contest;
-import by.ilya.catalog.domain.SubGovernance;
 import by.ilya.catalog.domain.Submission;
 import by.ilya.catalog.repository.SubmissionRepository;
 import org.springframework.beans.factory.annotation.Autowired;

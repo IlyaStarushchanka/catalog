@@ -1,11 +1,10 @@
-package by.ilya.catalog.facade;
+package by.ilya.catalog.facade.admin;
 
 import by.ilya.catalog.domain.AccessEnum;
 import by.ilya.catalog.domain.Manager;
-import by.ilya.catalog.dto.ManagerDTO;
-import by.ilya.catalog.mapper.CatalogMapper;
-import by.ilya.catalog.service.ManagerService;
-import by.ilya.catalog.service.ManagerServiceImpl;
+import by.ilya.catalog.dto.admin.ManagerDTO;
+import by.ilya.catalog.mapper.AdminMapper;
+import by.ilya.catalog.service.admin.ManagerService;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +15,7 @@ import java.util.List;
 @Service
 public class AdminManagerPageFacade {
 
-    private static final CatalogMapper MAPPER = CatalogMapper.INSTANCE;
+    private static final AdminMapper MAPPER = AdminMapper.INSTANCE;
 
     @Autowired
     private ManagerService managerService;
