@@ -39,6 +39,12 @@ public class AdminEndpoint {
     private AdminSubmissionFacade adminSubmissionFacade;
     private AdminAuthorFacade adminAuthorFacade;
 
+    @GetMapping("/")
+    public String adminIndex(Model model) {
+        model.addAttribute("managers", adminManagerPageFacade.getList());
+        return "admin/manager/managers-list";
+    }
+
     @GetMapping("/login")
     public String login(Model model) {
         model.addAttribute("managers", adminManagerPageFacade.getList());
