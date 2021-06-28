@@ -1,21 +1,18 @@
 package by.ilya.catalog.endpoint;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class CatalogEndpoint {
 
     /*@Autowired
-    private CityRepository cityRepository;
+    private CityRepository cityRepository;*/
 
-    @GetMapping("/showCities")
+    @GetMapping("/catalog")
     public String findCities(Model model) {
-
-        List<CityDTO> cities = (List<CityDTO>) cityRepository.findAll();
-
-        model.addAttribute("cities", cities);
-
-        return "showCities";
-    }*/
+        return "catalog/index";
+    }
 
 }

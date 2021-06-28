@@ -1,12 +1,191 @@
-!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="Ru-ru">
 <head>
-    <title>Home page</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8"/>
+  <title>TONcatalog</title>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1"/>
+  <link rel="stylesheet" href="/css/style.css"/>
 </head>
 <body>
-<a href="showCities">Show cities</a>
-<a href="login">Login</a>
+<div class="wrapper"><header class="header">
+  <div class="container">
+    <div class="row-wrap header__wrap">
+      <div class="row-left header__left">
+        <a href="/" class="logo header-logo">
+          <img src="/img/svg/toncatalog.svg" alt="TONcatalog">
+        </a>
+      </div>
+      <div class="row-right header__right">
+        <form action="#" method="get" class="search js-search">
+          <input type="search" name="search" class="input search__input js-search-input" placeholder="Search by contest name..." autocomplete="off">
+          <ul class="search__list js-search-list">
+            <li class="search__item"><mark>Lorem ips</mark>um dolor samet</li>
+            <li class="search__item"><mark>Lorem ips</mark>um dolor samet</li>
+            <li class="search__item"><mark>Lorem ips</mark>um dolor samet</li>
+          </ul>
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+  <main class="main"><section class="hero">
+    <div class="container">
+      <h1 class="hero__title">Catalog of Free TON contests winners works</h1>
+      <p class="hero__txt">Just start searching or using the filter below to get any contest work that you need.</p>
+    </div>
+  </section>
+    <div class="catalog">
+      <div class="container">
+        <div class="catalog__wrap">
+          <div class="catalog__bar">
+            <form action="#" method="get" class="filter">
+              <fieldset class="filter__group">
+                <legend class="filter__title">Sub-governance</legend>
+                <div class="checkselect">
+                  <label><input type="checkbox" name="Option 1" value="1"><span>Option 1</span></label>
+                  <label><input type="checkbox" name="Option 2" value="2"><span>Option 2</span></label>
+                  <label><input type="checkbox" name="Option 3" value="3"><span>Option 3</span></label>
+                  <label><input type="checkbox" name="Option 4" value="4"><span>Option 4</span></label>
+                  <label><input type="checkbox" name="Option 5" value="5"><span>Option 5</span></label>
+                  <label><input type="checkbox" name="Option 6" value="6"><span>Option 6</span></label>
+                </div>
+              </fieldset>
+              <fieldset class="filter__group">
+                <legend class="filter__title">Prize fund, TON</legend>
+                <div class="fromto">
+                  <input type="text" class="fromto__input js-fromto js-onlynumb" name="prize-fund_from" placeholder="From">
+                  <input type="text" class="fromto__input js-fromto js-onlynumb" name="prize-fund_to" placeholder="To">
+                </div>
+              </fieldset>
+              <fieldset class="filter__group">
+                <legend class="filter__title">Number of winners</legend>
+                <div class="fromto">
+                  <input type="text" class="fromto__input js-fromto js-onlynumb" name="number-of-winners_from" placeholder="From">
+                  <input type="text" class="fromto__input js-fromto js-onlynumb" name="number-of-winners_to" placeholder="To">
+                </div>
+              </fieldset>
+            </form>
+          </div>
+          <div class="catalog__main">
+            <div class="catalog__header">
+              <div class="catalog__header-counter">8 results</div>
+              <div class="catalog__header-sort">
+                <form action="#" method="get" class="sort">
+                  <div class="styled-select js-styled-select">
+                    <select name="categorys">
+                      <option value="Newest">Newest</option>
+                      <option value="Edit">Edit</option>
+                      <option value="Rang">Rang</option>
+                    </select>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <ul class="catalog__list">
+              <li class="catalog-item">
+                <a href="#" class="catalog-item__wrap">
+                  <div class="catalog-item__name">#169 Contest: Dune</div>
+                  <div class="catalog-item__sub">W&D Sub-governance</div>
+                  <div class="catalog-item__strong">5 winners</div>
+                  <div class="catalog-item__sub">150,000 TONs prize fund</div>
+                  <div class="catalog-item__interval">Jun 1 - Jun 20, 2021</div>
+                </a>
+              </li>
+              <li class="catalog-item">
+                <a href="#" class="catalog-item__wrap">
+                  <div class="catalog-item__name">#169 Contest: Dune->FreeTON Swap Implementation Stage 1 Proposal</div>
+                  <div class="catalog-item__sub">W&D Sub-governance</div>
+                  <div class="catalog-item__strong">5 winners</div>
+                  <div class="catalog-item__sub">150,000 TONs prize fund</div>
+                  <div class="catalog-item__interval">Jun 1 - Jun 20, 2021</div>
+                </a>
+              </li>
+              <li class="catalog-item">
+                <a href="#" class="catalog-item__wrap">
+                  <div class="catalog-item__name">#169 Contest: Dune->FreeTON Swap Implementation Stage 1 Proposal</div>
+                  <div class="catalog-item__sub">W&D Sub-governance</div>
+                  <div class="catalog-item__strong">5 winners</div>
+                  <div class="catalog-item__sub">150,000 TONs prize fund</div>
+                  <div class="catalog-item__interval">Jun 1 - Jun 20, 2021</div>
+                </a>
+              </li>
+              <li class="catalog-item">
+                <a href="#" class="catalog-item__wrap">
+                  <div class="catalog-item__name">#169 Contest: Dune->FreeTON Swap Implementation Stage 1 Proposal</div>
+                  <div class="catalog-item__sub">W&D Sub-governance</div>
+                  <div class="catalog-item__strong">5 winners</div>
+                  <div class="catalog-item__sub">150,000 TONs prize fund</div>
+                  <div class="catalog-item__interval">Jun 1 - Jun 20, 2021</div>
+                </a>
+              </li>
+              <li class="catalog-item">
+                <a href="#" class="catalog-item__wrap">
+                  <div class="catalog-item__name">#169 Contest: Dune->FreeTON Swap Implementation Stage 1 Proposal</div>
+                  <div class="catalog-item__sub">W&D Sub-governance</div>
+                  <div class="catalog-item__strong">5 winners</div>
+                  <div class="catalog-item__sub">150,000 TONs prize fund</div>
+                  <div class="catalog-item__interval">Jun 1 - Jun 20, 2021</div>
+                </a>
+              </li>
+              <li class="catalog-item">
+                <a href="#" class="catalog-item__wrap">
+                  <div class="catalog-item__name">#169 Contest: Dune->FreeTON Swap Implementation Stage 1 Proposal</div>
+                  <div class="catalog-item__sub">W&D Sub-governance</div>
+                  <div class="catalog-item__strong">5 winners</div>
+                  <div class="catalog-item__sub">150,000 TONs prize fund</div>
+                  <div class="catalog-item__interval">Jun 1 - Jun 20, 2021</div>
+                </a>
+              </li>
+              <li class="catalog-item">
+                <a href="#" class="catalog-item__wrap">
+                  <div class="catalog-item__name">#169 Contest: Dune->FreeTON Swap Implementation Stage 1 Proposal</div>
+                  <div class="catalog-item__sub">W&D Sub-governance</div>
+                  <div class="catalog-item__strong">5 winners</div>
+                  <div class="catalog-item__sub">150,000 TONs prize fund</div>
+                  <div class="catalog-item__interval">Jun 1 - Jun 20, 2021</div>
+                </a>
+              </li>
+              <li class="catalog-item">
+                <a href="#" class="catalog-item__wrap">
+                  <div class="catalog-item__name">#169 Contest: Dune->FreeTON Swap Implementation Stage 1 Proposal</div>
+                  <div class="catalog-item__sub">W&D Sub-governance</div>
+                  <div class="catalog-item__strong">5 winners</div>
+                  <div class="catalog-item__sub">150,000 TONs prize fund</div>
+                  <div class="catalog-item__interval">Jun 1 - Jun 20, 2021</div>
+                </a>
+              </li>
+              <li class="catalog-item">
+                <a href="#" class="catalog-item__wrap">
+                  <div class="catalog-item__name">#169 Contest: Dune->FreeTON Swap Implementation Stage 1 Proposal</div>
+                  <div class="catalog-item__sub">W&D Sub-governance</div>
+                  <div class="catalog-item__strong">5 winners</div>
+                  <div class="catalog-item__sub">150,000 TONs prize fund</div>
+                  <div class="catalog-item__interval">Jun 1 - Jun 20, 2021</div>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main><footer class="footer">
+    <div class="container">
+      <div class="row-wrap footer__wrap">
+        <div class="row-left footer__left">
+          <a href="/" class="logo footer-logo">
+            <img src="/img/svg/toncatalog.svg" alt="TONcatalog">
+          </a>
+        </div>
+        <div class="row-right footer__right">
+          <div class="donate"><span>Donate:</span> 0:1c8876f793bb43993f93f7db4dfe07d8777aaec0456c4edcbe8a6f007c7e7955</div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</div>
+<script src="/js/vendors.min.js"></script>
+<script src="/js/scripts.min.js"></script>
 </body>
 </html>
