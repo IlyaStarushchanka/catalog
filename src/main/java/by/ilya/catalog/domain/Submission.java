@@ -35,8 +35,10 @@ public class Submission {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<FileDB> files = new HashSet<>();
     private String authorFreeTonAddress;
-    @Column(length = 10000)
-    private String description;
+    @Column(length = 1000)
+    private String smallDescription;
+    @Column(length = 15000)
+    private String bigDescription;
     private String statisticsLink;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -118,12 +120,20 @@ public class Submission {
         this.authorFreeTonAddress = authorFreeTonAddress;
     }
 
-    public String getDescription() {
-        return description;
+    public String getSmallDescription() {
+        return smallDescription;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setSmallDescription(String smallDescription) {
+        this.smallDescription = smallDescription;
+    }
+
+    public String getBigDescription() {
+        return bigDescription;
+    }
+
+    public void setBigDescription(String bigDescription) {
+        this.bigDescription = bigDescription;
     }
 
     public String getStatisticsLink() {

@@ -50,7 +50,10 @@
             </div>
           </div>
           <img class="article__img" th:src="${submission.image}" alt="">
-          <div th:utext="${submission.description}" th:remove="tag"></div>
+          <div th:utext="${submission.smallDescription}">
+          </div>
+          <div class="js-hided-part hided-part" th:utext="${submission.bigDescription}">
+          </div>
           <button class="btn show-more js-show-mor">
             <span>Show more</span>
             <img src="/img/svg/chevrone-down_blue.svg" alt="">

@@ -38,7 +38,8 @@ public class ContestServiceImpl implements CrudService<Contest> {
         if (!contest.getSubGovernance().equals(newSubGovernance)){
             contest.getSubGovernance().getContests().remove(contest);
         }
-        contest.setDescription(newContestData.getDescription());
+        contest.setSmallDescription(newContestData.getSmallDescription());
+        contest.setBigDescription(newContestData.getBigDescription());
         contest.setName(newContestData.getName());
         contest.setStatus(newContestData.getStatus());
         contest.setSubmissionFrom(newContestData.getSubmissionFrom());
@@ -46,7 +47,6 @@ public class ContestServiceImpl implements CrudService<Contest> {
         contest.setVotingFrom(newContestData.getVotingFrom());
         contest.setVotingTo(newContestData.getVotingTo());
         contest.setSubGovernance(newSubGovernance);
-        contest.setDescription(newContestData.getDescription());
         contest.setPrizeFund(newContestData.getPrizeFund());
         if (newSubGovernance != null && !newSubGovernance.getContests().contains(contest)) {
             newSubGovernance.getContests().add(contest);

@@ -49,11 +49,18 @@
           </li>
         </ul>
       </section>
-      <div th:utext="${contest.description}" th:remove="tag"></div>
+      <section>
+        <h2>About</h2>
+      <div th:utext="${contest.smallDescription}">
+
+      </div>
+      <div class="js-hided-part hided-part" th:utext="${contest.bigDescription}">
+      </div>
       <button class="btn show-more js-show-mor">
         <span>Show more</span>
         <img src="/img/svg/chevrone-down_blue.svg" alt="">
       </button>
+      </section>
     </article>
     <section class="portfolio">
       <h2 class="sec-title">Winners works</h2>

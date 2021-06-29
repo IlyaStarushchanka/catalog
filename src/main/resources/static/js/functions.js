@@ -63,6 +63,8 @@ $('#author-select').on('change', function() {
 });
 
 function beforeSave(){
-    var description = document.getElementById("description");
-    description.value = document.querySelector('#editor').children[0].innerHTML;
+    var smallDescription = document.getElementById("smallDescription");
+    smallDescription.value = document.querySelector('#editorsmall').children[0].innerHTML;
+    var bigDescription = document.getElementById("bigDescription");
+    bigDescription.value = document.querySelector('#editorbig').children[0].innerHTML;
 }

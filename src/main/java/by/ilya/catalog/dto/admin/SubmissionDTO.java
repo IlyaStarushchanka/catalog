@@ -13,7 +13,8 @@ public class SubmissionDTO {
 
     private List<ResponseFile> files = new ArrayList<>();
     private String authorFreeTonAddress;
-    private String description;
+    private String smallDescription;
+    private String bigDescription;
     private String rate;
     private String place;
     private String prize;
@@ -45,12 +46,20 @@ public class SubmissionDTO {
         this.authorFreeTonAddress = authorFreeTonAddress;
     }
 
-    public String getDescription() {
-        return description;
+    public String getSmallDescription() {
+        return smallDescription;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setSmallDescription(String smallDescription) {
+        this.smallDescription = smallDescription;
+    }
+
+    public String getBigDescription() {
+        return bigDescription;
+    }
+
+    public void setBigDescription(String bigDescription) {
+        this.bigDescription = bigDescription;
     }
 
     public AuthorDTO getAuthor() {

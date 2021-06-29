@@ -27,8 +27,10 @@ public class Contest {
 
     @Column(nullable = false)
     private String name;
-    @Column(nullable = false, length = 10000)
-    private String description;
+    @Column(length = 1000)
+    private String smallDescription;
+    @Column(length = 15000)
+    private String bigDescription;
     private String submissionFrom;
     private String submissionTo;
     private String votingFrom;
@@ -61,12 +63,20 @@ public class Contest {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public String getSmallDescription() {
+        return smallDescription;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setSmallDescription(String smallDescription) {
+        this.smallDescription = smallDescription;
+    }
+
+    public String getBigDescription() {
+        return bigDescription;
+    }
+
+    public void setBigDescription(String bigDescription) {
+        this.bigDescription = bigDescription;
     }
 
     public String getSubmissionFrom() {

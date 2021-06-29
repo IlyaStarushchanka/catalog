@@ -6,7 +6,8 @@ public class ContestDTO {
 
     private long id;
     private String name;
-    private String description;
+    private String smallDescription;
+    private String bigDescription;
     private String submissionFrom;
     private String submissionTo;
     private String votingFrom;
@@ -34,12 +35,20 @@ public class ContestDTO {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public String getSmallDescription() {
+        return smallDescription;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setSmallDescription(String smallDescription) {
+        this.smallDescription = smallDescription;
+    }
+
+    public String getBigDescription() {
+        return bigDescription;
+    }
+
+    public void setBigDescription(String bigDescription) {
+        this.bigDescription = bigDescription;
     }
 
     public String getSubmissionFrom() {

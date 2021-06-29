@@ -10,7 +10,9 @@ public class SubmissionCatalogDTO {
     private List<ResponseFile> files;
     private List<LinkDBDTO> links;
     private long id;
-    private String description;
+    private String smallDescription;
+    private String bigDescription;
+    private String secondDescription;
     private String number;
     private String rate;
     private String place;
@@ -86,14 +88,6 @@ public class SubmissionCatalogDTO {
         this.contest = contest;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public AuthorCatalogDTO getAuthor() {
         return author;
     }
@@ -132,5 +126,29 @@ public class SubmissionCatalogDTO {
 
     public void setStatisticsShortLink(String statisticsShortLink) {
         this.statisticsShortLink = statisticsShortLink;
+    }
+
+    public String getSmallDescription() {
+        return smallDescription;
+    }
+
+    public void setSmallDescription(String smallDescription) {
+        this.smallDescription = smallDescription;
+    }
+
+    public String getBigDescription() {
+        return bigDescription;
+    }
+
+    public void setBigDescription(String bigDescription) {
+        this.bigDescription = bigDescription;
+    }
+
+    public String getSecondDescription() {
+        return secondDescription;
+    }
+
+    public void setSecondDescription(String secondDescription) {
+        this.secondDescription = secondDescription;
     }
 }

@@ -50,7 +50,8 @@ public class SubmissionServiceImpl implements CrudService<Submission> {
             submission.getAuthor().getSubmissions().remove(submission);
             submission.setAuthor(newAuthor);
         }
-        submission.setDescription(newSubmissionData.getDescription());
+        submission.setSmallDescription(newSubmissionData.getSmallDescription());
+        submission.setBigDescription(newSubmissionData.getBigDescription());
         submission.setNumber(newSubmissionData.getNumber());
         submission.setPlace(newSubmissionData.getPlace());
         submission.setPrize(newSubmissionData.getPrize());

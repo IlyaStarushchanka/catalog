@@ -145,11 +145,19 @@
                                                     </div>
                                                 </div>-->
                                                 <div class="form-group">
-                                                    <label class="col-sm-10 control-label">Description</label>
+                                                    <label class="col-sm-10 control-label">Small Description</label>
                                                     <div class="col-sm-10">
-                                                        <div id="editor" th:utext="${submission.description}">
+                                                        <div id="editorsmall" th:utext="${submission.smallDescription}">
                                                         </div>
-                                                        <textarea th:utext="${submission.description}" style="display:none" class="form-control" rows="10" placeholder="Description" id="description" name="description"></textarea>
+                                                        <textarea th:utext="${submission.smallDescription}" style="display:none" class="form-control" rows="10" placeholder="Description" id="smallDescription" name="smallDescription"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-10 control-label">Big Description</label>
+                                                    <div class="col-sm-10">
+                                                        <div id="editorbig" th:utext="${submission.bigDescription}">
+                                                        </div>
+                                                        <textarea th:utext="${submission.bigDescription}" style="display:none" class="form-control" rows="10" placeholder="Description" id="bigDescription" name="bigDescription"></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -250,7 +258,10 @@
 
 <!-- Initialize Quill editor -->
 <script>
-    var quill = new Quill('#editor', {
+    var quillsmall = new Quill('#editorsmall', {
+        theme: 'snow'
+    });
+    var quillbig = new Quill('#editorbig', {
         theme: 'snow'
     });
 </script>
