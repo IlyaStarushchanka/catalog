@@ -1,5 +1,6 @@
 package by.ilya.catalog.dto.catalog;
 
+import by.ilya.catalog.dto.admin.LinkDBDTO;
 import by.ilya.catalog.dto.admin.ResponseFile;
 
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.List;
 public class SubmissionCatalogDTO {
 
     private List<ResponseFile> files;
+    private List<LinkDBDTO> links;
     private long id;
     private String description;
     private String number;
@@ -16,6 +18,8 @@ public class SubmissionCatalogDTO {
     private String authorFreeTonAddress;
     private SmallContestCatalogDTO contest;
     private AuthorCatalogDTO author;
+    private String statisticsLink;
+    private String image;
 
     public List<ResponseFile> getFiles() {
         return files;
@@ -95,5 +99,29 @@ public class SubmissionCatalogDTO {
 
     public void setAuthor(AuthorCatalogDTO author) {
         this.author = author;
+    }
+
+    public List<LinkDBDTO> getLinks() {
+        return links;
+    }
+
+    public void setLinks(List<LinkDBDTO> links) {
+        this.links = links;
+    }
+
+    public String getStatisticsLink() {
+        return statisticsLink;
+    }
+
+    public void setStatisticsLink(String statisticsLink) {
+        this.statisticsLink = statisticsLink;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

@@ -13,7 +13,7 @@
     <div class="row-wrap header__wrap">
       <div class="row-left header__left">
         <a href="/" class="logo header-logo">
-          <img src="/img/svg/toncatalog.svg" alt="TONcatalog">
+          <img src="/img/svg/toncatalog.club.svg" alt="TONcatalog">
         </a>
       </div>
       <div class="row-right header__right">
@@ -60,7 +60,7 @@
       <ul class="portfolio__list">
         <li class="portfolio-item" th:each="submission : ${contest.submissions}">
           <a th:href=@{/submission?(id=${submission.id})} class="portfolio-item__wrap">
-            <div class="portfolio-item__pic"><img src="https://img2.goodfon.ru/original/1920x1200/c/1e/kanada-alberta-gory-ozero-5808.jpg" alt=""></div>
+            <div class="portfolio-item__pic"><img th:src="${submission.image}" alt=""></div>
             <div class="portfolio-item__stats">
               <div class="portfolio-item__stat">
                 <img src="/img/svg/link_black.svg" alt="">
@@ -100,7 +100,7 @@
     <div class="row-wrap footer__wrap">
       <div class="row-left footer__left">
         <a href="/" class="logo footer-logo">
-          <img src="/img/svg/toncatalog.svg" alt="TONcatalog">
+          <img src="/img/svg/toncatalog.club.svg" alt="TONcatalog">
         </a>
       </div>
       <div class="row-right footer__right">

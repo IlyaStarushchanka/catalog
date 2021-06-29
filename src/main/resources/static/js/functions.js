@@ -10,7 +10,6 @@ function getCurrentUser() {
             }
         },
         error : function(e) {
-            alert(e);
         }
     });
 }
@@ -25,6 +24,25 @@ function removeFile(caller) {
         url : "/admin/files/delete?id="+clickedBtnID,
         success : function(response) {
             fileId.parentElement.remove()
+        },
+        error : function(e) {
+
+        }
+    });
+}
+
+function removeLink(caller) {
+    var clickedBtnID = $(caller).attr('id');
+    var linkId = document
+        .getElementById('linkId_' + clickedBtnID);
+    var submissionId = document
+        .getElementById('linkSubmissionId');
+
+    $.ajax({
+        type : "GET",
+        url : "/admin/submissions/link/delete?linkId="+clickedBtnID+"&submissionId="+$(submissionId).val(),
+        success : function(response) {
+            linkId.parentElement.remove()
         },
         error : function(e) {
 

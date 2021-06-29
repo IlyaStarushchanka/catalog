@@ -11,6 +11,7 @@ public class SmallSubmissionCatalogDTO {
     private String prize;
     private AuthorCatalogDTO author;
     private String authorFreeTonAddress;
+    private String image;
 
     public int getFilesCount() {
         return filesCount;
@@ -82,5 +83,13 @@ public class SmallSubmissionCatalogDTO {
 
     public void setLinksCount(int linksCount) {
         this.linksCount = linksCount;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

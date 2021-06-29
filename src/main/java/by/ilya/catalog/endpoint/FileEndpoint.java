@@ -91,7 +91,7 @@ public class FileEndpoint {
     }
 
     @GetMapping("/files/submission/img/{id}")
-    public ResponseEntity<byte[]> getSubmissionImage(@PathVariable Long id) {
+    public ResponseEntity getSubmissionImage(@PathVariable Long id) {
         byte[] image = adminSubmissionFacade.getSubmissionImage(id);
         if (image != null) {
             return ResponseEntity.ok()

@@ -3,6 +3,7 @@ package by.ilya.catalog.facade.admin;
 import by.ilya.catalog.domain.Author;
 import by.ilya.catalog.domain.Contest;
 import by.ilya.catalog.domain.Submission;
+import by.ilya.catalog.dto.admin.LinkDBDTO;
 import by.ilya.catalog.dto.admin.SubmissionDTO;
 import by.ilya.catalog.mapper.AdminMapper;
 import by.ilya.catalog.service.admin.AuthorServiceImpl;
@@ -85,6 +86,16 @@ public class AdminSubmissionFacade {
                 submissionServiceImpl.delete(id);
             }
         }
+    }
+
+    @Transactional
+    public void deleteSubmissionLink(long submissionId, long linkId) {
+        submissionServiceImpl.deleteSubmissionLink(submissionId, linkId);
+    }
+
+    @Transactional
+    public void addSubmissionLink(LinkDBDTO linkDBDTO) {
+        submissionServiceImpl.addSubmissionLink(linkDBDTO);
     }
 
     @Transactional

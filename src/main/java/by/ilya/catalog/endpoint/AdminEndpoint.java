@@ -3,6 +3,7 @@ package by.ilya.catalog.endpoint;
 import by.ilya.catalog.domain.Manager;
 import by.ilya.catalog.dto.admin.AuthorDTO;
 import by.ilya.catalog.dto.admin.ContestDTO;
+import by.ilya.catalog.dto.admin.LinkDBDTO;
 import by.ilya.catalog.dto.admin.ManagerDTO;
 import by.ilya.catalog.dto.admin.SubGovernanceDTO;
 import by.ilya.catalog.dto.admin.SubmissionDTO;
@@ -241,11 +242,17 @@ public class AdminEndpoint {
         return "admin/submission/submission-list";
     }
 
-    @GetMapping("/submissions/delete")
-    public String deleteSubmission(@RequestParam(value = "id") long id, Model model){
-        adminSubmissionFacade.delete(id);
-        model.addAttribute("submissions", adminSubmissionFacade.getList());
-        return "admin/submission/submission-list";
+    @PostMapping("/submissions/link/add")
+    public String addSubmissionLink(@ModelAttribute LinkDBDTO linkDBDTO, Model model) throws NotFoundException {
+        adminSubmissionFacade.addSubmissionLink(linkDBDTO);
+        model.addAttribute("submission", adminSubmissionFacade.getById(linkDBDTO.getSubmissionId()));
+        return "admin/submission/submission-view";
+    }
+
+    @GetMapping("/submissions/link/delete")
+    @ResponseBody
+    public void deleteSubmissionLink(@RequestParam(value = "submissionId") long submissionId, @RequestParam(value = "linkId") long linkId, Model model){
+        adminSubmissionFacade.deleteSubmissionLink(submissionId, linkId);
     }
 
     @GetMapping("/contests/view")
@@ -253,6 +260,7 @@ public class AdminEndpoint {
         model.addAttribute("contest", adminContestFacade.getById(id));
         return "admin/contest/contest-view";
     }
+
 
     @GetMapping("/authors/list")
     public String authorList(Model model){

@@ -2,7 +2,10 @@ package by.ilya.catalog.service.admin;
 
 import by.ilya.catalog.domain.Author;
 import by.ilya.catalog.domain.Contest;
+import by.ilya.catalog.domain.LinkDB;
 import by.ilya.catalog.domain.Submission;
+import by.ilya.catalog.dto.admin.LinkDBDTO;
+import by.ilya.catalog.repository.LinkDBRepository;
 import by.ilya.catalog.repository.SubmissionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +18,8 @@ public class SubmissionServiceImpl implements CrudService<Submission> {
 
     @Autowired
     private SubmissionRepository submissionRepository;
+    @Autowired
+    private LinkDBRepository linkDBRepository;
 
     @Transactional
     public Submission create(Submission submission) {
@@ -51,6 +56,7 @@ public class SubmissionServiceImpl implements CrudService<Submission> {
         submission.setPrize(newSubmissionData.getPrize());
         submission.setRate(newSubmissionData.getRate());
         submission.setAuthorFreeTonAddress(newSubmissionData.getAuthorFreeTonAddress());
+        submission.setStatisticsLink(newSubmissionData.getStatisticsLink());
         if (newContest != null && !newContest.getSubmissions().contains(submission)) {
             newContest.getSubmissions().add(submission);
         }
@@ -69,5 +75,28 @@ public class SubmissionServiceImpl implements CrudService<Submission> {
             return submission.getImage();
         }
         return null;
+    }
+
+    public void deleteSubmissionLink(long submissionId, long linkId) {
+        Submission submission = submissionRepository.findById(submissionId).orElse(null);
+        LinkDB link = linkDBRepository.findById(linkId).orElse(null);
+        if (submission != null){
+            submission.getLinks().remove(link);
+        }
+        if (link != null){
+            linkDBRepository.deleteById(link.getId());
+        }
+    }
+
+    public void addSubmissionLink(LinkDBDTO linkDBDTO) {
+        Submission submission = submissionRepository.findById(linkDBDTO.getSubmissionId()).orElse(null);
+        if (submission != null){
+            LinkDB linkDB = new LinkDB();
+            linkDB.setName(linkDBDTO.getName());
+            linkDB.setUrl(linkDBDTO.getUrl());
+            linkDB.setSubmission(submission);
+            linkDBRepository.save(linkDB);
+            submission.getLinks().add(linkDB);
+        }
     }
 }

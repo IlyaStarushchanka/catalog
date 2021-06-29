@@ -17,6 +17,8 @@ public class SubmissionDTO {
     private String rate;
     private String place;
     private String prize;
+    private String statisticsLink;
+    private List<LinkDBDTO> links = new ArrayList<>();
 
 
     public ContestDTO getContest() {
@@ -105,5 +107,21 @@ public class SubmissionDTO {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getStatisticsLink() {
+        return statisticsLink;
+    }
+
+    public void setStatisticsLink(String statisticsLink) {
+        this.statisticsLink = statisticsLink;
+    }
+
+    public List<LinkDBDTO> getLinks() {
+        return links;
+    }
+
+    public void setLinks(List<LinkDBDTO> links) {
+        this.links = links;
     }
 }

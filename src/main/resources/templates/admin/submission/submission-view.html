@@ -128,6 +128,12 @@
                                     <form class="form-horizontal">
                                         <div class="row">
                                             <div class="col-lg-6">
+
+                                                <div class="form-group">
+                                                    <h7> Image : </h7>
+                                                    <img th:src="${submission.image}" alt="" class="logo">
+                                                </div>
+
                                                 <div class="form-group">
                                                     <h7> Number :
                                                         <p class="form-control-static" th:text="${submission.number}"></p></h7>
@@ -167,6 +173,18 @@
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="form-group">
+                                                    <h7>Links :
+                                                        <div th:each="link : ${submission.links}">
+                                                            <input type="hidden" id="linkSubmissionId" name="submissionId" th:value="${submission.id}" />
+                                                            <input type="hidden" th:id="'linkId_'+${link.id}" name="linkId" th:value="${link.id}" />
+                                                            <p class="form-control-static ti-link"><a th:href="${link.url}" th:text="${link.name}"></a>
+                                                                <a href="#" role="button" th:id="${link.id}" onclick="removeLink(this)">
+                                                                    <span class="ti-trash"/>
+                                                                </a></p>
+                                                        </div>
+                                                    </h7>
+                                                </div>
+                                                <div class="form-group">
                                                     <h7>Files :
                                                         <div th:each="file : ${submission.files}">
                                                             <input type="hidden" th:id="'fileId_'+${file.id}" name="fileId" th:value="${file.id}" />
@@ -176,7 +194,11 @@
                                                                 </a></p>
                                                         </div>
                                                     </h7>
-
+                                                </div>
+                                                <div class="form-group">
+                                                    <h7>Statistic link :
+                                                        <p class="form-control-static" th:utext="${submission.statisticsLink}"></p>
+                                                    </h7>
                                                 </div>
                                             </div>
                                         </div>
@@ -185,15 +207,84 @@
                             </div>
                         </div>
                     </div>
-                    <form method="POST" enctype="multipart/form-data" action="/admin/upload">
-                        <input type="hidden" id="submissionId" name="submissionId" th:value="${submission.id}" />
-                        <table>
-                            <tr><td>File to upload:</td>
-                                <td><input type="file" class="form-control" name="file" /></td>
-                            </tr>
-                            <tr><td></td><td><input type="submit" class="btn btn-primary" value="Upload" /></td></tr>
-                        </table>
-                    </form>
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-title">
+                                Add attachment
+                            </div>
+                            <div class="card-body">
+                                <div class="horizontal-form-elements">
+                                    <form class="form-horizontal" method="POST" enctype="multipart/form-data" action="/admin/upload">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <label class="col-sm-3 control-label">File to upload:</label>
+                                                <div class="col-sm-10">
+                                                    <input type="hidden" id="submissionId" name="submissionId" th:value="${submission.id}" />
+                                                    <input type="file" class="form-control" name="file" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button type="submit" name="auth" class="btn btn-primary">Upload file</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-title">
+                                Add Logo
+                            </div>
+                            <div class="card-body">
+                                <div class="horizontal-form-elements">
+                                    <form class="form-horizontal" method="POST" enctype="multipart/form-data" action="/admin/upload/submission/img">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <label class="col-sm-3 control-label">Add submission logo:</label>
+                                                <div class="col-sm-10">
+                                                    <input type="hidden" id="submissionId" name="submissionId" th:value="${submission.id}" />
+                                                    <input type="file" class="form-control" name="file" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button type="submit" name="auth" class="btn btn-primary">Add logo</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-title">
+                                <h4>Add link</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="horizontal-form-elements">
+                                    <form class="form-horizontal" method="POST" enctype="multipart/form-data" action="/admin/submissions/link/add">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">Name:</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="hidden" id="submissionId" name="submissionId" th:value="${submission.id}" />
+                                                        <input  type="text"
+                                                                autofocus name="name" class="form-control input-rounded" id="name">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">Url:</label>
+                                                    <div class="col-sm-10">
+                                                        <input  type="text" name="url" class="form-control input-rounded" id="url">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button type="submit" name="auth" class="btn btn-primary">Add link</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
         </div>

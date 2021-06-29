@@ -13,6 +13,7 @@ import by.ilya.catalog.dto.admin.ManagerDTO;
 import by.ilya.catalog.dto.admin.ResponseFile;
 import by.ilya.catalog.dto.admin.SubGovernanceDTO;
 import by.ilya.catalog.dto.admin.SubmissionDTO;
+import org.mapstruct.Context;
 import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -55,9 +56,10 @@ public interface AdminMapper {
 
     List<AuthorDTO> toAuthorListDTO(List<Author> authors);
 
+    @Mapping(target = "image", ignore = true)
     Submission toState (SubmissionDTO submission);
     @Mapping(target = "author.submissions", ignore = true)
-    @Mapping(target = "image", source = "image", qualifiedByName = "mapSubmissionImage")
+    @Mapping(target = "image", source = "submission", qualifiedByName = "mapSubmissionImage")
     SubmissionDTO toDTO (Submission submission);
 
     default ResponseFile toDTO (FileDB file){
@@ -93,16 +95,18 @@ public interface AdminMapper {
     @Mappings({
             @Mapping(target = "author.submissions", ignore = true),
             @Mapping(target = "contest.submissions", ignore = true),
-            @Mapping(target = "contest.subGovernance.contests", ignore = true)
+            @Mapping(target = "contest.subGovernance.contests", ignore = true),
+            @Mapping(target = "image", source = "submission", qualifiedByName = "mapSubmissionImage")
     })
     SubmissionDTO mapWithoutSubmissions(Submission submission);
 
     @Named("mapSubmissionImage")
-    default String mapSubmissionImage() {
-        if (addresses != null) {
-            return Arrays.stream(addresses).map(FreeTonAddress::new).collect(Collectors.toList());
-        }
-        return null;
+    default String mapSubmissionImage(Submission submission) {
+        return ServletUriComponentsBuilder
+                .fromCurrentContextPath()
+                .path("/files/submission/img/")
+                .path(String.valueOf(submission.getId()))
+                .toUriString();
     }
 
     @Named("mapFreeTonAddresses")

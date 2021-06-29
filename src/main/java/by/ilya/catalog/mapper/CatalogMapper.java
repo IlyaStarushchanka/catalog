@@ -36,13 +36,16 @@ public interface CatalogMapper {
 
     List<SubGovernanceCatalogDTO> toSubGovernanceListDTO (List<SubGovernance> subGovernances);
 
+    @Mapping(target = "image", source = "submission", qualifiedByName = "mapSubmissionImage")
     SubmissionCatalogDTO toSubmissionDTO(Submission submission);
 
     @Named("mapSmallSubmissions")
     List<SmallSubmissionCatalogDTO> toSmallSubmissionListDTO(List<Submission> submissions);
 
     @Mapping(target = "filesCount", expression="java(submission.getFiles() != null ? submission.getFiles().size() : 0)")
+    @Mapping(target = "linksCount", expression="java(submission.getLinks() != null ? submission.getLinks().size() : 0)")
     @Mapping(target = "authorFreeTonAddress", source = "authorFreeTonAddress", qualifiedByName = "mapSmallFreeTonAddress")
+    @Mapping(target = "image", source = "submission", qualifiedByName = "mapSubmissionImage")
     SmallSubmissionCatalogDTO toSmallSubmissionDTO(Submission submission);
 
     default ResponseFile toDTO (FileDB file){
@@ -63,6 +66,15 @@ public interface CatalogMapper {
         return authorFreeTonAddress.substring(0, 6) +
                 "..." +
                 authorFreeTonAddress.substring(authorFreeTonAddress.length() - 5, authorFreeTonAddress.length() - 1);
+    }
+
+    @Named("mapSubmissionImage")
+    default String mapSubmissionImage(Submission submission) {
+        return ServletUriComponentsBuilder
+                .fromCurrentContextPath()
+                .path("/files/submission/img/")
+                .path(String.valueOf(submission.getId()))
+                .toUriString();
     }
 
 }
