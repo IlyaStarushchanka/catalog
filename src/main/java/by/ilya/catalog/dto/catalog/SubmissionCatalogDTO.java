@@ -19,6 +19,7 @@ public class SubmissionCatalogDTO {
     private SmallContestCatalogDTO contest;
     private AuthorCatalogDTO author;
     private String statisticsLink;
+    private String statisticsShortLink;
     private String image;
 
     public List<ResponseFile> getFiles() {
@@ -123,5 +124,13 @@ public class SubmissionCatalogDTO {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getStatisticsShortLink() {
+        return statisticsShortLink;
+    }
+
+    public void setStatisticsShortLink(String statisticsShortLink) {
+        this.statisticsShortLink = statisticsShortLink;
     }
 }

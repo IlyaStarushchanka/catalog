@@ -65,18 +65,17 @@
         <h2 class="submission__bar-title">Links and attachments</h2>
         <div class="submission__bar-link" th:each="link : ${submission.links}">
           <div class="submission__bar-link-name" th:text="${link.name}"></div>
-          <a th:href="${link.url}" th:text="${link.url}"></a>
+          <a th:href="${link.url}" th:text="${link.shortUrl}"></a>
         </div>
         <a th:href="${file.url}" class="submission__bar-download" download target="_blank" th:each="file : ${submission.files}">
           <div class="submission__bar-download-icn"><img src="/img/svg/attach_black.svg" alt=""></div>
           <div class="submission__bar-download-main">
             <div class="submission__bar-download-name" th:text="${file.name}"></div>
-            <div class="submission__bar-download-size">1.2 mb</div>
           </div>
         </a>
         <h2 class="submission__bar-title">Statistics</h2>
         <p class="submission__bar-txt">Follow the link below to see statistical information about this submission.</p>
-        <p class="submission__bar-txt"><a th:href="${submission.statisticsLink}" th:text="${submission.statisticsLink}"></a></p>
+        <p class="submission__bar-txt"><a th:href="${submission.statisticsLink}" th:text="${submission.statisticsShortLink}"></a></p>
       </section>
     </div>
   </div>

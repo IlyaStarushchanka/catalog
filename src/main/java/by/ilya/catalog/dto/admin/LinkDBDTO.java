@@ -5,6 +5,7 @@ public class LinkDBDTO {
     private Long id;
     private String name;
 
+    private String shortUrl;
     private String url;
     private Long submissionId;
 
@@ -38,5 +39,13 @@ public class LinkDBDTO {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getShortUrl() {
+        return shortUrl;
+    }
+
+    public void setShortUrl(String shortUrl) {
+        this.shortUrl = shortUrl;
     }
 }

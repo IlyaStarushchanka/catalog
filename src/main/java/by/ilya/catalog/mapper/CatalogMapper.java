@@ -2,9 +2,11 @@ package by.ilya.catalog.mapper;
 
 import by.ilya.catalog.domain.Contest;
 import by.ilya.catalog.domain.FileDB;
+import by.ilya.catalog.domain.LinkDB;
 import by.ilya.catalog.domain.SubGovernance;
 import by.ilya.catalog.domain.Submission;
 import by.ilya.catalog.dto.admin.ContestDTO;
+import by.ilya.catalog.dto.admin.LinkDBDTO;
 import by.ilya.catalog.dto.admin.ResponseFile;
 import by.ilya.catalog.dto.admin.SubmissionDTO;
 import by.ilya.catalog.dto.catalog.ContestCatalogDTO;
@@ -17,6 +19,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
+import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.List;
@@ -37,7 +40,11 @@ public interface CatalogMapper {
     List<SubGovernanceCatalogDTO> toSubGovernanceListDTO (List<SubGovernance> subGovernances);
 
     @Mapping(target = "image", source = "submission", qualifiedByName = "mapSubmissionImage")
+    @Mapping(target = "statisticsShortLink", source = "statisticsLink", qualifiedByName = "subStringUrl")
     SubmissionCatalogDTO toSubmissionDTO(Submission submission);
+
+    @Mapping(target = "shortUrl", source = "url", qualifiedByName = "subStringUrl")
+    LinkDBDTO toDTO(LinkDB link);
 
     @Named("mapSmallSubmissions")
     List<SmallSubmissionCatalogDTO> toSmallSubmissionListDTO(List<Submission> submissions);
@@ -66,6 +73,14 @@ public interface CatalogMapper {
         return authorFreeTonAddress.substring(0, 6) +
                 "..." +
                 authorFreeTonAddress.substring(authorFreeTonAddress.length() - 5, authorFreeTonAddress.length() - 1);
+    }
+
+    @Named("subStringUrl")
+    default String subStringUrl (String url){
+        if (url != null && url.length() > 40){
+            return url.substring(0,40) + "...";
+        }
+        return url;
     }
 
     @Named("mapSubmissionImage")
