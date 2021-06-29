@@ -27,6 +27,7 @@
     <link href="/assets/css/lib/bootstrap.min.css" rel="stylesheet">
     <link href="/assets/css/lib/helper.css" rel="stylesheet">
     <link href="/assets/css/style.css" rel="stylesheet">
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 </head>
 
 <body onload="getCurrentUser()">
@@ -137,10 +138,18 @@
                                                                 autofocus name="number" th:value="${submission.number}" class="form-control input-rounded" id="number">
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
+                                                <!--<div class="form-group">
                                                     <label class="col-sm-3 control-label">Description</label>
                                                     <div class="col-sm-10">
                                                         <textarea class="form-control" rows="10" placeholder="Description" th:text="${submission.description}" id="description" name="description"></textarea>
+                                                    </div>
+                                                </div>-->
+                                                <div class="form-group">
+                                                    <label class="col-sm-10 control-label">Description</label>
+                                                    <div class="col-sm-10">
+                                                        <div id="editor" th:utext="${submission.description}">
+                                                        </div>
+                                                        <textarea th:utext="${submission.description}" style="display:none" class="form-control" rows="10" placeholder="Description" id="description" name="description"></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -203,7 +212,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <button type="submit" name="auth" class="btn btn-primary">Edit Submission</button>
+                                        <button type="submit" name="auth" class="btn btn-primary" onclick="beforeSave()">Edit Submission</button>
                                     </form>
                                 </div>
                             </div>
@@ -235,6 +244,16 @@
 <!-- scripit init-->
 <script src="/js/functions.js"></script>
 <script src="/js/validateData.js"></script>
+
+<!-- Include the Quill library -->
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+<!-- Initialize Quill editor -->
+<script>
+    var quill = new Quill('#editor', {
+        theme: 'snow'
+    });
+</script>
 
 </body>
 

@@ -62,8 +62,7 @@ $('#author-select').on('change', function() {
     addressInput.value = address;
 });
 
-$('#author-select').on('load', function() {
-    var address =  this.options[this.selectedIndex].id.replace('authorAddress_','');
-    var addressInput = document.getElementById("author.chosedFreeTonAddress");
-    addressInput.value = address;
-});
+function beforeSave(){
+    var description = document.getElementById("description");
+    description.value = document.querySelector('#editor').children[0].innerHTML;
+}
