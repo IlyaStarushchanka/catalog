@@ -188,7 +188,7 @@
                                                         <select class="form-control" id="author-select" name="author.id" >
                                                             <span th:each="author : ${authors}">
                                                                 <span  th:each="address : ${author.freeTonAddresses}">
-                                                                    <option class="author-option" th:id="'authorAddress_' + ${address}" th:each="author : ${authors}" th:value="${author.id}" th:text="${author.freetonForumNickname} + '->' + ${address}" th:selected="${submission.author.id+submission.authorFreeTonAddress eq author.id + address}"></option>
+                                                                    <option class="author-option" th:id="'authorAddress_' + ${address}"  th:value="${author.id}" th:text="${author.freetonForumNickname} + '->' + ${address}" th:selected="${submission.author.id+submission.authorFreeTonAddress eq author.id + address}"></option>
                                                                 </span>
                                                             </span>
                                                         </select>
@@ -198,7 +198,7 @@
                                                     <label class="col-sm-3 control-label">Address</label>
                                                     <div class="col-sm-10">
                                                         <input  type="text" readonly
-                                                                name="authorFreeTonAddress" class="form-control input-rounded" th:value="${submission.authorFreeTonAddress}" id="authorFreeTonAddress">
+                                                                name="authorFreeTonAddress" class="form-control input-rounded" th:value="${submission.authorFreeTonAddress}" id="author.chosedFreeTonAddress">
                                                     </div>
                                                 </div>
                                             </div>

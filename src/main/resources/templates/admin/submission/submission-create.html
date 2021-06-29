@@ -185,11 +185,11 @@
                                                     <label class="col-sm-3 control-label">Author</label>
                                                     <div class="col-sm-10">
                                                         <select class="form-control" id="author-select" name="author.id">
-                                                            <span th:each="author : ${authors}">
-                                                                <span  th:each="address : ${author.freeTonAddresses}">
-                                                                    <option class="author-option" th:id="'authorAddress_' + ${address}" th:each="author : ${authors}" th:value="${author.id}" th:text="${author.freetonForumNickname} + '->' + ${address}"></option>
-                                                                </span>
-                                                            </span>
+                                                            <div th:each="author : ${authors}">
+                                                                <div  th:each="address : ${author.freeTonAddresses}">
+                                                                    <option class="author-option" th:id="'authorAddress_' + ${address}" th:value="${author.id}" th:text="${author.freetonForumNickname} + '->' + ${address}"></option>
+                                                                </div>
+                                                            </div>
                                                         </select>
                                                     </div>
                                                 </div>
