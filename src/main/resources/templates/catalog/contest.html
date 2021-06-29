@@ -41,11 +41,11 @@
         <ul class="tablist">
           <li class="tablist__item">
             <div class="tablist__name">Submission period</div>
-            <div class="tablist__txt">11 May 2021 at 00:00 UTC – 30 May 2021 at 23:59 UTC</div>
+            <div class="tablist__txt" th:text="${contest.submissionFrom} + ' - ' ${contest.submissionTo}"></div>
           </li>
           <li class="tablist__item">
             <div class="tablist__name">Judging period</div>
-            <div class="tablist__txt">31 May 2021 at 00:00 UTC – 6 June 2021 at 23:59 UTC</div>
+            <div class="tablist__txt" th:text="${contest.votingFrom} + ' - ' ${contest.votingTo}"></div>
           </li>
         </ul>
       </section>
