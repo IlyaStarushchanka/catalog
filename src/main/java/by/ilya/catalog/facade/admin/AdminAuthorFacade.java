@@ -29,6 +29,7 @@ public class AdminAuthorFacade {
         return MAPPER.toDTO(author);
     }
 
+    @Transactional
     public AuthorDTO getById(long id) {
         return MAPPER.toDTO(authorServiceImpl.getById(id));
     }

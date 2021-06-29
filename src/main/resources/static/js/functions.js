@@ -55,3 +55,9 @@ function addFreeTonAddress(){
     var div = document.getElementsByClassName("freeTonAddress");
     $(div).append(additionalInput);
 }
+
+$('#author-select').on('change', function() {
+    var address =  this.id.replace('authorAddress_','');
+    var addressInput = document.getElementById("author.chosedFreeTonAddress");
+    addressInput.val = address;
+});

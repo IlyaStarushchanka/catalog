@@ -110,15 +110,15 @@ public interface AdminMapper {
     }
 
     @Named("mapFreeTonAddresses")
-    default List<FreeTonAddress> mapFreeTonAddresses(String[] addresses) {
+    default Set<FreeTonAddress> mapFreeTonAddresses(String[] addresses) {
         if (addresses != null) {
-            return Arrays.stream(addresses).map(FreeTonAddress::new).collect(Collectors.toList());
+            return Arrays.stream(addresses).map(FreeTonAddress::new).collect(Collectors.toSet());
         }
         return null;
     }
 
     @Named("mapFreeTonAddressesToDTO")
-    default String[] mapFreeTonAddressesToDTO(List<FreeTonAddress> addresses) {
+    default String[] mapFreeTonAddressesToDTO(Set<FreeTonAddress> addresses) {
         if (addresses != null) {
             return addresses.stream().map(FreeTonAddress::getAddress).toArray(String[]::new);
         }

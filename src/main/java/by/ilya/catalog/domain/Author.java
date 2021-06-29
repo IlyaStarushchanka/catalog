@@ -23,9 +23,8 @@ public class Author {
     private Long id;
 
     private String freetonForumNickname;
-    @OneToMany(cascade = CascadeType.ALL)
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<FreeTonAddress> freetonAddresses;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<FreeTonAddress> freetonAddresses;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Submission> submissions = new HashSet<>();
 
@@ -65,11 +64,11 @@ public class Author {
         this.submissions = submissions;
     }
 
-    public List<FreeTonAddress> getFreetonAddresses() {
+    public Set<FreeTonAddress> getFreetonAddresses() {
         return freetonAddresses;
     }
 
-    public void setFreetonAddresses(List<FreeTonAddress> freetonAddresses) {
+    public void setFreetonAddresses(Set<FreeTonAddress> freetonAddresses) {
         this.freetonAddresses = freetonAddresses;
     }
 }
