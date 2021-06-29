@@ -47,6 +47,10 @@ public class AdminSubmissionFacade {
         }
     }
 
+    public byte[] getSubmissionImage(long id){
+        return submissionServiceImpl.getSubmissionImage(id);
+    }
+
     @Transactional
     public SubmissionDTO getById(long id) {
         return MAPPER.toDTO(submissionServiceImpl.getById(id));

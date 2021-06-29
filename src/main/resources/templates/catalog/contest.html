@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="Ru-ru">
+<html lang="Ru-ru" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8"/>
     <title>TONcatalog</title>
@@ -32,10 +32,10 @@
       <main class="main"><div class="page">
   <div class="container">
     <nav class="breadcrumbs">
-      <a href="#">All contests</a><img src="/img/svg/chevrone-right_grey.svg" alt=""><span>Main Governance</span>
+      <a href="/">All contests</a><img src="/img/svg/chevrone-right_grey.svg" alt=""><span th:text="${contest.subGovernance.name}"></span>
     </nav>
     <article class="article">
-      <h1>#169 Contest: Dune->FreeTON Swap Implementation Stage 1 Proposal</h1>
+      <h1 th:text="${contest.name}"></h1>
       <section>
         <h2>Period</h2>
         <ul class="tablist">
@@ -49,20 +49,7 @@
           </li>
         </ul>
       </section>
-      <section>
-        <h2>About</h2>
-        <h3>Header</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <h3>Header</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-      </section>
-      
-      <div class="js-hided-part hided-part">
-        <h3>Header</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <h3>Header</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-      </div>
+      <div th:utext="${contest.description}" th:remove="tag"></div>
       <button class="btn show-more js-show-mor">
         <span>Show more</span>
         <img src="/img/svg/chevrone-down_blue.svg" alt="">
@@ -71,343 +58,34 @@
     <section class="portfolio">
       <h2 class="sec-title">Winners works</h2>
       <ul class="portfolio__list">
-        <li class="portfolio-item">
-          <a href="#" class="portfolio-item__wrap">
+        <li class="portfolio-item" th:each="submission : ${contest.submissions}">
+          <a th:href=@{/submission?(id=${submission.id})} class="portfolio-item__wrap">
             <div class="portfolio-item__pic"><img src="https://img2.goodfon.ru/original/1920x1200/c/1e/kanada-alberta-gory-ozero-5808.jpg" alt=""></div>
             <div class="portfolio-item__stats">
               <div class="portfolio-item__stat">
                 <img src="/img/svg/link_black.svg" alt="">
-                1
+                <span th:text="${submission.linksCount}" th:remove="tag"></span>
               </div>
               <div class="portfolio-item__stat">
                 <img src="/img/svg/attach_black.svg" alt="">
-                3
+                <span th:text="${submission.filesCount}" th:remove="tag"></span>
               </div>
             </div>
             <div class="portfolio-item__main">
-              <div class="portfolio-item__name">Submission #888</div>
+              <div class="portfolio-item__name" th:text="${submission.number}"></div>
               <div class="inforow">
                 <div class="infoitem">
-                  <img src="/img/svg/cup_blue.svg" alt="">
-                  1 place
+                  <img src="/img/svg/cup_blue.svg" alt="" th:text="${submission.place} + ' place'">
                 </div>
                 <div class="infoitem">
-                  <img src="/img/svg/star_blue.svg" alt="">
-                  9.67
+                  <img src="/img/svg/star_blue.svg" alt="" th:text="${submission.rate}">
                 </div>
                 <div class="infoitem">
-                  <img src="/img/svg/coin_blue.svg" alt="">
-                  15,000 TONs
+                  <img src="/img/svg/coin_blue.svg" alt="" th:text="${submission.prize} + ' TONs'">
                 </div>
               </div>
-              <div class="portfolio-item__username">usernickname</div>
-              <div class="portfolio-item__id">0:1b32...8e5c</div>
-            </div>
-          </a>
-        </li>
-        <li class="portfolio-item">
-          <a href="#" class="portfolio-item__wrap">
-            <div class="portfolio-item__pic"><img src="https://img2.goodfon.ru/original/1920x1200/c/1e/kanada-alberta-gory-ozero-5808.jpg" alt=""></div>
-            <div class="portfolio-item__stats">
-              <div class="portfolio-item__stat">
-                <img src="/img/svg/link_black.svg" alt="">
-                1
-              </div>
-              <div class="portfolio-item__stat">
-                <img src="/img/svg/attach_black.svg" alt="">
-                3
-              </div>
-            </div>
-            <div class="portfolio-item__main">
-              <div class="portfolio-item__name">Submission #888</div>
-              <div class="inforow">
-                <div class="infoitem">
-                  <img src="/img/svg/cup_blue.svg" alt="">
-                  1 place
-                </div>
-                <div class="infoitem">
-                  <img src="/img/svg/star_blue.svg" alt="">
-                  9.67
-                </div>
-                <div class="infoitem">
-                  <img src="/img/svg/coin_blue.svg" alt="">
-                  15,000 TONs
-                </div>
-              </div>
-              <div class="portfolio-item__username">usernickname</div>
-              <div class="portfolio-item__id">0:1b32...8e5c</div>
-            </div>
-          </a>
-        </li>
-        <li class="portfolio-item">
-          <a href="#" class="portfolio-item__wrap">
-            <div class="portfolio-item__pic"><img src="https://img2.goodfon.ru/original/1920x1200/c/1e/kanada-alberta-gory-ozero-5808.jpg" alt=""></div>
-            <div class="portfolio-item__stats">
-              <div class="portfolio-item__stat">
-                <img src="/img/svg/link_black.svg" alt="">
-                1
-              </div>
-              <div class="portfolio-item__stat">
-                <img src="/img/svg/attach_black.svg" alt="">
-                3
-              </div>
-            </div>
-            <div class="portfolio-item__main">
-              <div class="portfolio-item__name">Submission #888</div>
-              <div class="inforow">
-                <div class="infoitem">
-                  <img src="/img/svg/cup_blue.svg" alt="">
-                  1 place
-                </div>
-                <div class="infoitem">
-                  <img src="/img/svg/star_blue.svg" alt="">
-                  9.67
-                </div>
-                <div class="infoitem">
-                  <img src="/img/svg/coin_blue.svg" alt="">
-                  15,000 TONs
-                </div>
-              </div>
-              <div class="portfolio-item__username">usernickname</div>
-              <div class="portfolio-item__id">0:1b32...8e5c</div>
-            </div>
-          </a>
-        </li>
-        <li class="portfolio-item">
-          <a href="#" class="portfolio-item__wrap">
-            <div class="portfolio-item__pic"><img src="https://img2.goodfon.ru/original/1920x1200/c/1e/kanada-alberta-gory-ozero-5808.jpg" alt=""></div>
-            <div class="portfolio-item__stats">
-              <div class="portfolio-item__stat">
-                <img src="/img/svg/link_black.svg" alt="">
-                1
-              </div>
-              <div class="portfolio-item__stat">
-                <img src="/img/svg/attach_black.svg" alt="">
-                3
-              </div>
-            </div>
-            <div class="portfolio-item__main">
-              <div class="portfolio-item__name">Submission #888</div>
-              <div class="inforow">
-                <div class="infoitem">
-                  <img src="/img/svg/cup_blue.svg" alt="">
-                  1 place
-                </div>
-                <div class="infoitem">
-                  <img src="/img/svg/star_blue.svg" alt="">
-                  9.67
-                </div>
-                <div class="infoitem">
-                  <img src="/img/svg/coin_blue.svg" alt="">
-                  15,000 TONs
-                </div>
-              </div>
-              <div class="portfolio-item__username">usernickname</div>
-              <div class="portfolio-item__id">0:1b32...8e5c</div>
-            </div>
-          </a>
-        </li>
-        <li class="portfolio-item">
-          <a href="#" class="portfolio-item__wrap">
-            <div class="portfolio-item__pic"><img src="https://img2.goodfon.ru/original/1920x1200/c/1e/kanada-alberta-gory-ozero-5808.jpg" alt=""></div>
-            <div class="portfolio-item__stats">
-              <div class="portfolio-item__stat">
-                <img src="/img/svg/link_black.svg" alt="">
-                1
-              </div>
-              <div class="portfolio-item__stat">
-                <img src="/img/svg/attach_black.svg" alt="">
-                3
-              </div>
-            </div>
-            <div class="portfolio-item__main">
-              <div class="portfolio-item__name">Submission #888</div>
-              <div class="inforow">
-                <div class="infoitem">
-                  <img src="/img/svg/cup_blue.svg" alt="">
-                  1 place
-                </div>
-                <div class="infoitem">
-                  <img src="/img/svg/star_blue.svg" alt="">
-                  9.67
-                </div>
-                <div class="infoitem">
-                  <img src="/img/svg/coin_blue.svg" alt="">
-                  15,000 TONs
-                </div>
-              </div>
-              <div class="portfolio-item__username">usernickname</div>
-              <div class="portfolio-item__id">0:1b32...8e5c</div>
-            </div>
-          </a>
-        </li>
-        <li class="portfolio-item">
-          <a href="#" class="portfolio-item__wrap">
-            <div class="portfolio-item__pic"><img src="https://img2.goodfon.ru/original/1920x1200/c/1e/kanada-alberta-gory-ozero-5808.jpg" alt=""></div>
-            <div class="portfolio-item__stats">
-              <div class="portfolio-item__stat">
-                <img src="/img/svg/link_black.svg" alt="">
-                1
-              </div>
-              <div class="portfolio-item__stat">
-                <img src="/img/svg/attach_black.svg" alt="">
-                3
-              </div>
-            </div>
-            <div class="portfolio-item__main">
-              <div class="portfolio-item__name">Submission #888</div>
-              <div class="inforow">
-                <div class="infoitem">
-                  <img src="/img/svg/cup_blue.svg" alt="">
-                  1 place
-                </div>
-                <div class="infoitem">
-                  <img src="/img/svg/star_blue.svg" alt="">
-                  9.67
-                </div>
-                <div class="infoitem">
-                  <img src="/img/svg/coin_blue.svg" alt="">
-                  15,000 TONs
-                </div>
-              </div>
-              <div class="portfolio-item__username">usernickname</div>
-              <div class="portfolio-item__id">0:1b32...8e5c</div>
-            </div>
-          </a>
-        </li>
-        <li class="portfolio-item">
-          <a href="#" class="portfolio-item__wrap">
-            <div class="portfolio-item__pic"><img src="https://img2.goodfon.ru/original/1920x1200/c/1e/kanada-alberta-gory-ozero-5808.jpg" alt=""></div>
-            <div class="portfolio-item__stats">
-              <div class="portfolio-item__stat">
-                <img src="/img/svg/link_black.svg" alt="">
-                1
-              </div>
-              <div class="portfolio-item__stat">
-                <img src="/img/svg/attach_black.svg" alt="">
-                3
-              </div>
-            </div>
-            <div class="portfolio-item__main">
-              <div class="portfolio-item__name">Submission #888</div>
-              <div class="inforow">
-                <div class="infoitem">
-                  <img src="/img/svg/cup_blue.svg" alt="">
-                  1 place
-                </div>
-                <div class="infoitem">
-                  <img src="/img/svg/star_blue.svg" alt="">
-                  9.67
-                </div>
-                <div class="infoitem">
-                  <img src="/img/svg/coin_blue.svg" alt="">
-                  15,000 TONs
-                </div>
-              </div>
-              <div class="portfolio-item__username">usernickname</div>
-              <div class="portfolio-item__id">0:1b32...8e5c</div>
-            </div>
-          </a>
-        </li>
-        <li class="portfolio-item">
-          <a href="#" class="portfolio-item__wrap">
-            <div class="portfolio-item__pic"><img src="https://img2.goodfon.ru/original/1920x1200/c/1e/kanada-alberta-gory-ozero-5808.jpg" alt=""></div>
-            <div class="portfolio-item__stats">
-              <div class="portfolio-item__stat">
-                <img src="/img/svg/link_black.svg" alt="">
-                1
-              </div>
-              <div class="portfolio-item__stat">
-                <img src="/img/svg/attach_black.svg" alt="">
-                3
-              </div>
-            </div>
-            <div class="portfolio-item__main">
-              <div class="portfolio-item__name">Submission #888</div>
-              <div class="inforow">
-                <div class="infoitem">
-                  <img src="/img/svg/cup_blue.svg" alt="">
-                  1 place
-                </div>
-                <div class="infoitem">
-                  <img src="/img/svg/star_blue.svg" alt="">
-                  9.67
-                </div>
-                <div class="infoitem">
-                  <img src="/img/svg/coin_blue.svg" alt="">
-                  15,000 TONs
-                </div>
-              </div>
-              <div class="portfolio-item__username">usernickname</div>
-              <div class="portfolio-item__id">0:1b32...8e5c</div>
-            </div>
-          </a>
-        </li>
-        <li class="portfolio-item">
-          <a href="#" class="portfolio-item__wrap">
-            <div class="portfolio-item__pic"><img src="https://img2.goodfon.ru/original/1920x1200/c/1e/kanada-alberta-gory-ozero-5808.jpg" alt=""></div>
-            <div class="portfolio-item__stats">
-              <div class="portfolio-item__stat">
-                <img src="/img/svg/link_black.svg" alt="">
-                1
-              </div>
-              <div class="portfolio-item__stat">
-                <img src="/img/svg/attach_black.svg" alt="">
-                3
-              </div>
-            </div>
-            <div class="portfolio-item__main">
-              <div class="portfolio-item__name">Submission #888</div>
-              <div class="inforow">
-                <div class="infoitem">
-                  <img src="/img/svg/cup_blue.svg" alt="">
-                  1 place
-                </div>
-                <div class="infoitem">
-                  <img src="/img/svg/star_blue.svg" alt="">
-                  9.67
-                </div>
-                <div class="infoitem">
-                  <img src="/img/svg/coin_blue.svg" alt="">
-                  15,000 TONs
-                </div>
-              </div>
-              <div class="portfolio-item__username">usernickname</div>
-              <div class="portfolio-item__id">0:1b32...8e5c</div>
-            </div>
-          </a>
-        </li>
-        <li class="portfolio-item">
-          <a href="#" class="portfolio-item__wrap">
-            <div class="portfolio-item__pic"><img src="https://img2.goodfon.ru/original/1920x1200/c/1e/kanada-alberta-gory-ozero-5808.jpg" alt=""></div>
-            <div class="portfolio-item__stats">
-              <div class="portfolio-item__stat">
-                <img src="/img/svg/link_black.svg" alt="">
-                1
-              </div>
-              <div class="portfolio-item__stat">
-                <img src="/img/svg/attach_black.svg" alt="">
-                3
-              </div>
-            </div>
-            <div class="portfolio-item__main">
-              <div class="portfolio-item__name">Submission #888</div>
-              <div class="inforow">
-                <div class="infoitem">
-                  <img src="/img/svg/cup_blue.svg" alt="">
-                  1 place
-                </div>
-                <div class="infoitem">
-                  <img src="/img/svg/star_blue.svg" alt="">
-                  9.67
-                </div>
-                <div class="infoitem">
-                  <img src="/img/svg/coin_blue.svg" alt="">
-                  15,000 TONs
-                </div>
-              </div>
-              <div class="portfolio-item__username">usernickname</div>
-              <div class="portfolio-item__id">0:1b32...8e5c</div>
+              <div class="portfolio-item__username" th:text="${submission.author.freetonForumNickname}"></div>
+              <div class="portfolio-item__id" th:text="${submission.authorFreeTonAddress}"></div>
             </div>
           </a>
         </li>

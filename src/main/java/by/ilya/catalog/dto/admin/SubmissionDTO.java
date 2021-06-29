@@ -9,6 +9,7 @@ public class SubmissionDTO {
     private ContestDTO contest;
     private String number;
     private AuthorDTO author;
+    private String image;
 
     private List<ResponseFile> files = new ArrayList<>();
     private String authorFreeTonAddress;
@@ -96,5 +97,13 @@ public class SubmissionDTO {
 
     public void setPrize(String prize) {
         this.prize = prize;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

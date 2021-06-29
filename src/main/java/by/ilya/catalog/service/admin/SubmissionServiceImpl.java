@@ -62,4 +62,12 @@ public class SubmissionServiceImpl implements CrudService<Submission> {
     public void edit(long id) {
         submissionRepository.deleteById(id);
     }
+
+    public byte[] getSubmissionImage(long id) {
+        Submission submission = submissionRepository.findById(id).orElse(null);
+        if (submission != null){
+            return submission.getImage();
+        }
+        return null;
+    }
 }

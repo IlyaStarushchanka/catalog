@@ -22,6 +22,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static org.springframework.http.HttpStatus.NO_CONTENT;
+
 @Controller
 @CrossOrigin
 public class FileEndpoint {
@@ -33,15 +35,21 @@ public class FileEndpoint {
 
     @PostMapping("/admin/upload")
     public String uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("submissionId") Long submissionId, Model model) {
-        String message = "";
         try {
             fileStorageService.store(file, submissionId);
-
-            message = "Uploaded the file successfully: " + file.getOriginalFilename();
-            //return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
         } catch (Exception e) {
-            message = "Could not upload the file: " + file.getOriginalFilename() + "!";
-            //return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
+
+        }
+        model.addAttribute("submission", adminSubmissionFacade.getById(submissionId));
+        return "admin/submission/submission-view";
+    }
+
+    @PostMapping("/admin/upload/submission/img")
+    public String uploadSubmissionImg(@RequestParam("file") MultipartFile file, @RequestParam("submissionId") Long submissionId, Model model) {
+        try {
+            fileStorageService.storeSubmissionImg(file, submissionId);
+        } catch (Exception e) {
+
         }
         model.addAttribute("submission", adminSubmissionFacade.getById(submissionId));
         return "admin/submission/submission-view";
@@ -80,5 +88,16 @@ public class FileEndpoint {
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileDB.getName() + "\"")
                 .body(fileDB.getData());
+    }
+
+    @GetMapping("/files/submission/img/{id}")
+    public ResponseEntity<byte[]> getSubmissionImage(@PathVariable Long id) {
+        byte[] image = adminSubmissionFacade.getSubmissionImage(id);
+        if (image != null) {
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=image")
+                    .body(image);
+        }
+        return new ResponseEntity(NO_CONTENT);
     }
 }

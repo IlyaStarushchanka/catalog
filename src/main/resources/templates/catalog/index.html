@@ -43,12 +43,9 @@
           <fieldset class="filter__group">
             <legend class="filter__title">Sub-governance</legend>
             <div class="checkselect">
-              <label><input type="checkbox" name="Option 1" value="1"><span>Option 1</span></label>
-              <label><input type="checkbox" name="Option 2" value="2"><span>Option 2</span></label>
-              <label><input type="checkbox" name="Option 3" value="3"><span>Option 3</span></label>
-              <label><input type="checkbox" name="Option 4" value="4"><span>Option 4</span></label>
-              <label><input type="checkbox" name="Option 5" value="5"><span>Option 5</span></label>
-              <label><input type="checkbox" name="Option 6" value="6"><span>Option 6</span></label>
+              <label th:each="subGov : ${subGovernances}">
+                <input type="checkbox" name="id" th:name="${subGov.id}" th:value="${subGov.id}"><span th:text="${subGov.name}"></span>
+              </label>
             </div>
           </fieldset>
           <fieldset class="filter__group">
@@ -84,7 +81,7 @@
         </div>
         <ul class="catalog__list">
           <li class="catalog-item" th:each="contest : ${contests}">
-            <a href="#" class="catalog-item__wrap">
+            <a th:href=@{/contest?(id=${contest.id})} class="catalog-item__wrap">
               <div class="catalog-item__name" th:text="${contest.name}"></div>
               <div class="catalog-item__sub" th:text="${contest.subGovernance.name}"></div>
               <div class="catalog-item__strong" th:text="${contest.winnersCount} + ' winners'"></div>

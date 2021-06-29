@@ -3,6 +3,7 @@ package by.ilya.catalog.service.admin;
 import by.ilya.catalog.domain.FileDB;
 import by.ilya.catalog.domain.Submission;
 import by.ilya.catalog.repository.FileDBRepository;
+import by.ilya.catalog.repository.SubmissionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +16,8 @@ import java.util.stream.Stream;
 @Service
 public class FileStorageService {
 
+    @Autowired
+    private SubmissionRepository submissionRepository;
     @Autowired
     private FileDBRepository fileDBRepository;
     @Autowired
@@ -30,6 +33,18 @@ public class FileStorageService {
                 fileDB.setSubmission(submission);
                 submission.getFiles().add(fileDB);
                 fileDBRepository.save(fileDB);
+            }
+        }
+    }
+
+    @Transactional
+    public void storeSubmissionImg(MultipartFile file, Long submissionId) throws IOException {
+        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+        if (fileName != null || !fileName.isEmpty()) {
+            Submission submission = submissionServiceImpl.getById(submissionId);
+            submission.setImage(file.getBytes());
+            if (submission != null) {
+                submissionRepository.save(submission);
             }
         }
     }

@@ -7,6 +7,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import java.sql.Timestamp;
@@ -23,6 +24,9 @@ public class Submission {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Lob
+    private byte[] image;
+
     @ManyToOne
     private Contest contest;
     private String number;
@@ -33,6 +37,10 @@ public class Submission {
     private String authorFreeTonAddress;
     @Column(length = 10000)
     private String description;
+    private String statisticsLink;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<LinkDB> links = new HashSet<>();
 
     private String rate;
     private String place;
@@ -116,6 +124,30 @@ public class Submission {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getStatisticsLink() {
+        return statisticsLink;
+    }
+
+    public void setStatisticsLink(String statisticsLink) {
+        this.statisticsLink = statisticsLink;
+    }
+
+    public Set<LinkDB> getLinks() {
+        return links;
+    }
+
+    public void setLinks(Set<LinkDB> links) {
+        this.links = links;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 
     @Override

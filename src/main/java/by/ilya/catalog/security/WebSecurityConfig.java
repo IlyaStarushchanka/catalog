@@ -22,7 +22,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin/managers/delete").hasAnyAuthority("ADMIN")
                 .antMatchers("/").permitAll()
                 .antMatchers("/catalog/**").permitAll()
-                .antMatchers("/css/**", "/js/**", "/images/**").permitAll()
+                .antMatchers("/css/**", "/js/**", "/img/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().permitAll()

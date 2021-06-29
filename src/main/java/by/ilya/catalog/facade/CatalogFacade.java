@@ -1,6 +1,9 @@
 package by.ilya.catalog.facade;
 
+import by.ilya.catalog.dto.catalog.ContestCatalogDTO;
 import by.ilya.catalog.dto.catalog.SmallContestCatalogDTO;
+import by.ilya.catalog.dto.catalog.SubGovernanceCatalogDTO;
+import by.ilya.catalog.dto.catalog.SubmissionCatalogDTO;
 import by.ilya.catalog.mapper.CatalogMapper;
 import by.ilya.catalog.service.CatalogService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +19,18 @@ public class CatalogFacade {
 
     public List<SmallContestCatalogDTO> getContests(){
         return MAPPER.toSmallContestListDTO(catalogService.getContests());
+    }
+
+    public SubmissionCatalogDTO getSubmissionById(long id){
+        return MAPPER.toSubmissionDTO(catalogService.getSubmissionById(id));
+    }
+
+    public List<SubGovernanceCatalogDTO> getAllSubGovs(){
+        return MAPPER.toSubGovernanceListDTO(catalogService.getSubGovernanceList());
+    }
+
+    public ContestCatalogDTO getContestById(long id){
+        return MAPPER.toContestDTO(catalogService.getContestById(id));
     }
 
     @Autowired

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class CatalogEndpoint {
@@ -16,7 +17,20 @@ public class CatalogEndpoint {
     @GetMapping("/")
     public String contests(Model model) {
         model.addAttribute("contests", catalogFacade.getContests());
+        model.addAttribute("subGovernances", catalogFacade.getAllSubGovs());
         return "catalog/index";
+    }
+
+    @GetMapping("/contest")
+    public String getContest(@RequestParam(value = "id") long id, Model model) {
+        model.addAttribute("contest", catalogFacade.getContestById(id));
+        return "catalog/contest";
+    }
+
+    @GetMapping("/submission")
+    public String getSubmission(@RequestParam(value = "id") long id, Model model) {
+        model.addAttribute("submission", catalogFacade.getSubmissionById(id));
+        return "catalog/submission";
     }
 
     @Autowired

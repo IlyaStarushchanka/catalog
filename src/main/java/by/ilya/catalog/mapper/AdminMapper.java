@@ -57,6 +57,7 @@ public interface AdminMapper {
 
     Submission toState (SubmissionDTO submission);
     @Mapping(target = "author.submissions", ignore = true)
+    @Mapping(target = "image", source = "image", qualifiedByName = "mapSubmissionImage")
     SubmissionDTO toDTO (Submission submission);
 
     default ResponseFile toDTO (FileDB file){
@@ -95,6 +96,14 @@ public interface AdminMapper {
             @Mapping(target = "contest.subGovernance.contests", ignore = true)
     })
     SubmissionDTO mapWithoutSubmissions(Submission submission);
+
+    @Named("mapSubmissionImage")
+    default String mapSubmissionImage() {
+        if (addresses != null) {
+            return Arrays.stream(addresses).map(FreeTonAddress::new).collect(Collectors.toList());
+        }
+        return null;
+    }
 
     @Named("mapFreeTonAddresses")
     default List<FreeTonAddress> mapFreeTonAddresses(String[] addresses) {
