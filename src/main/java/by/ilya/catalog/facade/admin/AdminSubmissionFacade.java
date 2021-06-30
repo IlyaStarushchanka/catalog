@@ -111,7 +111,7 @@ public class AdminSubmissionFacade {
         }
         Author newAuthor = null;
         if (submissionDTO.getAuthor() != null) {
-            newAuthor = authorServiceImpl.getById(submission.getAuthor().getId());
+            newAuthor = authorServiceImpl.getById(submissionDTO.getAuthor().getId());
         }
         submissionServiceImpl.edit(newContest,newAuthor, submission, newSubmissionData);
     }
