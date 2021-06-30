@@ -44,7 +44,7 @@
             <legend class="filter__title">Sub-governance</legend>
             <div class="checkselect">
               <label th:each="subGov : ${subGovernances}">
-                <input type="checkbox" name="subGovesIds" th:value="${subGov.id}"><span th:text="${subGov.name}"></span>
+                <input type="checkbox" name="subGovesIds" id="subGovesIds" th:value="${subGov.id}"><span th:text="${subGov.name}"></span>
               </label>
             </div>
           </fieldset>

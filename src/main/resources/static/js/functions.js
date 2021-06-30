@@ -69,8 +69,29 @@ function beforeSave(){
     bigDescription.value = document.querySelector('#editorbig').children[0].innerHTML;
 }
 
-$("#filterForm").submit(function (event) {
-    event.preventDefault();
+$(':checkbox').on('change', function(e){
+    sendFilterRequest();
+});
+
+/*document.getElementById('filterForm').change(function(){
+    sendFilterRequest();
+});*/
+
+document.getElementById('prizeFundFrom').addEventListener('blur', (event) => {
+    sendFilterRequest();
+}, true)
+document.getElementById('prizeFundTo').addEventListener('blur', (event) => {
+    sendFilterRequest();
+}, true)
+document.getElementById('winnersFrom').addEventListener('blur', (event) => {
+    sendFilterRequest();
+}, true)
+document.getElementById('winnersTo').addEventListener('blur', (event) => {
+    sendFilterRequest();
+}, true)
+
+/*
+form.addEventListener('blur', (event) => {
     var urlParams = "?"
     if ($("#prizeFundFrom").val()){
         urlParams += "prizeFundFrom=" + $("#prizeFundFrom").val();
@@ -106,12 +127,61 @@ $("#filterForm").submit(function (event) {
             catalogList += "<a href=\"/contest?id=" + item.id + "\" class=\"catalog-item__wrap\">";
             catalogList += "<div class=\"catalog-item__name\">" + item.name +"</div>";
             catalogList += "<div class=\"catalog-item__sub\">" + item.subGovernance.name +"</div>";
-            catalogList += "<div class=\"catalog-item__strong\">" + item.winnersCount +"</div>";
+            catalogList += "<div class=\"catalog-item__strong\">" + item.winnersCount +" winners</div>";
             catalogList += "<div class=\"catalog-item__sub\">" + item.prizeFund +" TONs prize fund</div>";
             catalogList += "<div class=\"catalog-item__interval\">" + item.submissionFrom + " - " + item.submissionTo +"</div></a>";
             catalogList += "</li>";
         });
         catalog.innerHTML = catalogList;
     });
+}, true);*/
 
+function sendFilterRequest() {
+    var urlParams = "?"
+    if ($("#prizeFundFrom").val()){
+        urlParams += "prizeFundFrom=" + $("#prizeFundFrom").val();
+    }
+    if ($("#prizeFundTo").val()){
+        urlParams += "&prizeFundTo=" + $("#prizeFundTo").val();
+    }
+    if ($("#winnersFrom").val()){
+        urlParams += "&winnersFrom=" + $("#winnersFrom").val();
+    }
+    if ($("#winnersTo").val()){
+        urlParams += "&winnersTo=" + $("#winnersTo").val();
+    }
+    $(":checkbox").each(function () {
+        var ischecked = $(this).is(":checked");
+        if (ischecked) {
+            urlParams += "&subGovesIds=" + $(this).val();
+        }
+    });
+    $.ajax({
+        type: "GET",
+        url: "/contest/filter"+urlParams,
+        dataType: "json",
+        encode: true,
+    }).done(function (data) {
+        var catalog = document.getElementsByClassName("catalog__list")[0];
+        while (catalog.firstChild) {
+            catalog.removeChild(catalog.lastChild);
+        }
+        var catalogList = "";
+        jQuery.each(data, function(index, item) {
+            catalogList += "<li class=\"catalog-item\" >";
+            catalogList += "<a href=\"/contest?id=" + item.id + "\" class=\"catalog-item__wrap\">";
+            catalogList += "<div class=\"catalog-item__name\">" + item.name +"</div>";
+            catalogList += "<div class=\"catalog-item__sub\">" + item.subGovernance.name +"</div>";
+            catalogList += "<div class=\"catalog-item__strong\">" + item.winnersCount +" winners</div>";
+            catalogList += "<div class=\"catalog-item__sub\">" + item.prizeFund +" TONs prize fund</div>";
+            catalogList += "<div class=\"catalog-item__interval\">" + item.submissionFrom + " - " + item.submissionTo +"</div></a>";
+            catalogList += "</li>";
+        });
+        catalog.innerHTML = catalogList;
+    });
+}
+
+$("#filterForm").submit(function (event) {
+    event.preventDefault();
+    sendFilterRequest();
 });
