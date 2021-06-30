@@ -87,18 +87,30 @@ jq(function(){
         alert('changing symbol');
     })});*/
 
-document.getElementById('prizeFundFrom').addEventListener('blur', (event) => {
-    sendFilterRequest();
-}, true)
-document.getElementById('prizeFundTo').addEventListener('blur', (event) => {
-    sendFilterRequest();
-}, true)
-document.getElementById('winnersFrom').addEventListener('blur', (event) => {
-    sendFilterRequest();
-}, true)
-document.getElementById('winnersTo').addEventListener('blur', (event) => {
-    sendFilterRequest();
-}, true)
+var prizeFundFrom = document.getElementById('prizeFundFrom');
+if (prizeFundFrom) {
+    addEventListener('blur', (event) => {
+        sendFilterRequest();
+    }, true)
+}
+var prizeFundTo = document.getElementById('prizeFundTo');
+if(prizeFundTo) {
+    addEventListener('blur', (event) => {
+        sendFilterRequest();
+    }, true);
+}
+var winnersFrom = document.getElementById('winnersFrom');
+if(winnersFrom) {
+    addEventListener('blur', (event) => {
+        sendFilterRequest();
+    }, true);
+}
+var winnersTo = document.getElementById('winnersTo');
+if (winnersTo) {
+    addEventListener('blur', (event) => {
+        sendFilterRequest();
+    }, true);
+}
 function sendFilterRequest() {
     var urlParams = "?"
     if ($("#prizeFundFrom").val()){
@@ -151,10 +163,10 @@ function sendFilterRequest() {
     });
 }
 
-$('#searchResult li').on('click', function(){
+/*$('#searchResult li').on('click', function(){
     $(this).closest('.js-search').find('.js-search-input').val($(this).text());
     $(this).closest('.js-search-list').slideUp(250);
-});
+});*/
 
 function getSearchedContestName(){
     var urlParams = "?search=" + $("#searchInput").val();
