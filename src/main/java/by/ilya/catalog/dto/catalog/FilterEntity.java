@@ -10,6 +10,8 @@ public class FilterEntity {
 
     private Integer winnersFrom;
     private Integer winnersTo;
+    private String order;
+
 
     public Integer getPrizeFundFrom() {
         return prizeFundFrom;
@@ -49,5 +51,13 @@ public class FilterEntity {
 
     public void setWinnersTo(Integer winnersTo) {
         this.winnersTo = winnersTo;
+    }
+
+    public String getOrder() {
+        return order;
+    }
+
+    public void setOrder(String order) {
+        this.order = order;
     }
 }

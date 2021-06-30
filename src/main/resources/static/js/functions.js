@@ -73,10 +73,6 @@ $(':checkbox').on('change', function(e){
     sendFilterRequest();
 });
 
-/*document.getElementById('filterForm').change(function(){
-    sendFilterRequest();
-});*/
-
 function showLoadingImage(loadingClass) {
     loadingClass.innerHTML = "<div id=\"loading-image\"><img src=\"/img/loading.gif\" alt=\"Loading...\" /></div>";
 }
@@ -84,6 +80,12 @@ function showLoadingImage(loadingClass) {
 function hideLoadingImage() {
     $('#loading-image').remove();
 }
+
+/*var jq = jQuery.noConflict();
+jq(function(){
+    jq('#order').on('change',function(){
+        alert('changing symbol');
+    })});*/
 
 document.getElementById('prizeFundFrom').addEventListener('blur', (event) => {
     sendFilterRequest();
@@ -97,53 +99,6 @@ document.getElementById('winnersFrom').addEventListener('blur', (event) => {
 document.getElementById('winnersTo').addEventListener('blur', (event) => {
     sendFilterRequest();
 }, true)
-
-/*
-form.addEventListener('blur', (event) => {
-    var urlParams = "?"
-    if ($("#prizeFundFrom").val()){
-        urlParams += "prizeFundFrom=" + $("#prizeFundFrom").val();
-    }
-    if ($("#prizeFundTo").val()){
-        urlParams += "&prizeFundTo=" + $("#prizeFundTo").val();
-    }
-    if ($("#winnersFrom").val()){
-        urlParams += "&winnersFrom=" + $("#winnersFrom").val();
-    }
-    if ($("#winnersTo").val()){
-        urlParams += "&winnersTo=" + $("#winnersTo").val();
-    }
-    $(":checkbox").each(function () {
-        var ischecked = $(this).is(":checked");
-        if (ischecked) {
-            urlParams += "&subGovesIds=" + $(this).val();
-        }
-    });
-    $.ajax({
-        type: "GET",
-        url: "/contest/filter"+urlParams,
-        dataType: "json",
-        encode: true,
-    }).done(function (data) {
-        var catalog = document.getElementsByClassName("catalog__list")[0];
-        while (catalog.firstChild) {
-            catalog.removeChild(catalog.lastChild);
-        }
-        var catalogList = "";
-        jQuery.each(data, function(index, item) {
-            catalogList += "<li class=\"catalog-item\" >";
-            catalogList += "<a href=\"/contest?id=" + item.id + "\" class=\"catalog-item__wrap\">";
-            catalogList += "<div class=\"catalog-item__name\">" + item.name +"</div>";
-            catalogList += "<div class=\"catalog-item__sub\">" + item.subGovernance.name +"</div>";
-            catalogList += "<div class=\"catalog-item__strong\">" + item.winnersCount +" winners</div>";
-            catalogList += "<div class=\"catalog-item__sub\">" + item.prizeFund +" TONs prize fund</div>";
-            catalogList += "<div class=\"catalog-item__interval\">" + item.submissionFrom + " - " + item.submissionTo +"</div></a>";
-            catalogList += "</li>";
-        });
-        catalog.innerHTML = catalogList;
-    });
-}, true);*/
-
 function sendFilterRequest() {
     var urlParams = "?"
     if ($("#prizeFundFrom").val()){
@@ -158,6 +113,7 @@ function sendFilterRequest() {
     if ($("#winnersTo").val()){
         urlParams += "&winnersTo=" + $("#winnersTo").val();
     }
+    urlParams += "&order=" + $('#order').find(":selected").val();
     $(":checkbox").each(function () {
         var ischecked = $(this).is(":checked");
         if (ischecked) {
@@ -196,6 +152,11 @@ function sendFilterRequest() {
 }
 
 $("#filterForm").submit(function (event) {
+    event.preventDefault();
+    sendFilterRequest();
+});
+
+$("#sortForm").submit(function (event) {
     event.preventDefault();
     sendFilterRequest();
 });

@@ -27,6 +27,14 @@ public interface ContestRepository extends JpaRepository<Contest, Long> {
             @Param("ids") Collection<Long> ids,@Param("prizeFrom") Integer prizeFrom, @Param("prizeTo")  Integer prizeTo,
             @Param("winnersFrom") Integer winnersFrom, @Param("winnersTo")  Integer winnersTo);
 
+    @Query(value = "SELECT c FROM Contest c WHERE ((:ids) is null or c.subGovernance.id IN (:ids)) " +
+            "AND ( :prizeFrom is null or c.prizeFund >= :prizeFrom ) AND (:prizeTo is null or c.prizeFund <= :prizeTo) " +
+            "AND (:winnersFrom is null or size(c.submissions) >= :winnersFrom) " +
+            "AND (:winnersTo is null or size(c.submissions) <= :winnersTo) ORDER BY c.id DESC")
+    List<Contest> getFilteredListDESC(
+            @Param("ids") Collection<Long> ids,@Param("prizeFrom") Integer prizeFrom, @Param("prizeTo")  Integer prizeTo,
+            @Param("winnersFrom") Integer winnersFrom, @Param("winnersTo")  Integer winnersTo);
+
 
 
 }

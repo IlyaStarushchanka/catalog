@@ -70,11 +70,11 @@
           <div class="catalog__header-counter" th:text="${#lists.size(contests)} + ' results'"></div>
           <div class="loading-class"></div>
           <div class="catalog__header-sort">
-            <form action="#" method="get" class="sort">
+            <form action="/contes/sort" method="get" class="sort" id="sortForm">
               <div class="styled-select js-styled-select">
-                <select name="categorys">
-                  <option value="DESC">Newest</option>
+                <select name="categorys" id="order">
                   <option value="ASC">Oldest</option>
+                  <option value="DESC">Newest</option>
                 </select>
               </div>
             </form>

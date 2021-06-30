@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -65,7 +66,11 @@ public class CatalogFacade {
                 catalogService.getFilteredContests(filterEntity)
         );
         if (contests != null){
-            return contests.stream().sorted(contestComparator).collect(Collectors.toList());
+            if ("ASC".equals(filterEntity.getOrder())) {
+                return contests.stream().sorted(contestComparator).collect(Collectors.toList());
+            }
+            Collections.reverse(contests.stream().sorted(contestComparator).collect(Collectors.toList()));
+            return contests;
         }
         return contests;
     }
