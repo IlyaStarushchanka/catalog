@@ -14,8 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class AdminSubmissionFacade {
@@ -24,6 +26,12 @@ public class AdminSubmissionFacade {
     private ContestServiceImpl contestServiceImpl;
     private AuthorServiceImpl authorServiceImpl;
     private static final AdminMapper MAPPER = AdminMapper.INSTANCE;
+    public static final Comparator<SubmissionDTO> comparator;
+    static {
+        comparator = Comparator.comparing(SubmissionDTO::getId)
+                .thenComparing(sub -> Integer.getInteger(sub.getPlace()));
+    }
+
 
     @Transactional
     public void create(SubmissionDTO submissionDTO) {
@@ -58,7 +66,11 @@ public class AdminSubmissionFacade {
     }
 
     public List<SubmissionDTO> getList() {
-        return MAPPER.toSubmissionListDTO(new HashSet<>(submissionServiceImpl.getList()));
+        List<SubmissionDTO> submissions = MAPPER.toSubmissionListDTO(new HashSet<>(submissionServiceImpl.getList()));
+        if (submissions != null) {
+            return submissions.stream().sorted(comparator).collect(Collectors.toList());
+        }
+        return submissions;
     }
 
 
