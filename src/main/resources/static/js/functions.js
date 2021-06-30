@@ -89,25 +89,25 @@ jq(function(){
 
 var prizeFundFrom = document.getElementById('prizeFundFrom');
 if (prizeFundFrom) {
-    addEventListener('blur', (event) => {
+    prizeFundFrom.addEventListener('blur', (event) => {
         sendFilterRequest();
     }, true)
 }
 var prizeFundTo = document.getElementById('prizeFundTo');
 if(prizeFundTo) {
-    addEventListener('blur', (event) => {
+    prizeFundTo.addEventListener('blur', (event) => {
         sendFilterRequest();
     }, true);
 }
 var winnersFrom = document.getElementById('winnersFrom');
 if(winnersFrom) {
-    addEventListener('blur', (event) => {
+    winnersFrom.addEventListener('blur', (event) => {
         sendFilterRequest();
     }, true);
 }
 var winnersTo = document.getElementById('winnersTo');
 if (winnersTo) {
-    addEventListener('blur', (event) => {
+    winnersTo.addEventListener('blur', (event) => {
         sendFilterRequest();
     }, true);
 }
