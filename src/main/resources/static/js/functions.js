@@ -151,6 +151,31 @@ function sendFilterRequest() {
     });
 }
 
+$('#searchResult li').on('click', function(){
+    $(this).closest('.js-search').find('.js-search-input').val($(this).text());
+    $(this).closest('.js-search-list').slideUp(250);
+});
+
+function getSearchedContestName(){
+    var urlParams = "?search=" + $("#searchInput").val();
+    var searchResult = document.getElementById("searchResult");
+    $.ajax({
+        type: "GET",
+        url: "/contest/names"+urlParams,
+        dataType: "json",
+        encode: true,
+    }).done(function (data) {
+        var searchItems = "";
+        jQuery.each(data, function(index, item) {
+            searchItems += "<li class=\"search__item\">" + item + "</li>";
+        });
+        while (searchResult.firstChild) {
+            searchResult.removeChild(searchResult.lastChild);
+        }
+        searchResult.innerHTML = searchItems;
+    });
+}
+
 $("#filterForm").submit(function (event) {
     event.preventDefault();
     sendFilterRequest();

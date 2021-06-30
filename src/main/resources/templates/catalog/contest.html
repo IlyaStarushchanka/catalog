@@ -32,7 +32,7 @@
       <main class="main"><div class="page">
   <div class="container">
     <nav class="breadcrumbs">
-      <a href="/">All contests</a><img src="/img/svg/chevrone-right_grey.svg" alt=""><span th:text="${contest.subGovernance.name}"></span>
+      <a href="/">All contests</a><img src="/img/svg/chevrone-right_grey.svg" alt=""><a th:href=@{/catalog?(subGovId=${contest.subGovernance.id})} th:text="${contest.subGovernance.name}"></a>
     </nav>
     <article class="article">
       <h1 th:text="${contest.name}"></h1>

@@ -16,8 +16,8 @@ public interface ContestRepository extends JpaRepository<Contest, Long> {
 
     List<Contest> findByNameContaining(String name);
 
-    @Query("select c.name from Contest c")
-    List<String> getContestNames();
+    @Query("select c.name from Contest c where c.name like %:search%")
+    List<String> getContestNames(@Param("search") String search);
 
     @Query(value = "SELECT c FROM Contest c WHERE ((:ids) is null or c.subGovernance.id IN (:ids)) " +
             "AND ( :prizeFrom is null or c.prizeFund >= :prizeFrom ) AND (:prizeTo is null or c.prizeFund <= :prizeTo) " +

@@ -42,8 +42,8 @@ public class CatalogService {
         return contestRepository.findByNameContaining(name);
     }
 
-    public List<String> getContestNames(){
-        return contestRepository.getContestNames();
+    public List<String> getContestNames(String search){
+        return contestRepository.getContestNames(search);
     }
 
     public List<Contest> getFilteredContests(FilterEntity filterEntity) {

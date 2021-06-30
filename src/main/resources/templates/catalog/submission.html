@@ -34,7 +34,7 @@
     <div class="submission">
       <div class="submission__main">
         <nav class="breadcrumbs">  
-          <a href="/">All contests</a><img src="/img/svg/chevrone-right_grey.svg" alt=""><a th:href=@{/contest?(id=${submission.contest.id})} th:text="${submission.contest.subGovernance.name}"></a><img src="img/svg/chevrone-right_grey.svg" alt=""><a th:href=@{/contest?(id=${submission.contest.id})} th:text="${submission.contest.name}"></a>
+          <a href="/">All contests</a><img src="/img/svg/chevrone-right_grey.svg" alt=""><a th:href=@{/catalog?(subGovId=${submission.contest.subGovernance.id})} th:text="${submission.contest.subGovernance.name}"></a><img src="img/svg/chevrone-right_grey.svg" alt=""><a th:href=@{/contest?(id=${submission.contest.id})} th:text="${submission.contest.name}"></a>
         </nav>
         <article class="article">
           <h1 th:text="${submission.number}"></h1>

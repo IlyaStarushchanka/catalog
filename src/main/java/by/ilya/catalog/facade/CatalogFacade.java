@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -26,8 +27,7 @@ public class CatalogFacade {
     public static final Comparator<SmallSubmissionCatalogDTO> submissionComparator;
     public static final Comparator<SmallContestCatalogDTO> contestComparator;
     static {
-        submissionComparator = Comparator.comparing(SmallSubmissionCatalogDTO::getId)
-                .thenComparing(sub -> Integer.getInteger(sub.getPlace()));
+        submissionComparator = Comparator.comparing(sub -> Integer.valueOf(sub.getPlace()));
         contestComparator = Comparator.comparing(SmallContestCatalogDTO::getId);
     }
 
@@ -81,9 +81,19 @@ public class CatalogFacade {
     }
 
     @Transactional
-    public List<String> getContestNames(String name){
-        return null;//return catalogService.getContestByContainingName(name);
+    public List<String> getContestNames(String search){
+        List<String> names = catalogService.getContestNames(search);
+        List<String> result = new ArrayList<>(3);
+        for (String name : names){
+            String replacement = "<mark>" + search + "</mark>";
+            result.add(name.replaceFirst(search, replacement));
+            if (result.size() == 3){
+                break;
+            }
+        }
+        return result;
     }
+
 
     @Autowired
     public void setCatalogService(CatalogService catalogService) {
