@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1"/>
     <link rel="stylesheet" href="/css/style.css"/>
   </head>
-  <body onload="checkDescriptionValues()">
+  <body>
     <div class="wrapper"><header class="header">
   <div class="container">
     <div class="row-wrap header__wrap">
@@ -55,9 +55,9 @@
           <img class="article__img" th:src="${submission.image}" alt="">
           <div th:utext="${submission.smallDescription}">
           </div>
-          <div class="js-hided-part hided-part" th:utext="${submission.bigDescription}">
+          <div class="js-hided-part hided-part" id="bidDescriptionDiv" th:utext="${submission.bigDescription}">
           </div>
-          <button class="btn show-more js-show-mor">
+          <button class="btn show-more js-show-mor" id="show-more-id">
             <span>Show more</span>
             <img src="/img/svg/chevrone-down_blue.svg" alt="">
           </button>
