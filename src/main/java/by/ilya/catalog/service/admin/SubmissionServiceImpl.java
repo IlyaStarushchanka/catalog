@@ -5,6 +5,7 @@ import by.ilya.catalog.domain.Contest;
 import by.ilya.catalog.domain.LinkDB;
 import by.ilya.catalog.domain.Submission;
 import by.ilya.catalog.dto.admin.LinkDBDTO;
+import by.ilya.catalog.repository.ContestRepository;
 import by.ilya.catalog.repository.LinkDBRepository;
 import by.ilya.catalog.repository.SubmissionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,8 @@ public class SubmissionServiceImpl implements CrudService<Submission> {
     private SubmissionRepository submissionRepository;
     @Autowired
     private LinkDBRepository linkDBRepository;
+    @Autowired
+    private ContestRepository contestRepository;
 
     @Transactional
     public Submission create(Submission submission) {
@@ -50,6 +53,7 @@ public class SubmissionServiceImpl implements CrudService<Submission> {
             submission.getAuthor().getSubmissions().remove(submission);
             submission.setAuthor(newAuthor);
         }
+        contestRepository.saveAndFlush(submission.getContest());
         submission.setSmallDescription(newSubmissionData.getSmallDescription());
         submission.setBigDescription(newSubmissionData.getBigDescription());
         submission.setNumber(newSubmissionData.getNumber());
@@ -58,12 +62,14 @@ public class SubmissionServiceImpl implements CrudService<Submission> {
         submission.setRate(newSubmissionData.getRate());
         submission.setAuthorFreeTonAddress(newSubmissionData.getAuthorFreeTonAddress());
         submission.setStatisticsLink(newSubmissionData.getStatisticsLink());
+        submission.setContest(newContest);
         if (newContest != null && !newContest.getSubmissions().contains(submission)) {
             newContest.getSubmissions().add(submission);
         }
         if (newAuthor != null && !newAuthor.getSubmissions().contains(submission)) {
             newAuthor.getSubmissions().add(submission);
         }
+
         submissionRepository.saveAndFlush(submission);
     }
     public void edit(long id) {
