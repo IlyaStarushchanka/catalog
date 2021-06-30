@@ -22,7 +22,9 @@ import org.mapstruct.factory.Mappers;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 @Mapper
 public interface CatalogMapper {
@@ -32,9 +34,11 @@ public interface CatalogMapper {
     List<SmallContestCatalogDTO> toSmallContestListDTO(List<Contest> contests);
 
     @Mapping(target = "winnersCount", expression="java(contest.getSubmissions() != null ? contest.getSubmissions().size() : 0)")
+    @Mapping(target = "prizeFund", source = "prizeFund", qualifiedByName = "mapPrizeFund")
     SmallContestCatalogDTO toSmallContestDTO(Contest contest);
 
     @IterableMapping(qualifiedByName="mapSmallSubmissions")
+    @Mapping(target = "prizeFund", source = "prizeFund", qualifiedByName = "mapPrizeFund")
     ContestCatalogDTO toContestDTO(Contest contest);
 
     List<SubGovernanceCatalogDTO> toSubGovernanceListDTO (List<SubGovernance> subGovernances);
@@ -90,6 +94,11 @@ public interface CatalogMapper {
                 .path("/files/submission/img/")
                 .path(String.valueOf(submission.getId()))
                 .toUriString();
+    }
+
+    @Named("mapPrizeFund")
+    default String mapPrizeFund(int prizeFund) {
+        return NumberFormat.getNumberInstance(Locale.US).format(prizeFund);
     }
 
 }

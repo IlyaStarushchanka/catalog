@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="Ru-ru" xmlns:th="http://www.thymeleaf.org">
+<html lang="Ru-ru" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
   <head>
     <meta charset="UTF-8"/>
     <title>TONcatalog</title>
@@ -39,20 +39,20 @@
   <div class="container">
     <div class="catalog__wrap">
       <div class="catalog__bar">
-        <form action="#" method="get" class="filter">
+        <form action="/contest/filter" method="get" class="filter" id="filterForm">
           <fieldset class="filter__group">
             <legend class="filter__title">Sub-governance</legend>
             <div class="checkselect">
               <label th:each="subGov : ${subGovernances}">
-                <input type="checkbox" name="id" th:name="${subGov.id}" th:value="${subGov.id}"><span th:text="${subGov.name}"></span>
+                <input type="checkbox" name="subGovesIds" th:value="${subGov.id}"><span th:text="${subGov.name}"></span>
               </label>
             </div>
           </fieldset>
           <fieldset class="filter__group">
             <legend class="filter__title">Prize fund, TON</legend>
             <div class="fromto">
-              <input type="text" class="fromto__input js-fromto js-onlynumb" name="prize-fund_from" placeholder="From">
-              <input type="text" class="fromto__input js-fromto js-onlynumb" name="prize-fund_to" placeholder="To">
+              <input type="text" class="fromto__input js-fromto js-onlynumb" name="prizeFundFrom" placeholder="From" th:value="${filterEnity?.prizeFundFrom}">
+              <input type="text" class="fromto__input js-fromto js-onlynumb" name="prizeFundTo" placeholder="To" th:value="${filterEnity?.prizeFundTo}">
             </div>
           </fieldset>
           <fieldset class="filter__group">
@@ -62,6 +62,7 @@
               <input type="text" class="fromto__input js-fromto js-onlynumb" name="number-of-winners_to" placeholder="To">
             </div>
           </fieldset>
+          <input type="submit" style="display:none"/>
         </form>
       </div>
       <div class="catalog__main">
@@ -112,5 +113,6 @@
     </div>
     <script src="/js/vendors.min.js"></script>
     <script src="/js/scripts.min.js"></script>
+    <script src="/js/functions.js"></script>
   </body>
 </html>

@@ -44,4 +44,9 @@ public class CatalogService {
     public List<String> getContestNames(){
         return contestRepository.getContestNames();
     }
+
+    public List<Contest> getFilteredContests(List<Long> ids, Integer prizeFrom, Integer prizeTo) {
+        return contestRepository.findContestsBySubGovIdsAndPrizeFromAndToList(ids, prizeFrom, prizeTo);
+
+    }
 }

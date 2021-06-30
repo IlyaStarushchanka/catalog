@@ -1,6 +1,5 @@
 package by.ilya.catalog.facade;
 
-import by.ilya.catalog.dto.admin.SubmissionDTO;
 import by.ilya.catalog.dto.catalog.ContestCatalogDTO;
 import by.ilya.catalog.dto.catalog.SmallContestCatalogDTO;
 import by.ilya.catalog.dto.catalog.SmallSubmissionCatalogDTO;
@@ -57,6 +56,15 @@ public class CatalogFacade {
             contest.setSubmissions(sortedSubmissions);
         }
         return contest;
+    }
+
+    @Transactional
+    public List<SmallContestCatalogDTO> getFilteredContests(List<Long> ids, Integer prizeFrom, Integer prizeTo){
+        List<SmallContestCatalogDTO> contests = MAPPER.toSmallContestListDTO(catalogService.getFilteredContests(ids, prizeFrom, prizeTo));
+        if (contests != null){
+            return contests.stream().sorted(contestComparator).collect(Collectors.toList());
+        }
+        return contests;
     }
 
     @Transactional

@@ -39,7 +39,7 @@ public class Contest {
     @Enumerated(value = EnumType.STRING)
     private StatusEnum status;
 
-    private String prizeFund;
+    private Integer prizeFund;
 
     @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private Set<Submission> submissions = new HashSet<>();
@@ -135,11 +135,11 @@ public class Contest {
         this.subGovernance = subGovernance;
     }
 
-    public String getPrizeFund() {
+    public Integer getPrizeFund() {
         return prizeFund;
     }
 
-    public void setPrizeFund(String prizeFund) {
+    public void setPrizeFund(Integer prizeFund) {
         this.prizeFund = prizeFund;
     }
 

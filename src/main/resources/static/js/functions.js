@@ -68,3 +68,29 @@ function beforeSave(){
     var bigDescription = document.getElementById("bigDescription");
     bigDescription.value = document.querySelector('#editorbig').children[0].innerHTML;
 }
+
+$("#filterForm").submit(function(e) {
+
+    /*e.preventDefault(); // avoid to execute the actual submit of the form.
+
+    var form = $(this);
+    var url = form.attr('action');*/
+
+
+    $(this)
+        .find('input[name]')
+        .filter(function () {
+            return !this.value;
+        })
+        .prop('name', '');
+});
+    /*$.ajax({
+        type: "POST",
+        url: url,
+        data: form.serialize(), // serializes the form's elements.
+        success: function(data)
+        {
+            alert(data); // show response from the php script.
+        }
+    });*/
+
