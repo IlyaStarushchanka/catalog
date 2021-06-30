@@ -32,7 +32,7 @@ public class Submission {
     private String number;
     @ManyToOne
     private Author author;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<FileDB> files = new HashSet<>();
     private String authorFreeTonAddress;
     @Column(length = 1000)
@@ -41,7 +41,7 @@ public class Submission {
     private String bigDescription;
     private String statisticsLink;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<LinkDB> links = new HashSet<>();
 
     private String rate;

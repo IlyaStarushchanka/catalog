@@ -38,10 +38,12 @@ public class AdminContestFacade {
         return MAPPER.toDTO(contest);
     }
 
+    @Transactional
     public ContestDTO getById(long id) {
         return MAPPER.toDTO(contestServiceImpl.getById(id));
     }
 
+    @Transactional
     public List<ContestDTO> getList() {
         return MAPPER.toContestListDTO(contestServiceImpl.getList());
     }

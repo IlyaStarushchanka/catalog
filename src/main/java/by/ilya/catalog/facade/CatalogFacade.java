@@ -10,6 +10,7 @@ import by.ilya.catalog.mapper.CatalogMapper;
 import by.ilya.catalog.service.CatalogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Comparator;
 import java.util.List;
@@ -29,6 +30,7 @@ public class CatalogFacade {
         contestComparator = Comparator.comparing(SmallContestCatalogDTO::getId);
     }
 
+    @Transactional
     public List<SmallContestCatalogDTO> getContests(){
         List<SmallContestCatalogDTO> contests = MAPPER.toSmallContestListDTO(catalogService.getContests());
         if (contests != null){
@@ -37,14 +39,17 @@ public class CatalogFacade {
         return contests;
     }
 
+    @Transactional
     public SubmissionCatalogDTO getSubmissionById(long id){
         return MAPPER.toSubmissionDTO(catalogService.getSubmissionById(id));
     }
 
+    @Transactional
     public List<SubGovernanceCatalogDTO> getAllSubGovs(){
         return MAPPER.toSubGovernanceListDTO(catalogService.getSubGovernanceList());
     }
 
+    @Transactional
     public ContestCatalogDTO getContestById(long id){
         ContestCatalogDTO contest = MAPPER.toContestDTO(catalogService.getContestById(id));
         if (contest != null && contest.getSubmissions() != null) {
@@ -54,10 +59,12 @@ public class CatalogFacade {
         return contest;
     }
 
+    @Transactional
     public List<SmallContestCatalogDTO> getContestsByContainingName(String name){
         return MAPPER.toSmallContestListDTO(catalogService.getContestByContainingName(name));
     }
 
+    @Transactional
     public List<String> getContestNames(String name){
         return null;//return catalogService.getContestByContainingName(name);
     }

@@ -56,6 +56,7 @@ public class AdminSubmissionFacade {
         }
     }
 
+    @Transactional
     public byte[] getSubmissionImage(long id){
         return submissionServiceImpl.getSubmissionImage(id);
     }
@@ -65,6 +66,7 @@ public class AdminSubmissionFacade {
         return MAPPER.toDTO(submissionServiceImpl.getById(id));
     }
 
+    @Transactional
     public List<SubmissionDTO> getList() {
         List<SubmissionDTO> submissions = MAPPER.toSubmissionListDTO(new HashSet<>(submissionServiceImpl.getList()));
         if (submissions != null) {

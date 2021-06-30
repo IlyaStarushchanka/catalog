@@ -23,7 +23,7 @@ public class SubGovernance {
 
     @Column(nullable = false)
     private String name;
-    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private Set<Contest> contests = new HashSet<>();
 
     public Long getId() {
