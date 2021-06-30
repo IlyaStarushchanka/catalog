@@ -77,6 +77,14 @@ $(':checkbox').on('change', function(e){
     sendFilterRequest();
 });*/
 
+function showLoadingImage(loadingClass) {
+    loadingClass.innerHTML = "<div id=\"loading-image\"><img src=\"/img/loading.gif\" alt=\"Loading...\" /></div>";
+}
+
+function hideLoadingImage() {
+    $('#loading-image').remove();
+}
+
 document.getElementById('prizeFundFrom').addEventListener('blur', (event) => {
     sendFilterRequest();
 }, true)
@@ -156,16 +164,16 @@ function sendFilterRequest() {
             urlParams += "&subGovesIds=" + $(this).val();
         }
     });
+    var catalog__bar = document.getElementsByClassName("loading-class")[0];
+    var catalog = document.getElementsByClassName("catalog__list")[0];
+    showLoadingImage(catalog__bar);
     $.ajax({
         type: "GET",
         url: "/contest/filter"+urlParams,
         dataType: "json",
         encode: true,
     }).done(function (data) {
-        var catalog = document.getElementsByClassName("catalog__list")[0];
-        while (catalog.firstChild) {
-            catalog.removeChild(catalog.lastChild);
-        }
+
         var catalogList = "";
         jQuery.each(data, function(index, item) {
             catalogList += "<li class=\"catalog-item\" >";
@@ -177,6 +185,10 @@ function sendFilterRequest() {
             catalogList += "<div class=\"catalog-item__interval\">" + item.submissionFrom + " - " + item.submissionTo +"</div></a>";
             catalogList += "</li>";
         });
+        while (catalog.firstChild) {
+            catalog.removeChild(catalog.lastChild);
+        }
+        hideLoadingImage();
         catalog.innerHTML = catalogList;
     });
 }
