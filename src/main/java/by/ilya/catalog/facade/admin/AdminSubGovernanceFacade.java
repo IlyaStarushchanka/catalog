@@ -17,20 +17,24 @@ public class AdminSubGovernanceFacade {
     private SubGovernanceServiceImpl subGovernanceServiceImpl;
     private static final AdminMapper MAPPER = AdminMapper.INSTANCE;
 
+    @Transactional
     public SubGovernanceDTO create(SubGovernanceDTO subGovernanceDTO) {
         SubGovernance subGovernance = MAPPER.toState(subGovernanceDTO);
         return MAPPER.toDTO(subGovernanceServiceImpl.create(subGovernance));
     }
 
+    @Transactional
     public SubGovernanceDTO getById(long id) {
         return MAPPER.toDTO(subGovernanceServiceImpl.getById(id));
     }
 
+    @Transactional
     public List<SubGovernanceDTO> getList() {
         return MAPPER.toSubGovernancesListDTO(subGovernanceServiceImpl.getList());
     }
 
 
+    @Transactional
     public List<SubGovernanceDTO> delete(long id) {
         SubGovernance subGovernance = subGovernanceServiceImpl.getById(id);
         if (subGovernance != null) {
