@@ -57,11 +57,11 @@ public class CatalogEndpoint {
 
     @GetMapping("/contest/filter")
     @ResponseBody
-    public List<SmallContestCatalogDTO> getSubmission(@ModelAttribute FilterEntity filterEntity, Model model) throws InterruptedException {
+    public List<SmallContestCatalogDTO> getSubmission(@ModelAttribute FilterEntity filterEntity, Model model){
         /*model.addAttribute("filterEntity", filterEntity);
         model.addAttribute("contests", catalogFacade.getFilteredContests(filterEntity));
         model.addAttribute("subGovernances", catalogFacade.getAllSubGovs());*/
-        Thread.sleep(1000);
+
         return catalogFacade.getFilteredContests(filterEntity);
     }
 
