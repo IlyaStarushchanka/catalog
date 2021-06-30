@@ -69,8 +69,7 @@ public class CatalogFacade {
             if ("ASC".equals(filterEntity.getOrder())) {
                 return contests.stream().sorted(contestComparator).collect(Collectors.toList());
             }
-            Collections.reverse(contests.stream().sorted(contestComparator).collect(Collectors.toList()));
-            return contests;
+            return contests.stream().sorted(Collections.reverseOrder(contestComparator)).collect(Collectors.toList());
         }
         return contests;
     }
