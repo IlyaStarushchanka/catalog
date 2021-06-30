@@ -9,8 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class SubGovernance {
@@ -21,8 +23,8 @@ public class SubGovernance {
 
     @Column(nullable = false)
     private String name;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Contest> contests = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    private Set<Contest> contests = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -40,11 +42,11 @@ public class SubGovernance {
         this.name = name;
     }
 
-    public List<Contest> getContests() {
+    public Set<Contest> getContests() {
         return contests;
     }
 
-    public void setContests(List<Contest> contests) {
+    public void setContests(Set<Contest> contests) {
         this.contests = contests;
     }
 

@@ -27,7 +27,14 @@ public class CatalogEndpoint {
         return "catalog/contest";
     }
 
-    @GetMapping("/submission")
+    @GetMapping("/contest/search")
+    public String searchByName(@RequestParam(value = "name") String name, Model model) {
+        model.addAttribute("contests", catalogFacade.getContestsByContainingName(name));
+        return "catalog/index";
+    }
+
+
+        @GetMapping("/submission")
     public String getSubmission(@RequestParam(value = "id") long id, Model model) {
         model.addAttribute("submission", catalogFacade.getSubmissionById(id));
         return "catalog/submission";

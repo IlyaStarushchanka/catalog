@@ -36,4 +36,12 @@ public class CatalogService {
     public Contest getContestById(long id){
         return contestRepository.findById(id).orElse(null);
     }
+
+    public List<Contest> getContestByContainingName(String name){
+        return contestRepository.findByNameContaining(name);
+    }
+
+    public List<String> getContestNames(){
+        return contestRepository.getContestNames();
+    }
 }

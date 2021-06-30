@@ -228,6 +228,13 @@ public class AdminEndpoint {
         return "admin/submission/submission-list";
     }
 
+    @GetMapping("/submissions/delete")
+    public String deleteSubmission(@RequestParam(value = "id") long id, Model model){
+        adminSubmissionFacade.delete(id);
+        model.addAttribute("submissions", adminSubmissionFacade.getList());
+        return "admin/submission/submission-list";
+    }
+
     @PostMapping("/submissions/add")
     public String addSubmission(@ModelAttribute SubmissionDTO submissionDTO, Model model){
         adminSubmissionFacade.create(submissionDTO);

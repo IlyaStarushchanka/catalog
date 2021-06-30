@@ -21,7 +21,7 @@ public class ContestServiceImpl implements CrudService<Contest> {
     }
     @Override
     public List<Contest> getList() {
-        return (List<Contest>)contestRepository.findAll();
+        return contestRepository.findAll();
     }
 
     @Override

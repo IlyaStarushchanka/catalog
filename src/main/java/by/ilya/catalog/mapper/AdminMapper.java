@@ -47,6 +47,9 @@ public interface AdminMapper {
     ContestDTO toDTO (Contest contest);
 
     @IterableMapping(qualifiedByName="mapWithoutContests")
+    List<ContestDTO> toContestListFromSetDTO(Set<Contest> contests);
+
+    @IterableMapping(qualifiedByName="mapWithoutContests")
     List<ContestDTO> toContestListDTO(List<Contest> contests);
 
     @Mapping(target = "freetonAddresses", source = "freeTonAddresses", qualifiedByName = "mapFreeTonAddresses")

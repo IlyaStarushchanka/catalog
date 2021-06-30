@@ -33,6 +33,14 @@ public class CatalogFacade {
         return MAPPER.toContestDTO(catalogService.getContestById(id));
     }
 
+    public List<SmallContestCatalogDTO> getContestsByContainingName(String name){
+        return MAPPER.toSmallContestListDTO(catalogService.getContestByContainingName(name));
+    }
+
+    public List<String> getContestNames(String name){
+        return null;//return catalogService.getContestByContainingName(name);
+    }
+
     @Autowired
     public void setCatalogService(CatalogService catalogService) {
         this.catalogService = catalogService;

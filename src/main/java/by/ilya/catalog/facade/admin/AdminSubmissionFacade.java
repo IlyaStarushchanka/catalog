@@ -107,7 +107,7 @@ public class AdminSubmissionFacade {
         }
         Contest newContest = null;
         if (submissionDTO.getContest() != null) {
-            newContest = contestServiceImpl.getById(submission.getContest().getId());
+            newContest = contestServiceImpl.getById(submissionDTO.getContest().getId());
         }
         Author newAuthor = null;
         if (submissionDTO.getAuthor() != null) {
