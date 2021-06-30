@@ -41,7 +41,7 @@ public class Contest {
 
     private String prizeFund;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     private Set<Submission> submissions = new HashSet<>();
 
     @ManyToOne(optional = false)
