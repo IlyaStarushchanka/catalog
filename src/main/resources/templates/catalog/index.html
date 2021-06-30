@@ -39,7 +39,7 @@
   <div class="container">
     <div class="catalog__wrap">
       <div class="catalog__bar">
-        <form action="/contest/filter" method="get" class="filter" id="filterForm">
+        <form action="#" method="get" class="filter" id="filterForm">
           <fieldset class="filter__group">
             <legend class="filter__title">Sub-governance</legend>
             <div class="checkselect">
@@ -51,15 +51,15 @@
           <fieldset class="filter__group">
             <legend class="filter__title">Prize fund, TON</legend>
             <div class="fromto">
-              <input type="text" class="fromto__input js-fromto js-onlynumb" name="prizeFundFrom" placeholder="From" th:value="${filterEnity?.prizeFundFrom}">
-              <input type="text" class="fromto__input js-fromto js-onlynumb" name="prizeFundTo" placeholder="To" th:value="${filterEnity?.prizeFundTo}">
+              <input type="text" class="fromto__input js-fromto js-onlynumb" id="prizeFundFrom" name="prizeFundFrom" placeholder="From" th:value="${filterEnity?.prizeFundFrom}">
+              <input type="text" class="fromto__input js-fromto js-onlynumb" id="prizeFundTo" name="prizeFundTo" placeholder="To" th:value="${filterEnity?.prizeFundTo}">
             </div>
           </fieldset>
           <fieldset class="filter__group">
             <legend class="filter__title">Number of winners</legend>
             <div class="fromto">
-              <input type="text" class="fromto__input js-fromto js-onlynumb" name="number-of-winners_from" placeholder="From">
-              <input type="text" class="fromto__input js-fromto js-onlynumb" name="number-of-winners_to" placeholder="To">
+              <input type="text" class="fromto__input js-fromto js-onlynumb" id="winnersFrom" name="winnersFrom" placeholder="From">
+              <input type="text" class="fromto__input js-fromto js-onlynumb" id="winnersTo" name="winnersTo" placeholder="To">
             </div>
           </fieldset>
           <input type="submit" style="display:none"/>
@@ -72,9 +72,8 @@
             <form action="#" method="get" class="sort">
               <div class="styled-select js-styled-select">
                 <select name="categorys">
-                  <option value="Newest">Newest</option>
-                  <option value="Edit">Edit</option>
-                  <option value="Rang">Rang</option>
+                  <option value="DESC">Newest</option>
+                  <option value="ASC">Oldest</option>
                 </select>
               </div>
             </form>

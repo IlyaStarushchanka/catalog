@@ -8,6 +8,9 @@ public class FilterEntity {
     private Integer prizeFundTo;
     private List<Long> subGovesIds;
 
+    private Integer winnersFrom;
+    private Integer winnersTo;
+
     public Integer getPrizeFundFrom() {
         return prizeFundFrom;
     }
@@ -30,5 +33,21 @@ public class FilterEntity {
 
     public void setSubGovesIds(List<Long> subGovesIds) {
         this.subGovesIds = subGovesIds;
+    }
+
+    public Integer getWinnersFrom() {
+        return winnersFrom;
+    }
+
+    public void setWinnersFrom(Integer winnersFrom) {
+        this.winnersFrom = winnersFrom;
+    }
+
+    public Integer getWinnersTo() {
+        return winnersTo;
+    }
+
+    public void setWinnersTo(Integer winnersTo) {
+        this.winnersTo = winnersTo;
     }
 }

@@ -1,6 +1,7 @@
 package by.ilya.catalog.endpoint;
 
 import by.ilya.catalog.dto.catalog.FilterEntity;
+import by.ilya.catalog.dto.catalog.SmallContestCatalogDTO;
 import by.ilya.catalog.facade.CatalogFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 @Controller
 public class CatalogEndpoint {
@@ -43,12 +47,22 @@ public class CatalogEndpoint {
         return "catalog/submission";
     }
 
-    @GetMapping("/contest/filter")
+    /*@GetMapping("/contest/filter")
     public String getSubmission(@ModelAttribute FilterEntity filterEntity, Model model) {
         model.addAttribute("filterEntity", filterEntity);
-        model.addAttribute("contests", catalogFacade.getFilteredContests(filterEntity.getSubGovesIds(), filterEntity.getPrizeFundFrom(), filterEntity.getPrizeFundTo()));
+        model.addAttribute("contests", catalogFacade.getFilteredContests(filterEntity));
         model.addAttribute("subGovernances", catalogFacade.getAllSubGovs());
         return "catalog/index";
+    }*/
+
+    @GetMapping("/contest/filter")
+    @ResponseBody
+    public List<SmallContestCatalogDTO> getSubmission(@ModelAttribute FilterEntity filterEntity, Model model) {
+        /*model.addAttribute("filterEntity", filterEntity);
+        model.addAttribute("contests", catalogFacade.getFilteredContests(filterEntity));
+        model.addAttribute("subGovernances", catalogFacade.getAllSubGovs());*/
+
+        return catalogFacade.getFilteredContests(filterEntity);
     }
 
     @Autowired

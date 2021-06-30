@@ -3,6 +3,7 @@ package by.ilya.catalog.service;
 import by.ilya.catalog.domain.Contest;
 import by.ilya.catalog.domain.SubGovernance;
 import by.ilya.catalog.domain.Submission;
+import by.ilya.catalog.dto.catalog.FilterEntity;
 import by.ilya.catalog.repository.ContestRepository;
 import by.ilya.catalog.repository.SubGovernanceRepository;
 import by.ilya.catalog.repository.SubmissionRepository;
@@ -45,8 +46,10 @@ public class CatalogService {
         return contestRepository.getContestNames();
     }
 
-    public List<Contest> getFilteredContests(List<Long> ids, Integer prizeFrom, Integer prizeTo) {
-        return contestRepository.findContestsBySubGovIdsAndPrizeFromAndToList(ids, prizeFrom, prizeTo);
+    public List<Contest> getFilteredContests(FilterEntity filterEntity) {
+        return contestRepository.getFilteredList(filterEntity.getSubGovesIds(),
+                filterEntity.getPrizeFundFrom(), filterEntity.getPrizeFundTo(), filterEntity.getWinnersFrom(),
+                filterEntity.getWinnersTo());
 
     }
 }

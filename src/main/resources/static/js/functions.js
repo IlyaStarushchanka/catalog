@@ -69,28 +69,49 @@ function beforeSave(){
     bigDescription.value = document.querySelector('#editorbig').children[0].innerHTML;
 }
 
-$("#filterForm").submit(function(e) {
-
-    /*e.preventDefault(); // avoid to execute the actual submit of the form.
-
-    var form = $(this);
-    var url = form.attr('action');*/
-
-
-    $(this)
-        .find('input[name]')
-        .filter(function () {
-            return !this.value;
-        })
-        .prop('name', '');
-});
-    /*$.ajax({
-        type: "POST",
-        url: url,
-        data: form.serialize(), // serializes the form's elements.
-        success: function(data)
-        {
-            alert(data); // show response from the php script.
+$("#filterForm").submit(function (event) {
+    event.preventDefault();
+    var urlParams = "?"
+    if ($("#prizeFundFrom").val()){
+        urlParams += "prizeFundFrom=" + $("#prizeFundFrom").val();
+    }
+    if ($("#prizeFundTo").val()){
+        urlParams += "&prizeFundTo=" + $("#prizeFundTo").val();
+    }
+    if ($("#winnersFrom").val()){
+        urlParams += "&winnersFrom=" + $("#winnersFrom").val();
+    }
+    if ($("#winnersTo").val()){
+        urlParams += "&winnersTo=" + $("#winnersTo").val();
+    }
+    $(":checkbox").each(function () {
+        var ischecked = $(this).is(":checked");
+        if (ischecked) {
+            urlParams += "&subGovesIds=" + $(this).val();
         }
-    });*/
+    });
+    $.ajax({
+        type: "GET",
+        url: "/contest/filter"+urlParams,
+        dataType: "json",
+        encode: true,
+    }).done(function (data) {
+        var catalog = document.getElementsByClassName("catalog__list")[0];
+        while (catalog.firstChild) {
+            catalog.removeChild(catalog.lastChild);
+        }
+        var catalogList = "";
+        jQuery.each(data, function(index, item) {
+            catalogList += "<li class=\"catalog-item\" >";
+            catalogList += "<a href=\"/contest?id=" + item.id + "\" class=\"catalog-item__wrap\">";
+            catalogList += "<div class=\"catalog-item__name\">" + item.name +"</div>";
+            catalogList += "<div class=\"catalog-item__sub\">" + item.subGovernance.name +"</div>";
+            catalogList += "<div class=\"catalog-item__strong\">" + item.winnersCount +"</div>";
+            catalogList += "<div class=\"catalog-item__sub\">" + item.prizeFund +" TONs prize fund</div>";
+            catalogList += "<div class=\"catalog-item__interval\">" + item.submissionFrom + " - " + item.submissionTo +"</div></a>";
+            catalogList += "</li>";
+        });
+        catalog.innerHTML = catalogList;
+    });
 
+});
