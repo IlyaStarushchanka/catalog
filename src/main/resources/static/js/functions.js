@@ -164,9 +164,9 @@ function sendFilterRequest() {
             urlParams += "&subGovesIds=" + $(this).val();
         }
     });
-    var catalog__bar = document.getElementsByClassName("loading-class")[0];
+    var loadingBar = document.getElementsByClassName("loading-class")[0];
     var catalog = document.getElementsByClassName("catalog__list")[0];
-    showLoadingImage(catalog__bar);
+    showLoadingImage(loadingBar);
     $.ajax({
         type: "GET",
         url: "/contest/filter"+urlParams,
@@ -175,6 +175,8 @@ function sendFilterRequest() {
     }).done(function (data) {
 
         var catalogList = "";
+        var resultCounter = document.getElementsByClassName("catalog__header-counter")[0];
+        resultCounter.innerHTML = data.length + " results";
         jQuery.each(data, function(index, item) {
             catalogList += "<li class=\"catalog-item\" >";
             catalogList += "<a href=\"/contest?id=" + item.id + "\" class=\"catalog-item__wrap\">";

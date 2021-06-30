@@ -38,8 +38,6 @@
 <div class="catalog">
   <div class="container">
     <div class="catalog__wrap">
-      <div class="loading-class">
-      </div>
       <div class="catalog__bar">
         <form action="#" method="get" class="filter" id="filterForm">
           <fieldset class="filter__group">
@@ -70,6 +68,7 @@
       <div class="catalog__main">
         <div class="catalog__header">
           <div class="catalog__header-counter" th:text="${#lists.size(contests)} + ' results'"></div>
+          <div class="loading-class"></div>
           <div class="catalog__header-sort">
             <form action="#" method="get" class="sort">
               <div class="styled-select js-styled-select">
