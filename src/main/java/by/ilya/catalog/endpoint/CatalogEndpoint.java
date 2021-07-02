@@ -3,6 +3,7 @@ package by.ilya.catalog.endpoint;
 import by.ilya.catalog.dto.catalog.FilterEntity;
 import by.ilya.catalog.dto.catalog.SmallContestCatalogDTO;
 import by.ilya.catalog.facade.CatalogFacade;
+import by.ilya.catalog.repository.ContestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,10 +21,12 @@ public class CatalogEndpoint {
 
 
     private CatalogFacade catalogFacade;
+    @Autowired
+    private ContestRepository contestRepository;
 
     @GetMapping("/")
     public String contests(Model model) {
-        model.addAttribute("contests", catalogFacade.getContests());
+        model.addAttribute("contests", contestRepository.findContests());
         model.addAttribute("subGovernances", catalogFacade.getAllSubGovs());
         return "catalog/index";
     }
