@@ -126,6 +126,7 @@ function sendFilterRequest() {
         urlParams += "&winnersTo=" + $("#winnersTo").val();
     }
     urlParams += "&order=" + $('#order').find(":selected").val();
+    urlParams += "&search=" + encodeURIComponent($('#searchInput').val());
     $(":checkbox").each(function () {
         var ischecked = $(this).is(":checked");
         if (ischecked) {
@@ -169,7 +170,7 @@ function sendFilterRequest() {
 });*/
 
 function getSearchedContestName(){
-    var urlParams = "?search=" + $("#searchInput").val();
+    var urlParams = "?search=" + encodeURIComponent($("#searchInput").val());
     var searchResult = document.getElementById("searchResult");
     $.ajax({
         type: "GET",
@@ -179,7 +180,7 @@ function getSearchedContestName(){
     }).done(function (data) {
         var searchItems = "";
         jQuery.each(data, function(index, item) {
-            searchItems += "<li class=\"search__item\">" + item + "</li>";
+            searchItems += "<li class=\"search__item\"><a href='/contest?id="+item.id + "'/>"  + item.name + "</li>";
         });
         while (searchResult.firstChild) {
             searchResult.removeChild(searchResult.lastChild);
@@ -195,5 +196,12 @@ $("#filterForm").submit(function (event) {
 
 $("#sortForm").submit(function (event) {
     event.preventDefault();
+    sendFilterRequest();
+});
+
+$("#searchForm").submit(function (event) {
+    event.preventDefault();
+    $('.js-search-input').focusout();
+    /*$(this).closest('.js-search-list').slideUp(250);*/
     sendFilterRequest();
 });

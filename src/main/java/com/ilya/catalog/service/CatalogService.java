@@ -5,6 +5,7 @@ import com.ilya.catalog.dto.admin.LinkDBDTO;
 import com.ilya.catalog.dto.admin.ResponseFile;
 import com.ilya.catalog.dto.catalog.ContestCatalogDTO;
 import com.ilya.catalog.dto.catalog.FilterEntity;
+import com.ilya.catalog.dto.catalog.SearchNamesDTO;
 import com.ilya.catalog.dto.catalog.SmallContestCatalogDTO;
 import com.ilya.catalog.dto.catalog.SmallSubmissionCatalogDTO;
 import com.ilya.catalog.dto.catalog.SubmissionCatalogDTO;
@@ -60,14 +61,14 @@ public class CatalogService {
         return contestRepository.findContests(name);
     }
 
-    public List<String> getContestNames(String search){
+    public List<SearchNamesDTO> getContestNames(String search){
         return contestRepository.getContestNames(search);
     }
 
     public List<SmallContestCatalogDTO> getFilteredContests(FilterEntity filterEntity) {
         return contestRepository.getFilteredList(filterEntity.getSubGovesIds(),
                 filterEntity.getPrizeFundFrom(), filterEntity.getPrizeFundTo(), filterEntity.getWinnersFrom(),
-                filterEntity.getWinnersTo());
+                filterEntity.getWinnersTo(), filterEntity.getSearch());
 
     }
 }

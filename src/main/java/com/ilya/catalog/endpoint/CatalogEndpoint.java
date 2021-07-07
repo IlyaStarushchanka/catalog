@@ -1,6 +1,7 @@
 package com.ilya.catalog.endpoint;
 
 import com.ilya.catalog.dto.catalog.FilterEntity;
+import com.ilya.catalog.dto.catalog.SearchNamesDTO;
 import com.ilya.catalog.dto.catalog.SmallContestCatalogDTO;
 import com.ilya.catalog.facade.CatalogFacade;
 import com.ilya.catalog.repository.ContestRepository;
@@ -77,7 +78,7 @@ public class CatalogEndpoint {
 
     @GetMapping("/contest/names")
     @ResponseBody
-    public List<String> getContestNames(@RequestParam("search") String search) {
+    public List<SearchNamesDTO> getContestNames(@RequestParam("search") String search) {
         return catalogFacade.getContestNames(search);
     }
 

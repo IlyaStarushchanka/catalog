@@ -11,6 +11,7 @@ public class FilterEntity {
     private Integer winnersFrom;
     private Integer winnersTo;
     private String order;
+    private String search;
 
 
     public Integer getPrizeFundFrom() {
@@ -59,5 +60,13 @@ public class FilterEntity {
 
     public void setOrder(String order) {
         this.order = order;
+    }
+
+    public String getSearch() {
+        return search;
+    }
+
+    public void setSearch(String search) {
+        this.search = search;
     }
 }

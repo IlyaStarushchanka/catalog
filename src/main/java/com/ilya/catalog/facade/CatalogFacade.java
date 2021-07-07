@@ -2,6 +2,7 @@ package com.ilya.catalog.facade;
 
 import com.ilya.catalog.dto.catalog.ContestCatalogDTO;
 import com.ilya.catalog.dto.catalog.FilterEntity;
+import com.ilya.catalog.dto.catalog.SearchNamesDTO;
 import com.ilya.catalog.dto.catalog.SmallContestCatalogDTO;
 import com.ilya.catalog.dto.catalog.SmallSubmissionCatalogDTO;
 import com.ilya.catalog.dto.catalog.SubGovernanceCatalogDTO;
@@ -72,13 +73,14 @@ public class CatalogFacade {
         return catalogService.getContestByContainingName(name);
     }
 
-    public List<String> getContestNames(String search){
-        List<String> names = catalogService.getContestNames(search);
-        List<String> result = new ArrayList<>(3);
-        for (String name : names){
+    public List<SearchNamesDTO> getContestNames(String search){
+        List<SearchNamesDTO> names = catalogService.getContestNames(search);
+        List<SearchNamesDTO> result = new ArrayList<>(5);
+        for (SearchNamesDTO name : names){
             String replacement = "<mark>" + search + "</mark>";
-            result.add(name.replaceFirst(search, replacement));
-            if (result.size() == 3){
+            name.setName(name.getName().replaceFirst("(?i)"+search, replacement));
+            result.add(name);
+            if (result.size() == 5){
                 break;
             }
         }
