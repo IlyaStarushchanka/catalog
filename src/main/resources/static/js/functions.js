@@ -169,7 +169,7 @@ function sendFilterRequest() {
 });*/
 
 function getSearchedContestName(){
-    var urlParams = "?search=" + $("#searchInput").val();
+    var urlParams = "?search=" + encodeURIComponent($("#searchInput").val());
     var searchResult = document.getElementById("searchResult");
     $.ajax({
         type: "GET",

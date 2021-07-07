@@ -74,11 +74,11 @@ public class CatalogFacade {
 
     public List<String> getContestNames(String search){
         List<String> names = catalogService.getContestNames(search);
-        List<String> result = new ArrayList<>(3);
+        List<String> result = new ArrayList<>(5);
         for (String name : names){
             String replacement = "<mark>" + search + "</mark>";
-            result.add(name.replaceFirst(search, replacement));
-            if (result.size() == 3){
+            result.add(name.replaceFirst("(?i)"+search, replacement));
+            if (result.size() == 5){
                 break;
             }
         }

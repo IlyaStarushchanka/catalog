@@ -16,11 +16,11 @@ public interface ContestRepository extends JpaRepository<Contest, Long> {
 
     @Query("select new com.ilya.catalog.dto.catalog.SmallContestCatalogDTO(c.id, c.name, c.submissionFrom, c.submissionTo, " +
             "c.prizeFund, subg.id, subg.name ,COUNT(subs)) from Contest c left join c.subGovernance subg left join c.submissions subs " +
-            "where c.name like %:name% " +
+            "where lower(c.name) like lower(concat('%',:name,'%')) " +
             "group by c.id, c.name, c.submissionFrom, c.submissionTo, c.prizeFund, subg.name, subg.id")
     List<SmallContestCatalogDTO> findContests(@Param("name") String name);
 
-    @Query("select c.name from Contest c where c.name like %:search%")
+    @Query("select c.name from Contest c where lower(c.name) like lower(concat('%',:search,'%'))")
     List<String> getContestNames(@Param("search") String search);
 
     @Query("select new com.ilya.catalog.dto.catalog.SmallContestCatalogDTO(c.id, c.name, c.submissionFrom, c.submissionTo, " +
