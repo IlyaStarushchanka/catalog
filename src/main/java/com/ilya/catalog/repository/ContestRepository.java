@@ -40,11 +40,12 @@ public interface ContestRepository extends JpaRepository<Contest, Long> {
             "((:ids) is null or c.subGovernance.id IN (:ids)) " +
             "AND ( :prizeFrom is null or c.prizeFund >= :prizeFrom ) AND (:prizeTo is null or c.prizeFund <= :prizeTo) " +
             "AND (:winnersFrom is null or size(c.submissions) >= :winnersFrom) " +
-            "AND (:winnersTo is null or size(c.submissions) <= :winnersTo)" +
+            "AND (:winnersTo is null or size(c.submissions) <= :winnersTo) " +
+            "AND ( :search is null or lower(c.name) like lower(concat('%',:search,'%')) ) " +
             "group by c.id, c.name, c.submissionFrom, c.submissionTo, c.prizeFund, subg.name, subg.id")
     List<SmallContestCatalogDTO> getFilteredList(
             @Param("ids") Collection<Long> ids,@Param("prizeFrom") Integer prizeFrom, @Param("prizeTo")  Integer prizeTo,
-            @Param("winnersFrom") Integer winnersFrom, @Param("winnersTo")  Integer winnersTo);
+            @Param("winnersFrom") Integer winnersFrom, @Param("winnersTo")  Integer winnersTo, @Param("search") String search);
 
     /*@Query(value = "SELECT c FROM Contest c WHERE ((:ids) is null or c.subGovernance.id IN (:ids)) " +
             "AND ( :prizeFrom is null or c.prizeFund >= :prizeFrom ) AND (:prizeTo is null or c.prizeFund <= :prizeTo) " +

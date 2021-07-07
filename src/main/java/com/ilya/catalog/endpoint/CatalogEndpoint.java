@@ -59,6 +59,7 @@ public class CatalogEndpoint {
     public String searchByName(@RequestParam(value = "name") String name, Model model) {
         model.addAttribute("contests", catalogFacade.getContestsByContainingName(name));
         model.addAttribute("subGovernances", catalogFacade.getAllSubGovs());
+        model.addAttribute("name", name);
         return "catalog/index";
     }
 

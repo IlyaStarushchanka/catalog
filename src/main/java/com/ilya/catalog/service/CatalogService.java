@@ -67,7 +67,7 @@ public class CatalogService {
     public List<SmallContestCatalogDTO> getFilteredContests(FilterEntity filterEntity) {
         return contestRepository.getFilteredList(filterEntity.getSubGovesIds(),
                 filterEntity.getPrizeFundFrom(), filterEntity.getPrizeFundTo(), filterEntity.getWinnersFrom(),
-                filterEntity.getWinnersTo());
+                filterEntity.getWinnersTo(), filterEntity.getSearch());
 
     }
 }
