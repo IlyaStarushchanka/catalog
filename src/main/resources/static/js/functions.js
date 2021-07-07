@@ -200,8 +200,10 @@ $("#sortForm").submit(function (event) {
 });
 
 $("#searchForm").submit(function (event) {
-    event.preventDefault();
-    $('.js-search-input').focusout();
-    /*$(this).closest('.js-search-list').slideUp(250);*/
-    sendFilterRequest();
+    if ($("#filterForm").html()) {
+        event.preventDefault();
+        $('.js-search-input').focusout();
+        /*$(this).closest('.js-search-list').slideUp(250);*/
+        sendFilterRequest();
+    }
 });
