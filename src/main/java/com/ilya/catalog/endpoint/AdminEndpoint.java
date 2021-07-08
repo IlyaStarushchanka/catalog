@@ -69,8 +69,8 @@ public class AdminEndpoint {
     public String openEditPage(@RequestParam(value = "id") long id, Model model, Principal principal){
         ManagerDTO manager = adminManagerPageFacade.getById(id);
         if (manager == null || manager.getNickName().equals(principal.getName())){
-            model.addAttribute("errorMessage", "You cannot edit current user.");
-            return "error";
+            model.addAttribute("errorMessage", "You don't have permissions to change managers.");
+            return "admin/error";
         }
         model.addAttribute("manager", manager);
 
@@ -94,7 +94,8 @@ public class AdminEndpoint {
         try {
             model.addAttribute("managers", adminManagerPageFacade.edit(managerDTO));
         } catch (NotFoundException e) {
-            return "error";
+            model.addAttribute("errorMessage", "Requested manager not found.");
+            return "admin/error";
         }
         return "admin/manager/managers-list";
     }
@@ -120,8 +121,8 @@ public class AdminEndpoint {
     public String openSubGovEditPage(@RequestParam(value = "id") long id, Model model, Principal principal){
         SubGovernanceDTO subGovernance = adminSubGovernanceFacade.getById(id);
         if (subGovernance == null){
-            model.addAttribute("errorMessage", "You cannot edit current user.");
-            return "error";
+            model.addAttribute("errorMessage", "Requested subGov not found.");
+            return "admin/error";
         }
         model.addAttribute("subGov", subGovernance);
 
@@ -169,8 +170,8 @@ public class AdminEndpoint {
     public String openContestEditPage(@RequestParam(value = "id") long id, Model model, Principal principal){
         ContestDTO contest = adminContestFacade.getById(id);
         if (contest == null){
-            model.addAttribute("errorMessage", "You cannot edit current user.");
-            return "error";
+            model.addAttribute("errorMessage", "Requested contest not found!");
+            return "admin/error";
         }
         model.addAttribute("contest", contest);
         model.addAttribute("subGovernances", adminSubGovernanceFacade.getList());
@@ -213,8 +214,8 @@ public class AdminEndpoint {
     public String openSubmissionEditPage(@RequestParam(value = "id") long id, Model model, Principal principal){
         SubmissionDTO submissionDTO = adminSubmissionFacade.getById(id);
         if (submissionDTO == null){
-            model.addAttribute("errorMessage", "You cannot edit submission.");
-            return "error";
+            model.addAttribute("errorMessage", "Requested submission not found");
+            return "admin/error";
         }
         model.addAttribute("submission", submissionDTO);
         model.addAttribute("contests", adminContestFacade.getList());
