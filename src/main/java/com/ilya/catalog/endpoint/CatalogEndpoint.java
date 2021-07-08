@@ -36,6 +36,7 @@ public class CatalogEndpoint {
 
         filterEntity.setSubGovesIds(new ArrayList<>());
         filterEntity.getSubGovesIds().add(subGovId);
+        filterEntity.setSearch("");
         model.addAttribute("subGovernances", catalogFacade.getAllSubGovs());
         //model.addAttribute("contestNames", catalogFacade.getContestNames());
         if (subGovId != null) {
