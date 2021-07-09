@@ -18,6 +18,7 @@ public class AdminAuthorFacade {
     private AuthorServiceImpl authorServiceImpl;
     private static final AdminMapper MAPPER = AdminMapper.INSTANCE;
 
+    @Transactional
     public List<AuthorDTO> getList() {
         return MAPPER.toAuthorListDTO(authorServiceImpl.getList());
     }

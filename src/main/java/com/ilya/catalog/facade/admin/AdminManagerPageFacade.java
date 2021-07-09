@@ -29,6 +29,11 @@ public class AdminManagerPageFacade {
         return manager != null;
     }
 
+    public ManagerDTO getManagerByUserName(String userName) {
+        Manager manager = managerService.getManagerByUsername(userName);
+        return MAPPER.toDTO(manager);
+    }
+
     public ManagerDTO getById(long id) {
         return MAPPER.toDTO(managerService.getById(id));
     }

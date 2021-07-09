@@ -1,10 +1,19 @@
 package com.ilya.catalog.dto.admin;
 
+import com.ilya.catalog.domain.AccessEnum;
+
 public class ManagerDTO {
 
     private long id;
     private String nickName;
     private String access;
+
+    public boolean isAdmin(){
+        if (AccessEnum.ADMIN.name().equals(access)){
+            return true;
+        }
+        return false;
+    }
 
     public long getId() {
         return id;

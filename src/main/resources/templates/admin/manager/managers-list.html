@@ -123,7 +123,7 @@
                         <div class="card">
                             <div class="card-title">
                                 <h4>Managers
-                                    <a th:href=@{/admin/managers/openAdd} role="button">
+                                    <a th:href=@{/admin/managers/openAdd} th:if="${currentUser.isAdmin()}" role="button">
                                         <span class="ti-plus"/>
                                     </a>
                                 </h4>
@@ -146,10 +146,10 @@
                                             <td th:text="${manager.nickName}"></td>
                                             <td th:text="${manager.access}"></td>
                                             <td>
-                                                <a th:href=@{/admin/managers/delete?(id=${manager.id})} role="button">
+                                                <a th:href=@{/admin/managers/delete?(id=${manager.id})} th:if="${currentUser.isAdmin()}" role="button">
                                                     <span class="ti-trash"/>
                                                 </a>
-                                                <a th:href=@{/admin/managers/openEdit?(id=${manager.id})} role="button">
+                                                <a th:href=@{/admin/managers/openEdit?(id=${manager.id})} th:if="${currentUser.isAdmin()}" role="button">
                                                     <span class="ti-pencil"/>
                                                 </a>
                                             </td>

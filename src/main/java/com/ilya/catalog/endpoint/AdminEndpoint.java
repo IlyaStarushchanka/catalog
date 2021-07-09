@@ -37,14 +37,16 @@ public class AdminEndpoint {
     private AdminAuthorFacade adminAuthorFacade;
 
     @GetMapping("/")
-    public String adminIndex(Model model) {
+    public String adminIndex(Model model, Principal principal) {
         model.addAttribute("managers", adminManagerPageFacade.getList());
+        model.addAttribute("currentUser", adminManagerPageFacade.getManagerByUserName(principal.getName()));
         return "admin/manager/managers-list";
     }
 
     @GetMapping("/login")
-    public String login(Model model) {
+    public String login(Model model, Principal principal) {
         model.addAttribute("managers", adminManagerPageFacade.getList());
+        model.addAttribute("currentUser", adminManagerPageFacade.getManagerByUserName(principal.getName()));
         return "admin/manager/managers-list";
     }
 
@@ -78,31 +80,35 @@ public class AdminEndpoint {
     }
 
     @GetMapping("/managers/list")
-    public String getManagersList(Model model) {
+    public String getManagersList(Model model, Principal principal) {
         model.addAttribute("managers", adminManagerPageFacade.getList());
+        model.addAttribute("currentUser", adminManagerPageFacade.getManagerByUserName(principal.getName()));
         return "admin/manager/managers-list";
     }
 
     @PostMapping("/managers/add")
-    public String createManager(@ModelAttribute Manager manager, Model model){
+    public String createManager(@ModelAttribute Manager manager, Model model, Principal principal){
         model.addAttribute("managers", adminManagerPageFacade.create(manager));
+        model.addAttribute("currentUser", adminManagerPageFacade.getManagerByUserName(principal.getName()));
         return "admin/manager/managers-list";
     }
 
     @PostMapping("/managers/edit")
-    public String editManager(@ModelAttribute ManagerDTO managerDTO, Model model){
+    public String editManager(@ModelAttribute ManagerDTO managerDTO, Model model, Principal principal){
         try {
             model.addAttribute("managers", adminManagerPageFacade.edit(managerDTO));
         } catch (NotFoundException e) {
             model.addAttribute("errorMessage", "Requested manager not found.");
             return "admin/error";
         }
+        model.addAttribute("currentUser", adminManagerPageFacade.getManagerByUserName(principal.getName()));
         return "admin/manager/managers-list";
     }
 
     @GetMapping("/managers/delete")
     public String deleteManager(@RequestParam(value = "id") long id, Model model, Principal principal){
         model.addAttribute("managers", adminManagerPageFacade.delete(id, principal.getName()));
+        model.addAttribute("currentUser", adminManagerPageFacade.getManagerByUserName(principal.getName()));
         return "admin/manager/managers-list";
     }
 
