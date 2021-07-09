@@ -6,7 +6,7 @@ public class AuthorDTO {
 
     private long id;
     private String freetonForumNickname;
-    private List<SubmissionDTO> submissions;
+    //private List<SubmissionDTO> submissions;
     private String[] freeTonAddresses;
     private String chosedFreeTonAddress;
 
@@ -18,13 +18,13 @@ public class AuthorDTO {
         this.freetonForumNickname = freetonForumNickname;
     }
 
-    public List<SubmissionDTO> getSubmissions() {
+    /*public List<SubmissionDTO> getSubmissions() {
         return submissions;
     }
 
     public void setSubmissions(List<SubmissionDTO> submissions) {
         this.submissions = submissions;
-    }
+    }*/
 
     public String[] getFreeTonAddresses() {
         return freeTonAddresses;

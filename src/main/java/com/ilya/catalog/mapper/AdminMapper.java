@@ -60,7 +60,7 @@ public interface AdminMapper {
 
     @Mapping(target = "image", ignore = true)
     Submission toState (SubmissionDTO submission);
-    @Mapping(target = "author.submissions", ignore = true)
+    //@Mapping(target = "author.submissions", ignore = true)
     @Mapping(target = "image", source = "submission", qualifiedByName = "mapSubmissionImage")
     SubmissionDTO toDTO (Submission submission);
 
@@ -95,7 +95,7 @@ public interface AdminMapper {
 
     @Named("mapWithoutSubmissions")
     @Mappings({
-            @Mapping(target = "author.submissions", ignore = true),
+            //@Mapping(target = "author.submissions", ignore = true),
             @Mapping(target = "contest.submissions", ignore = true),
             @Mapping(target = "contest.subGovernance.contests", ignore = true),
             @Mapping(target = "image", source = "submission", qualifiedByName = "mapSubmissionImage")
