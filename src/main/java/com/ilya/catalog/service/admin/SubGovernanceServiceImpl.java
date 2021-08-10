@@ -2,6 +2,8 @@ package com.ilya.catalog.service.admin;
 
 import com.ilya.catalog.domain.Contest;
 import com.ilya.catalog.domain.SubGovernance;
+import com.ilya.catalog.dto.admin.SmallSubGovernanceAdminDTO;
+import com.ilya.catalog.dto.admin.SmallSubmissionAdminDTO;
 import com.ilya.catalog.repository.SubGovernanceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +27,10 @@ public class SubGovernanceServiceImpl implements CrudService<SubGovernance> {
     @Override
     public List<SubGovernance> getList() {
         return subGovernanceRepository.findAll();
+    }
+
+    public List<SmallSubGovernanceAdminDTO> findAdminSubmissions() {
+        return subGovernanceRepository.findAdminSubGovernances();
     }
 
     @Override

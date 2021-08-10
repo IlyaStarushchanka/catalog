@@ -1,6 +1,7 @@
 package com.ilya.catalog.facade.admin;
 
 import com.ilya.catalog.domain.SubGovernance;
+import com.ilya.catalog.dto.admin.SmallSubGovernanceAdminDTO;
 import com.ilya.catalog.dto.admin.SubGovernanceDTO;
 import com.ilya.catalog.mapper.AdminMapper;
 import com.ilya.catalog.service.admin.SubGovernanceServiceImpl;
@@ -29,13 +30,13 @@ public class AdminSubGovernanceFacade {
     }
 
     @Transactional
-    public List<SubGovernanceDTO> getList() {
-        return MAPPER.toSubGovernancesListDTO(subGovernanceServiceImpl.getList());
+    public List<SmallSubGovernanceAdminDTO> getList() {
+        return subGovernanceServiceImpl.findAdminSubmissions();
     }
 
 
     @Transactional
-    public List<SubGovernanceDTO> delete(long id) {
+    public List<SmallSubGovernanceAdminDTO> delete(long id) {
         SubGovernance subGovernance = subGovernanceServiceImpl.getById(id);
         if (subGovernance != null) {
             subGovernanceServiceImpl.delete(id);

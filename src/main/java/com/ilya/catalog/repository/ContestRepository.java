@@ -1,6 +1,7 @@
 package com.ilya.catalog.repository;
 
 import com.ilya.catalog.domain.Contest;
+import com.ilya.catalog.dto.admin.SmallContestAdminDTO;
 import com.ilya.catalog.dto.catalog.ContestCatalogDTO;
 import com.ilya.catalog.dto.catalog.SmallContestCatalogDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -28,6 +29,10 @@ public interface ContestRepository extends JpaRepository<Contest, Long> {
             "left join c.submissions subs group by c.id, c.name, c.submissionFrom, c.submissionTo, c.prizeFund, " +
             "subg.name, subg.id")
     List<SmallContestCatalogDTO> findContests();
+
+    @Query("select new com.ilya.catalog.dto.admin.SmallContestAdminDTO(c.id, c.name, c.submissionFrom, c.submissionTo, " +
+            "c.votingFrom, c.votingTo, c.status, c.prizeFund, subg.id, subg.name) from Contest c left join c.subGovernance subg ")
+    List<SmallContestAdminDTO> findAdminContests();
 
     @Query("select new com.ilya.catalog.dto.catalog.ContestCatalogDTO(c.id, c.name, c.smallDescription, c.bigDescription, " +
             "c.submissionFrom, c.submissionTo, c.votingFrom, c.votingTo, c.prizeFund, subg.id, subg.name) " +

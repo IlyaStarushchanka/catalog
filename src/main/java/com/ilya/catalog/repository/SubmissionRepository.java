@@ -1,6 +1,7 @@
 package com.ilya.catalog.repository;
 
 import com.ilya.catalog.domain.Submission;
+import com.ilya.catalog.dto.admin.SmallSubmissionAdminDTO;
 import com.ilya.catalog.dto.catalog.ContestCatalogDTO;
 import com.ilya.catalog.dto.catalog.SmallSubmissionCatalogDTO;
 import com.ilya.catalog.dto.catalog.SubmissionCatalogDTO;
@@ -30,4 +31,9 @@ public interface SubmissionRepository extends JpaRepository<Submission, Long> {
             "where s.id = :id")
     SubmissionCatalogDTO findBySubmissionId(@Param("id") long id);
 
+
+    @Query("select new com.ilya.catalog.dto.admin.SmallSubmissionAdminDTO(s.id, s.number, " +
+            "s.rate, s.place, s.prize, author.id, author.freetonForumNickname, s.authorFreeTonAddress, c.name) " +
+            "from Submission s left join s.author author left join s.contest c ")
+    List<SmallSubmissionAdminDTO> findAdminSubmissions();
 }

@@ -4,6 +4,7 @@ import com.ilya.catalog.domain.Contest;
 import com.ilya.catalog.domain.SubGovernance;
 import com.ilya.catalog.domain.Submission;
 import com.ilya.catalog.dto.admin.ContestDTO;
+import com.ilya.catalog.dto.admin.SmallContestAdminDTO;
 import com.ilya.catalog.mapper.AdminMapper;
 import com.ilya.catalog.service.admin.ContestServiceImpl;
 import com.ilya.catalog.service.admin.SubGovernanceServiceImpl;
@@ -44,13 +45,13 @@ public class AdminContestFacade {
     }
 
     @Transactional
-    public List<ContestDTO> getList() {
-        return MAPPER.toContestListDTO(contestServiceImpl.getList());
+    public List<SmallContestAdminDTO> getList() {
+        return contestServiceImpl.findAdminContests();
     }
 
 
     @Transactional
-    public List<ContestDTO> delete(long id) {
+    public List<SmallContestAdminDTO> delete(long id) {
         Contest contest = contestServiceImpl.getById(id);
         if (contest != null) {
             contest.getSubGovernance().getContests().remove(contest);

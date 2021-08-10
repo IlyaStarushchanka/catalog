@@ -2,6 +2,7 @@ package com.ilya.catalog.service.admin;
 
 import com.ilya.catalog.domain.Contest;
 import com.ilya.catalog.domain.SubGovernance;
+import com.ilya.catalog.dto.admin.SmallContestAdminDTO;
 import com.ilya.catalog.repository.ContestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,10 @@ public class ContestServiceImpl implements CrudService<Contest> {
     @Override
     public List<Contest> getList() {
         return contestRepository.findAll();
+    }
+
+    public List<SmallContestAdminDTO> findAdminContests() {
+        return contestRepository.findAdminContests();
     }
 
     @Override

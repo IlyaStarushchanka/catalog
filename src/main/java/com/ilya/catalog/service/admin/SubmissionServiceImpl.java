@@ -5,6 +5,8 @@ import com.ilya.catalog.domain.Contest;
 import com.ilya.catalog.domain.LinkDB;
 import com.ilya.catalog.domain.Submission;
 import com.ilya.catalog.dto.admin.LinkDBDTO;
+import com.ilya.catalog.dto.admin.SmallContestAdminDTO;
+import com.ilya.catalog.dto.admin.SmallSubmissionAdminDTO;
 import com.ilya.catalog.repository.ContestRepository;
 import com.ilya.catalog.repository.LinkDBRepository;
 import com.ilya.catalog.repository.SubmissionRepository;
@@ -32,6 +34,10 @@ public class SubmissionServiceImpl implements CrudService<Submission> {
     @Override
     public List<Submission> getList() {
         return submissionRepository.findAll();
+    }
+
+    public List<SmallSubmissionAdminDTO> findAdminSubmissions() {
+        return submissionRepository.findAdminSubmissions();
     }
 
     @Override

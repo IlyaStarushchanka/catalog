@@ -4,6 +4,7 @@ import com.ilya.catalog.domain.Author;
 import com.ilya.catalog.domain.Contest;
 import com.ilya.catalog.domain.Submission;
 import com.ilya.catalog.dto.admin.LinkDBDTO;
+import com.ilya.catalog.dto.admin.SmallSubmissionAdminDTO;
 import com.ilya.catalog.dto.admin.SubmissionDTO;
 import com.ilya.catalog.mapper.AdminMapper;
 import com.ilya.catalog.service.admin.AuthorServiceImpl;
@@ -26,9 +27,9 @@ public class AdminSubmissionFacade {
     private ContestServiceImpl contestServiceImpl;
     private AuthorServiceImpl authorServiceImpl;
     private static final AdminMapper MAPPER = AdminMapper.INSTANCE;
-    public static final Comparator<SubmissionDTO> comparator;
+    public static final Comparator<SmallSubmissionAdminDTO> comparator;
     static {
-        comparator = Comparator.comparing(SubmissionDTO::getId)
+        comparator = Comparator.comparing(SmallSubmissionAdminDTO::getId)
                 .thenComparing(sub -> Integer.getInteger(sub.getPlace()));
     }
 
@@ -67,8 +68,8 @@ public class AdminSubmissionFacade {
     }
 
     @Transactional
-    public List<SubmissionDTO> getList() {
-        List<SubmissionDTO> submissions = MAPPER.toSubmissionListDTO(new HashSet<>(submissionServiceImpl.getList()));
+    public List<SmallSubmissionAdminDTO> getList() {
+        List<SmallSubmissionAdminDTO> submissions = submissionServiceImpl.findAdminSubmissions();
         if (submissions != null) {
             return submissions.stream().sorted(comparator).collect(Collectors.toList());
         }

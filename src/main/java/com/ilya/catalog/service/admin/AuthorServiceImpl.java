@@ -1,6 +1,7 @@
 package com.ilya.catalog.service.admin;
 
 import com.ilya.catalog.domain.Author;
+import com.ilya.catalog.dto.admin.SmallAuthorAdminDTO;
 import com.ilya.catalog.repository.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,13 @@ public class AuthorServiceImpl implements CrudService<Author> {
     @Override
     public List<Author> getList() {
         return authorRepository.findAll();
+    }
+
+
+    public List<SmallAuthorAdminDTO> findAdminAuthors() {
+        List<SmallAuthorAdminDTO> authors = authorRepository.findAdminAuthors();
+        authors.forEach(e -> e.setFreeTonAddresses(authorRepository.findAddressesByAuthorId(e.getId())));
+        return authors;
     }
 
     @Override

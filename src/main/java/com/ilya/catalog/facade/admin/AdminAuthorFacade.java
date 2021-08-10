@@ -3,6 +3,7 @@ package com.ilya.catalog.facade.admin;
 import com.ilya.catalog.domain.Author;
 import com.ilya.catalog.domain.FreeTonAddress;
 import com.ilya.catalog.dto.admin.AuthorDTO;
+import com.ilya.catalog.dto.admin.SmallAuthorAdminDTO;
 import com.ilya.catalog.mapper.AdminMapper;
 import com.ilya.catalog.service.admin.AuthorServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,8 @@ public class AdminAuthorFacade {
     private static final AdminMapper MAPPER = AdminMapper.INSTANCE;
 
     @Transactional
-    public List<AuthorDTO> getList() {
-        return MAPPER.toAuthorListDTO(authorServiceImpl.getList());
+    public List<SmallAuthorAdminDTO> getList() {
+        return authorServiceImpl.findAdminAuthors();
     }
 
     @Transactional
@@ -36,7 +37,7 @@ public class AdminAuthorFacade {
     }
 
     @Transactional
-    public List<AuthorDTO> edit(AuthorDTO authorDTO) {
+    public List<SmallAuthorAdminDTO> edit(AuthorDTO authorDTO) {
         List<FreeTonAddress> newAddresses = new ArrayList<>();
         Author author = authorServiceImpl.getById(authorDTO.getId());
         author.setFreetonForumNickname(authorDTO.getFreetonForumNickname());
@@ -50,7 +51,7 @@ public class AdminAuthorFacade {
             author.getFreetonAddresses().addAll(newAddresses);
         }
         authorServiceImpl.edit(author);
-        return MAPPER.toAuthorListDTO(authorServiceImpl.getList());
+        return authorServiceImpl.findAdminAuthors();
     }
 
     @Autowired
