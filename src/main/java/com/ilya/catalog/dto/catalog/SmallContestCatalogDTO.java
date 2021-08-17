@@ -1,5 +1,7 @@
 package com.ilya.catalog.dto.catalog;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.text.NumberFormat;
 import java.util.Locale;
 
@@ -14,9 +16,11 @@ public class SmallContestCatalogDTO {
     private String prizeFund;
     private SubGovernanceCatalogDTO subGovernance;
     private int winnersCount;
+    @JsonIgnore
+    private int order;
 
     public SmallContestCatalogDTO(long id, String name, String submissionFrom, String submissionTo, int prizeFund,
-                                  long subGovId, String subGovName, long winnersCount) {
+                                  long subGovId, String subGovName, long winnersCount, int order) {
         this.id = id;
         this.name = name;
         this.submissionFrom = submissionFrom;
@@ -24,6 +28,7 @@ public class SmallContestCatalogDTO {
         this.prizeFund = NumberFormat.getNumberInstance(Locale.US).format(prizeFund);
         this.subGovernance = new SubGovernanceCatalogDTO(subGovId, subGovName);
         this.winnersCount = (int)winnersCount;
+        this.order = order;
     }
 
     public SmallContestCatalogDTO() {
@@ -83,5 +88,13 @@ public class SmallContestCatalogDTO {
 
     public void setWinnersCount(int winnersCount) {
         this.winnersCount = winnersCount;
+    }
+
+    public int getOrder() {
+        return order;
+    }
+
+    public void setOrder(int order) {
+        this.order = order;
     }
 }

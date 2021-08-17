@@ -16,22 +16,22 @@ import java.util.List;
 public interface ContestRepository extends JpaRepository<Contest, Long> {
 
     @Query("select new com.ilya.catalog.dto.catalog.SmallContestCatalogDTO(c.id, c.name, c.submissionFrom, c.submissionTo, " +
-            "c.prizeFund, subg.id, subg.name ,COUNT(subs)) from Contest c left join c.subGovernance subg left join c.submissions subs " +
+            "c.prizeFund, subg.id, subg.name ,COUNT(subs), c.position) from Contest c left join c.subGovernance subg left join c.submissions subs " +
             "where lower(c.name) like lower(concat('%',:name,'%')) " +
-            "group by c.id, c.name, c.submissionFrom, c.submissionTo, c.prizeFund, subg.name, subg.id")
+            "group by c.id, c.name, c.submissionFrom, c.submissionTo, c.prizeFund, subg.name, subg.id, c.position")
     List<SmallContestCatalogDTO> findContests(@Param("name") String name);
 
     @Query("select c.name from Contest c where lower(c.name) like lower(concat('%',:search,'%'))")
     List<String> getContestNames(@Param("search") String search);
 
     @Query("select new com.ilya.catalog.dto.catalog.SmallContestCatalogDTO(c.id, c.name, c.submissionFrom, c.submissionTo, " +
-            "c.prizeFund, subg.id, subg.name ,COUNT(subs)) from Contest c left join c.subGovernance subg " +
+            "c.prizeFund, subg.id, subg.name ,COUNT(subs), c.position) from Contest c left join c.subGovernance subg " +
             "left join c.submissions subs group by c.id, c.name, c.submissionFrom, c.submissionTo, c.prizeFund, " +
-            "subg.name, subg.id")
+            "subg.name, subg.id, c.position")
     List<SmallContestCatalogDTO> findContests();
 
     @Query("select new com.ilya.catalog.dto.admin.SmallContestAdminDTO(c.id, c.name, c.submissionFrom, c.submissionTo, " +
-            "c.votingFrom, c.votingTo, c.status, c.prizeFund, subg.id, subg.name) from Contest c left join c.subGovernance subg ")
+            "c.votingFrom, c.votingTo, c.status, c.prizeFund, subg.id, subg.name) from Contest c left join c.subGovernance subg order by c.id")
     List<SmallContestAdminDTO> findAdminContests();
 
     @Query("select new com.ilya.catalog.dto.catalog.ContestCatalogDTO(c.id, c.name, c.smallDescription, c.bigDescription, " +
@@ -40,14 +40,14 @@ public interface ContestRepository extends JpaRepository<Contest, Long> {
     ContestCatalogDTO findByContestId(@Param("id") long id);
 
     @Query("select new com.ilya.catalog.dto.catalog.SmallContestCatalogDTO(c.id, c.name, c.submissionFrom, c.submissionTo, " +
-            "c.prizeFund, subg.id, subg.name ,COUNT(subs)) from Contest c left join c.subGovernance subg " +
+            "c.prizeFund, subg.id, subg.name ,COUNT(subs), c.position) from Contest c left join c.subGovernance subg " +
             "left join c.submissions subs WHERE " +
             "((:ids) is null or c.subGovernance.id IN (:ids)) " +
             "AND ( :prizeFrom is null or c.prizeFund >= :prizeFrom ) AND (:prizeTo is null or c.prizeFund <= :prizeTo) " +
             "AND (:winnersFrom is null or size(c.submissions) >= :winnersFrom) " +
             "AND (:winnersTo is null or size(c.submissions) <= :winnersTo) " +
             "AND ( :search is null or lower(c.name) like lower(concat('%',:search,'%')) ) " +
-            "group by c.id, c.name, c.submissionFrom, c.submissionTo, c.prizeFund, subg.name, subg.id")
+            "group by c.id, c.name, c.submissionFrom, c.submissionTo, c.prizeFund, subg.name, subg.id, c.position")
     List<SmallContestCatalogDTO> getFilteredList(
             @Param("ids") Collection<Long> ids,@Param("prizeFrom") Integer prizeFrom, @Param("prizeTo")  Integer prizeTo,
             @Param("winnersFrom") Integer winnersFrom, @Param("winnersTo")  Integer winnersTo, @Param("search") String search);

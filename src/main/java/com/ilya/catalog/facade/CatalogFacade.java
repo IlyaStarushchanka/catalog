@@ -28,7 +28,7 @@ public class CatalogFacade {
     public static final Comparator<SmallContestCatalogDTO> contestComparator;
     static {
         submissionComparator = Comparator.comparing(sub -> Integer.valueOf(sub.getPlace()));
-        contestComparator = Comparator.comparing(SmallContestCatalogDTO::getId);
+        contestComparator = Comparator.comparing(SmallContestCatalogDTO::getOrder);
     }
 
     public List<SmallContestCatalogDTO> getContests(){

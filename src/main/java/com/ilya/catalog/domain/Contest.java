@@ -36,6 +36,7 @@ public class Contest {
     @Column(nullable = false)
     @Enumerated(value = EnumType.STRING)
     private StatusEnum status;
+    private int position;
 
     private Integer prizeFund;
 
@@ -139,6 +140,14 @@ public class Contest {
 
     public void setPrizeFund(Integer prizeFund) {
         this.prizeFund = prizeFund;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
     }
 
     @Override

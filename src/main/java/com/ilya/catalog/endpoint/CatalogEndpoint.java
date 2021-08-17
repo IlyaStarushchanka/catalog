@@ -25,7 +25,7 @@ public class CatalogEndpoint {
 
     @GetMapping("/")
     public String contests(Model model) {
-        model.addAttribute("contests", contestRepository.findContests());
+        model.addAttribute("contests", catalogFacade.getContests());
         model.addAttribute("subGovernances", catalogFacade.getAllSubGovs());
         return "catalog/index";
     }
